@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_order" android:icon="@drawable/order_icon"></item>
+    <item android:id="@+id/menu_client" android:icon="@drawable/client_icon"></item>
+    <item android:id="@+id/menu_product" android:icon="@drawable/product_icon"></item>
+    <item android:id="@+id/menu_history" android:icon="@drawable/history_icon"></item>
+    <item android:id="@+id/menu_chart" android:icon="@drawable/chart_icon"></item>
+</menu>

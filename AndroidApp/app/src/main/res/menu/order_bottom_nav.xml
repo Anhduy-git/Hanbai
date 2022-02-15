@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/order_today" android:title="Today"></item>
+    <item android:id="@+id/upcoming_order" android:title="Upcoming"></item>
+    <item android:id="@+id/unpaid_order" android:title="Unpaid"></item>
+</menu>
