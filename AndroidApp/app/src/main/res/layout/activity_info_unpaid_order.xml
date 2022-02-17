@@ -4,42 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderInfoTodayActivity"
+    tools:context=".OrderInfoUnpaidActivity"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
 
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/bg_transparent"
                 android:drawableLeft="@drawable/btn_back"
-                android:paddingLeft="10dp"
-                android:layout_gravity="center_vertical">
+                android:paddingLeft="10dp">
+
             </Button>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/paid_btn"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_ship_btn"
+            android:drawableTop="@drawable/icon_payment"
+            android:paddingTop="4dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:translationY="2dp">
+
+        </Button>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/bg_gradient"
-            android:paddingEnd="20dp"
-            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
             android:paddingBottom="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,6 +81,7 @@
                             android:text="Name:         "
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
 
                         <TextView
@@ -74,6 +93,7 @@
                             android:text="Le Viet Luc"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
                     </LinearLayout>
 
@@ -89,6 +109,7 @@
                             android:text="Number:     "
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
 
                         <TextView
@@ -100,6 +121,7 @@
                             android:text="012345678"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
                     </LinearLayout>
 
@@ -115,6 +137,7 @@
                             android:text="Andress:     "
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
 
                         <TextView
@@ -126,6 +149,7 @@
                             android:text="123 Vo Van Kiet - P5 - Q5"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
                     </LinearLayout>
 
@@ -140,6 +164,7 @@
                             android:text="Time:           "
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
 
                         <TextView
@@ -150,6 +175,7 @@
                             android:text="12h00"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
                     </LinearLayout>
 
@@ -174,6 +200,7 @@
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/white"
                             android:textSize="16sp">
+
                         </TextView>
 
                         <TextView
@@ -189,12 +216,13 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/order_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ava_client_default">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
@@ -227,63 +255,10 @@
             android:id="@+id/order_dish_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="215dp"
-            android:layout_marginBottom="60dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:layout_marginTop="215dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="Paid"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="18sp">
-
-                </TextView>
-
-                <LinearLayout
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_checkbox"
-                    android:gravity="center">
-
-                    <CheckBox
-                        android:id="@+id/order_paid_checkbox"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="confirm_check_box" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/order_ship_btn"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_gradient"
-                android:text="Ship"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20dp">
-            </Button>
-        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

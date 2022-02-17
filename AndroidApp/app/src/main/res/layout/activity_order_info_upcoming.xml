@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderInfoTodayActivity"
+    tools:context=".OrderInfoUpcomingActivity"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -271,19 +271,6 @@
                         android:button="confirm_check_box" />
                 </LinearLayout>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/order_ship_btn"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_gradient"
-                android:text="Ship"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20dp">
-            </Button>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
