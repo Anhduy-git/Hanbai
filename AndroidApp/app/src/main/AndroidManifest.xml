@@ -20,7 +20,7 @@
             android:name=".NewOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".InfoClientActivity" android:theme="@style/NoStatusBar"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
