@@ -264,11 +264,11 @@
                     android:background="@drawable/bg_checkbox"
                     android:gravity="center">
 
-                    <CheckBox
-                        android:id="@+id/order_paid_checkbox"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="confirm_check_box" />
+<!--                    <CheckBox-->
+<!--                        android:id="@+id/order_paid_checkbox"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:button="confirm_check_box" />-->
                 </LinearLayout>
             </LinearLayout>
 
