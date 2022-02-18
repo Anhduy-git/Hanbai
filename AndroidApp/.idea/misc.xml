@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/drawable/bg_sec_color.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/bg_th_color.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/bg_transparent.xml" value="0.3515625" />
+        <entry key="app/src/main/res/drawable/bg_white_product.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/border_bottom_1.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/order_icon.xml" value="0.3515625" />
@@ -43,6 +44,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_new_client.xml" value="0.3302564102564103" />
         <entry key="app/src/main/res/layout/activity_new_order.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_product_info.xml" value="0.3296296296296296" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_client.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.33541666666666664" />
