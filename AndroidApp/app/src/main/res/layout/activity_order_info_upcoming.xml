@@ -193,7 +193,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/ava_client_default">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
