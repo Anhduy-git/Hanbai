@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp">
+
+    <RelativeLayout
+        android:id="@+id/layout_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/bg_alert_dialog">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/header_alert_ship">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/money_icon"
+                android:layout_centerInParent="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Payment confirmation:"
+            android:textAlignment="center"
+            android:textColor="#4CA1A3"
+            android:textSize="17dp"></TextView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_dialog"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:translationY="-20dp">
+
+        <Button
+            android:id="@+id/cancel_dialog_btn"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bg_cancel_btn_alert"
+            android:text="Cancel"
+            android:textColor="#4CA1A3">
+        </Button>
+
+        <Button
+            android:id="@+id/confirm_dialog_btn"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_confirm_btn_alert"
+            android:text="Payment"
+            android:textColor="@color/main_white">
+        </Button>
+    </LinearLayout>
+</RelativeLayout>

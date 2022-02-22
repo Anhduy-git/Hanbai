@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main_color">#0A9396</color>
+    <color name="main_white">#DEDEDE</color>
     <color name="sec_color">#005F73</color>
     <color name="th_color">#94D2BD</color>
     <color name="f_color">#001219</color>

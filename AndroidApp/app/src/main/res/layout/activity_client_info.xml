@@ -28,16 +28,16 @@
         android:layout_marginTop="40dp">
 
         <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/back_btn_1"
             android:translationZ="1dp">
         </Button>
 
         <Button
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
@@ -47,15 +47,14 @@
         </Button>
 
         <Button
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
             android:background="@drawable/lib_btn"
-            android:translationY="-40dp"
+            android:translationY="-45dp"
             android:translationZ="1dp">
-
         </Button>
     </RelativeLayout>
     <RelativeLayout
@@ -74,6 +73,7 @@
             android:translationY="0dp"
             android:translationZ="1dp">
         </Button>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,8 +89,8 @@
                 android:text="Le Viet Luc"
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
+
             <TextView
                 android:id="@+id/view_client_phone"
                 android:layout_width="wrap_content"
@@ -99,8 +99,8 @@
                 android:maxLines="1"
                 android:text="012345678"
                 android:textColor="@color/black"
-                android:textSize="20sp">
-            </TextView>
+                android:textSize="20sp"></TextView>
+
             <TextView
                 android:id="@+id/view_client_address"
                 android:layout_width="wrap_content"
@@ -109,8 +109,8 @@
                 android:maxLines="1"
                 android:text="123 Vo Van Kiet - P5 - Q5"
                 android:textColor="@color/black"
-                android:textSize="20sp">
-            </TextView>
+                android:textSize="20sp"></TextView>
+
             <TextView
                 android:id="@+id/view_client_email"
                 android:layout_width="wrap_content"
@@ -119,34 +119,34 @@
                 android:maxLines="1"
                 android:text="11lucviet@gmail.com"
                 android:textColor="@color/black"
-                android:textSize="20sp">
-            </TextView>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/view_client_bank"
+                android:textSize="20sp"></TextView>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:maxLines="1"
-                android:text="190 3456 2678 017"
-                android:textColor="@color/black"
-                android:textSize="20sp">
-            </TextView>
-            <TextView
-                android:id="@+id/view_client_bankName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:layout_marginStart="5dp"
-                android:maxLines="1"
-                android:text="TECHCOMBANK"
-                android:textColor="@color/black"
-                android:textSize="20sp">
-            </TextView>
-        </LinearLayout>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/view_client_bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:maxLines="1"
+                    android:text="190 3456 2678 017"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/view_client_bankName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="1dp"
+                    android:maxLines="1"
+                    android:text="TECHCOMBANK"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
+            </LinearLayout>
         </LinearLayout>
 </RelativeLayout>
 

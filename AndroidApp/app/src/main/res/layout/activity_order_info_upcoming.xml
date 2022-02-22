@@ -28,7 +28,7 @@
         </LinearLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -45,25 +45,68 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+
                 <LinearLayout
                     android:layout_width="266dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Name:         "
+                            android:text="Name: "
                             android:textColor="@color/white"
-                            android:textSize="15sp">
+                            android:textSize="16sp">
+
                         </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Andress: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Time: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total price: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/order_name"
@@ -74,21 +117,7 @@
                             android:text="Le Viet Luc"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Number:     "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
@@ -100,21 +129,7 @@
                             android:text="012345678"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Andress:     "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
@@ -126,66 +141,50 @@
                             android:text="123 Vo Van Kiet - P5 - Q5"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Time:           "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
                             android:id="@+id/order_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
                             android:maxLines="1"
                             android:text="12h00"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total price:   "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
-                        </TextView>
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/order_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="@color/white"
-                            android:textSize="16sp">
-                        </TextView>
+                            <TextView
+                                android:id="@+id/order_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15sp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:text="VND"
-                            android:textColor="@color/white"
-                            android:textSize="16sp">
+                            </TextView>
 
-                        </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:text="VND"
+                                android:textColor="@color/white"
+                                android:textSize="15sp">
+
+                            </TextView>
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -200,26 +199,24 @@
                 </de.hdodenhof.circleimageview.CircleImageView>
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="170dp"
-            android:paddingRight="20dp">
+            android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/new_dish_btn"
-                android:layout_width="40dp"
+                android:layout_width="140dp"
                 android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
+                android:layout_marginTop="170dp"
                 android:background="@drawable/bg_transparent"
                 android:drawableRight="@drawable/plus_icon"
+                android:text="more product"
                 android:textAllCaps="false"
                 android:textColor="@color/f_color"
                 android:textSize="16sp">
-
             </Button>
         </RelativeLayout>
 
@@ -227,7 +224,7 @@
             android:id="@+id/order_dish_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="215dp"
+            android:layout_marginTop="205dp"
             android:layout_marginBottom="60dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
@@ -264,11 +261,21 @@
                     android:background="@drawable/bg_checkbox"
                     android:gravity="center">
 
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/order_paid_checkbox"-->
-<!--                        android:layout_width="40dp"-->
-<!--                        android:layout_height="40dp"-->
-<!--                        android:button="confirm_check_box" />-->
+                    <RelativeLayout
+                        android:id="@+id/check_ic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="invisible">
+
+                        <ImageView
+                            android:id="@+id/icon_checking"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/check_icon">
+                        </ImageView>
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
