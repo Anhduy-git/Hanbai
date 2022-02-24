@@ -1,4 +1,4 @@
-package com.example.androidapp.Fragment;
+package com.example.androidapp.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,19 +16,18 @@ import com.example.androidapp.OrderFragment.OrderViewPagerAdapter;
 import com.example.androidapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HistoryFragment extends Fragment {
+public class OrderFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
     private View v;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_history, container, false);
+        v = inflater.inflate(R.layout.fragment_order, container, false);
 
-        bottomNavigationView = v.findViewById(R.id.bottom_nav_history);
-        viewPager = v.findViewById(R.id.history_viewpager);
+        bottomNavigationView = v.findViewById(R.id.bottom_nav_order);
+        viewPager = v.findViewById(R.id.order_viewpager);
 
         OrderViewPagerAdapter adapter = new OrderViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
@@ -42,13 +41,13 @@ public class HistoryFragment extends Fragment {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        bottomNavigationView.getMenu().findItem(R.id.history_all).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.order_today).setChecked(true);
                         break;
                     case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.history_completed).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.upcoming_order).setChecked(true);
                         break;
                     case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.history_canceled).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.unpaid_order).setChecked(true);
                         break;
                 }
             }
@@ -63,13 +62,13 @@ public class HistoryFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.history_all:
+                    case R.id.order_today:
                         viewPager.setCurrentItem(0);
                         break;
-                    case R.id.history_completed:
+                    case R.id.upcoming_order:
                         viewPager.setCurrentItem(1);
                         break;
-                    case R.id.history_canceled:
+                    case R.id.unpaid_order:
                         viewPager.setCurrentItem(2);
                         break;
                 }

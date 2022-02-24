@@ -1,8 +1,10 @@
-package com.example.androidapp;
+package com.example.androidapp.Activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidapp.R;
 
 public class OrderInfoUnpaidActivity extends AppCompatActivity {
 
