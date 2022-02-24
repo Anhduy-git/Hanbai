@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidapp.Activities.NewClientActivity;
 import com.example.androidapp.Data.ClientData.Client;
@@ -22,7 +23,7 @@ import com.example.androidapp.Data.ClientData.ClientViewModel;
 import com.example.androidapp.R;
 
 public class ClientFragment extends Fragment {
-    public static final int ADD_CLIENT_REQUEST = 1;
+    //public static final int ADD_CLIENT_REQUEST = 1;
 
     private ClientViewModel clientViewModel;
     private Button btnAddClient;
@@ -32,6 +33,9 @@ public class ClientFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_client, container, false);
         initUI(v);
+
+        //Create view model
+        clientViewModel = new ViewModelProvider(getActivity()).get(ClientViewModel.class);
 
         //Add client button
         btnAddClient.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +57,7 @@ public class ClientFragment extends Fragment {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == -1) {
                         Intent intent = result.getData();
-
+                        
                         if (intent != null) {
                             Client newClient = intent.getParcelableExtra(NewClientActivity.EXTRA_CLIENT);
                             Log.d("NAME", newClient.getClientName());
