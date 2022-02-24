@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidApp">
         <activity
+            android:name=".InfoClientActivity"
+            android:exported="false" />
+        <activity
             android:name=".PickTypeActivity"
             android:exported="false" />
         <activity
@@ -31,6 +34,16 @@
         <activity
             android:name=".NewOrderActivity"
             android:exported="false" />
+        <activity
+            android:name=".OrderInfoTodayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderInfoUpcomingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderInfoUnpaidActivity"
+            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

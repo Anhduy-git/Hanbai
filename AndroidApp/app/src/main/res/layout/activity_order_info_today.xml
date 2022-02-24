@@ -11,24 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
 
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/bg_transparent"
                 android:drawableLeft="@drawable/btn_back"
-                android:paddingLeft="10dp"
-                android:layout_gravity="center_vertical">
-            </Button>
+                android:paddingLeft="10dp"></Button>
         </LinearLayout>
+    </RelativeLayout>
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -49,21 +49,63 @@
                     android:layout_width="266dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Name:         "
+                            android:text="Name: "
                             android:textColor="@color/white"
-                            android:textSize="15sp">
+                            android:textSize="16sp">
+
                         </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Andress: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Time: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total price: "
+                            android:textColor="@color/white"
+                            android:textSize="16sp">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/order_name"
@@ -74,21 +116,7 @@
                             android:text="Le Viet Luc"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Number:     "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
@@ -100,21 +128,7 @@
                             android:text="012345678"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:text="Andress:     "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
@@ -126,113 +140,91 @@
                             android:text="123 Vo Van Kiet - P5 - Q5"
                             android:textColor="@color/white"
                             android:textSize="15sp">
-                        </TextView>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Time:           "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
                         </TextView>
 
                         <TextView
                             android:id="@+id/order_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
                             android:maxLines="1"
                             android:text="12h00"
                             android:textColor="@color/white"
                             android:textSize="15sp">
+
                         </TextView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/order_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:text="VND"
+                                android:textColor="@color/white"
+                                android:textSize="15sp">
+
+                            </TextView>
+                        </LinearLayout>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total price:   "
-                            android:textColor="@color/white"
-                            android:textSize="15sp">
-                        </TextView>
-
-                        <TextView
-                            android:id="@+id/order_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="@color/white"
-                            android:textSize="16sp">
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:text="VND"
-                            android:textColor="@color/white"
-                            android:textSize="16sp">
-
-                        </TextView>
-                    </LinearLayout>
-
                 </LinearLayout>
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/order_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/ava_client_default">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
             </LinearLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+        <Button
+            android:layout_width="140dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="170dp"
-            android:paddingRight="20dp">
+            android:background="@drawable/bg_transparent"
+            android:drawableRight="@drawable/plus_icon"
+            android:text="more product"
+            android:textAllCaps="false"
+            android:textColor="@color/f_color"
+            android:textSize="16sp">
+        </Button>
+    </RelativeLayout>
 
-            <Button
-                android:id="@+id/new_dish_btn"
-                android:layout_width="40dp"
-                android:layout_height="32dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/bg_transparent"
-                android:drawableRight="@drawable/plus_icon"
-                android:textAllCaps="false"
-                android:textColor="@color/f_color"
-                android:textSize="16sp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_dish_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="205dp"
+        android:layout_marginBottom="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-            </Button>
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/order_dish_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="215dp"
-            android:layout_marginBottom="60dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -258,18 +250,27 @@
 
                 </TextView>
 
-                <LinearLayout
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_checkbox"
-                    android:gravity="center">
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_checkbox"
+                android:gravity="center">
 
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/order_paid_checkbox"-->
-<!--                        android:layout_width="40dp"-->
-<!--                        android:layout_height="40dp"-->
-<!--                        android:button="confirm_check_box" />-->
-                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/check_ic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:id="@+id/icon_checking"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/check_icon"></ImageView>
+                </RelativeLayout>
+            </LinearLayout>
             </LinearLayout>
 
             <Button
@@ -286,4 +287,3 @@
             </Button>
         </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
