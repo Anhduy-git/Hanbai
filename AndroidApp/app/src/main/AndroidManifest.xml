@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidApp">
         <activity
+            android:name=".PickTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuantityPriceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewProductActivity"
             android:exported="false" />
         <activity
