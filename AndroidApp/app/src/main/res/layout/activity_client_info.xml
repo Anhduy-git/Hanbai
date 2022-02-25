@@ -15,7 +15,9 @@
         app:contentPaddingTop="30dp"
         android:translationY="-30dp"
         android:translationZ="-3dp">
+
         <ImageView
+            android:id="@+id/view_client_avatar"
             android:layout_width="match_parent"
             android:layout_height="310dp"
             android:scaleType="centerCrop"
@@ -28,12 +30,12 @@
         android:layout_marginTop="40dp">
 
         <Button
+            android:id="@+id/btn_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/back_btn_1"
-            android:translationZ="1dp">
-        </Button>
+            android:translationZ="1dp"></Button>
 
         <Button
             android:layout_width="30dp"
@@ -136,16 +138,6 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"></TextView>
 
-                <TextView
-                    android:id="@+id/view_client_bankName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginBottom="1dp"
-                    android:maxLines="1"
-                    android:text="TECHCOMBANK"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"></TextView>
             </LinearLayout>
         </LinearLayout>
 </RelativeLayout>

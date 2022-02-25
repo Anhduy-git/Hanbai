@@ -1,18 +1,29 @@
 package com.example.androidapp.Activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,9 +43,13 @@ import java.io.IOException;
 public class NewClientActivity extends AppCompatActivity {
     public static final String EXTRA_CLIENT = "com.example.androidapp.EXTRA_CLIENT";
 
+    private final int GALLERY_REQUEST = 1;
+    private final int CAMERA_REQUEST = 2;
+
     private Button btnBack;
     private Button btnAddClient;
-    private Button btnAddImage;
+    private Button btnGallery;
+    private Button btnCamera;
     private EditText editClientName;
     private EditText editClientNumber;
     private EditText editClientAddress;
@@ -73,6 +88,24 @@ public class NewClientActivity extends AppCompatActivity {
             }
         });
 
+        //Choose image from gallery
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePictureFromGallery();
+            }
+        });
+
+        //Choose image from camera
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkRequestPermission()){
+                    takePictureFromCamera();
+                }
+            }
+        });
+
         //Add client button
         btnAddClient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +113,6 @@ public class NewClientActivity extends AppCompatActivity {
                 addClient();
             }
         });
-
     }
 
     private static void setWindowsFlag(Activity activity, final int Bits, Boolean on) {
@@ -103,6 +135,8 @@ public class NewClientActivity extends AppCompatActivity {
         editClientAddress = findViewById(R.id.edit_address);
         editClientEmail = findViewById(R.id.edit_email);
         editClientBank = findViewById(R.id.edit_bank);
+        btnGallery = findViewById(R.id.btn_gallery);
+        btnCamera = findViewById(R.id.btn_camera);
     }
 
     private void addClient(){
@@ -152,13 +186,79 @@ public class NewClientActivity extends AppCompatActivity {
         finish();
     }
 
+    private boolean checkRequestPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int cameraPermission = ActivityCompat.checkSelfPermission(NewClientActivity.this,
+                    Manifest.permission.CAMERA);
+            if (cameraPermission == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(
+                        NewClientActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        CAMERA_REQUEST);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void takePictureFromGallery(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        activityResultLauncher.launch(intent);
+    }
+
+    private void takePictureFromCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            activityResultLauncher.launch(intent);
+        }
+    }
+
+    //On activity result
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent intent = result.getData();
+
+                        if (intent != null) {
+                            Log.d("PHOTO", "success");
+                            try {
+                                //set changed Img
+                                changeImg = true;
+                                Uri selectedImage = intent.getData();
+                                imageView.setImageURI(selectedImage);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                
+                            }
+                        }
+                    }
+                }
+            }
+    );
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_REQUEST && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            try {
+                takePictureFromCamera();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            Toast.makeText(NewClientActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/your_app/app_data/imageClientDir
         File directory = cw.getDir("imageClientDir", Context.MODE_PRIVATE);
         // Create imageDir
         File myPath = new File(directory,fileName);
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(myPath);

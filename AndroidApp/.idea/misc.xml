@@ -62,7 +62,7 @@
         <entry key="app/src/main/res/layout/fragment_today.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_unpaid_order.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_upcoming_order.xml" value="0.33541666666666664" />
-        <entry key="app/src/main/res/layout/item_client.xml" value="0.1418884982420894" />
+        <entry key="app/src/main/res/layout/item_client.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.1418884982420894" />
         <entry key="app/src/main/res/menu/history_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.33541666666666664" />
