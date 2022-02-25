@@ -1,4 +1,4 @@
-package com.example.androidapp;
+package com.example.androidapp.Activities;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidapp.R;
 
 public class InfoClientActivity extends AppCompatActivity {
     @Override

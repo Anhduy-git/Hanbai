@@ -41,5 +41,13 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:design:29.0.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+
+
+    //Room Database
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    
 }
