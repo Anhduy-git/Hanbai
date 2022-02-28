@@ -9,16 +9,19 @@ import androidx.room.RoomDatabase;
 
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
+import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
+import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
 
 //App database
 //Add more entities (tables) to database by listing them inside {}
-@Database(entities = {Client.class}, version = 1)
+@Database(entities = {Client.class, Order.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";
     private static AppDatabase instance;
 
     //Entities' DAO
     public abstract ClientDao clientDao();
+    public abstract OrderDao orderDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -33,7 +36,7 @@ public abstract class AppDatabase extends RoomDatabase{
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private ClientDao clientDao;
 //        private DishDao dishDao;
-//        private OrderDao orderDao;
+        private OrderDao orderDao;
 //        private UnpaidOrderDao unpaidOrderDao;
 //        private UpcomingOrderDao upcomingOrderDao;
 //        private HistoryOrderDao historyOrderDao;
@@ -41,7 +44,7 @@ public abstract class AppDatabase extends RoomDatabase{
         private PopulateDbAsyncTask(AppDatabase db) {
             clientDao = db.clientDao();
 //            dishDao = db.dishDao();
-//            orderDao = db.orderDao();
+            orderDao = db.orderDao();
 //            unpaidOrderDao = db.unpaidOrderDao();
 //            upcomingOrderDao = db.upcomingOrderDao();
 //            historyOrderDao = db.historyOrderDao();
