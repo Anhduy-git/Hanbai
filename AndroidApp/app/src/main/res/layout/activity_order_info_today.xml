@@ -19,6 +19,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -204,15 +205,14 @@
             android:layout_width="140dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="170dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/bg_transparent"
             android:drawableRight="@drawable/plus_icon"
             android:text="more product"
             android:textAllCaps="false"
             android:textColor="@color/f_color"
-            android:textSize="16sp">
-        </Button>
+            android:textSize="16sp"></Button>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

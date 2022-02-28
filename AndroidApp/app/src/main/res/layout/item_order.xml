@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_reveal_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +10,8 @@
     <!-- Your secondary layout here -->
     <RelativeLayout
         android:layout_width="75dp"
-        android:layout_height="75dp">
+        android:layout_height="75dp"
+        android:id="@+id/order_item_del">
         <ImageView
             android:layout_width="23dp"
             android:layout_height="26dp"
@@ -19,6 +21,7 @@
 
     <!-- Your main layout here -->
     <RelativeLayout
+        android:id="@+id/order_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
