@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ConfirmProductActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:contentPaddingTop="30dp"
+        android:translationY="-30dp"
+        android:translationZ="-3dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ava_client_default"></ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp">
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn_1"
+            android:translationZ="1dp"></Button>
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/confirm_icon"
+            android:translationZ="1dp"></Button>
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/cam_btn"
+            android:translationY="-80dp"
+            android:translationZ="1dp">
+        </Button>
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/lib_btn"
+            android:translationY="-45dp"
+            android:translationZ="1dp">
+        </Button>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/card_view"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Name: "
+                android:textSize="17sp"
+                android:textColor="@color/f_color"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Number: "
+                android:textSize="17sp"
+                android:textColor="@color/f_color"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Address: "
+                android:textSize="17sp"
+                android:textColor="@color/f_color"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Email: "
+                android:textSize="17sp"
+                android:textColor="@color/f_color"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Bank: "
+                android:textSize="17sp"
+                android:textColor="@color/f_color"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1"
+                android:text="Le Viet Luc "
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/f_color"
+                android:textCursorDrawable="@null"
+                android:textSize="17sp"></EditText>
+
+            <EditText
+                android:id="@+id/edit_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1"
+                android:text="012345678"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/f_color"
+                android:textCursorDrawable="@null"
+                android:textSize="17sp"></EditText>
+
+            <EditText
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1"
+                android:text="123 Vo Van Kiet - P5 - Q5"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/f_color"
+                android:textCursorDrawable="@null"
+                android:textSize="17sp"></EditText>
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1"
+                android:text="11lucviet@gmail.com"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textColor="@color/f_color"
+                android:textCursorDrawable="@null"
+                android:textSize="17sp"></EditText>
+
+            <EditText
+                android:id="@+id/edit_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_bottom_1"
+                android:text="190 3456 2678 017 TECHCOMBANK"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/f_color"
+                android:textCursorDrawable="@null"
+                android:textSize="17sp"></EditText>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
