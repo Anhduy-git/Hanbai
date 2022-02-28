@@ -63,8 +63,20 @@
         <entry key="app/src/main/res/layout/fragment_today.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_unpaid_order.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_upcoming_order.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/item_adding_type.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_attribute.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_attribute_in_sub_product.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/item_client.xml" value="0.1418884982420894" />
+        <entry key="app/src/main/res/layout/item_input_quantity_price.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_input_type_attribute.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/item_product.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_product_for_order.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_quantity_price.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_selected_spinner.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_spinner.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_type_attribute.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/layout/item_type_product.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/menu/history_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/menu/order_bottom_nav.xml" value="0.33541666666666664" />

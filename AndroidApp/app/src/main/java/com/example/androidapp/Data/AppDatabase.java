@@ -6,15 +6,18 @@ import android.os.AsyncTask;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
+import com.example.androidapp.Data.OrderData.OrderTodayData.DataConverter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
 
 //App database
 //Add more entities (tables) to database by listing them inside {}
-@Database(entities = {Client.class, Order.class}, version = 2)
+@Database(entities = {Client.class, Order.class}, version = 3)
+@TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";
     private static AppDatabase instance;
