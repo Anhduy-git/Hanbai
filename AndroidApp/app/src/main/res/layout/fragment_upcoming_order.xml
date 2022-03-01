@@ -5,5 +5,27 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".OrderFragment.UpcomingOrderFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/add_client_button"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="330dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_transparent"
+            android:drawableLeft="@drawable/plus_icon">
+        </Button>
 
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/order_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 </FrameLayout>
