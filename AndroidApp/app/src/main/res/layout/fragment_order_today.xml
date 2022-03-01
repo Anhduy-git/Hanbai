@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
 
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,11 +55,13 @@
                 android:background="@drawable/bg_transparent"
                 android:drawableLeft="@drawable/plus_icon"></Button>
         </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/order_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:paddingLeft="10dp"
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
