@@ -12,7 +12,6 @@
         android:id="@+id/order_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>

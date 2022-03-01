@@ -209,6 +209,8 @@
                             android:textSize="16sp"></TextView>
 
                         <TextView
+                            android:id="@+id/order_time"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12"
@@ -300,8 +302,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="-60dp"
-        android:gravity="vertical">
+        android:layout_marginTop="-60dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
