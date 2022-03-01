@@ -11,47 +11,54 @@
         android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-            <TextView
+            android:orientation="horizontal">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order today "
-                android:textColor="@color/f_color"
-                android:textSize="17sp"></TextView>
-            <TextView
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp">
 
-                android:id="@+id/order_num"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order today "
+                    android:textColor="@color/f_color"
+                    android:textSize="17sp"></TextView>
+                <TextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/num_color"
-                android:textSize="18sp"></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" order"
-                android:textColor="@color/f_color"
-                android:textSize="17sp"></TextView>
+                    android:id="@+id/order_num"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="0"
+                    android:textColor="@color/num_color"
+                    android:textSize="18sp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" order"
+                    android:textColor="@color/f_color"
+                    android:textSize="17sp"></TextView>
+            </LinearLayout>
+
             <Button
-                android:id="@+id/add_client_button"
-                android:layout_width="30dp"
+                android:id="@+id/add_order_button"
+                android:layout_width="35dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="170dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/bg_transparent"
-                android:drawableLeft="@drawable/plus_icon">
-            </Button>
-        </LinearLayout>
+                android:drawableLeft="@drawable/plus_icon"></Button>
+        </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/order_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="55dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
