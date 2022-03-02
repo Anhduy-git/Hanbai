@@ -21,6 +21,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_transparent"
+                android:paddingLeft="4dp"
                 android:drawableLeft="@drawable/plus_icon"></Button>
 
         </RelativeLayout>
@@ -30,8 +31,8 @@
             android:id="@+id/order_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </FrameLayout>
