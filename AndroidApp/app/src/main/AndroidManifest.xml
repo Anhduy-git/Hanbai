@@ -24,6 +24,7 @@
         <activity
             android:name=".QuantityPriceActivity"
             android:exported="false" />
+
         <activity
             android:name=".ProductInfoActivity"
             android:exported="false" />
@@ -36,6 +37,9 @@
             android:theme="@style/NoStatusBar" />
         <activity
             android:name=".Activities.NewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SubClientActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.OrderInfoTodayActivity"

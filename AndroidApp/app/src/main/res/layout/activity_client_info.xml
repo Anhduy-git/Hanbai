@@ -112,7 +112,7 @@
                 android:textSize="20sp"></TextView>
 
             <TextView
-                android:id="@+id/view_client_email"
+                android:id="@+id/order_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"
@@ -127,7 +127,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/view_client_bank"
+                    android:id="@+id/order_bank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"

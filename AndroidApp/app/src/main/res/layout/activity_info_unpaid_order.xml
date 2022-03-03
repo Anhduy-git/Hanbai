@@ -166,7 +166,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_email"
+                            android:id="@+id/order_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -178,7 +178,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_bank"
+                            android:id="@+id/order_bank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -303,7 +303,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/order_dish_recycler"
+        android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="0dp"
