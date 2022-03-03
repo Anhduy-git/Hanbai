@@ -45,6 +45,10 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_ORDER_TIME";
     public static final String EXTRA_ORDER_IMAGE =
             "com.example.androidapp.EXTRA_ORDER_IMAGE";
+    public static final String EXTRA_ORDER_BANK =
+            "com.example.androidapp.EXTRA_ORDER_BANK";
+    public static final String EXTRA_ORDER_EMAIL =
+            "com.example.androidapp.EXTRA_ORDER_EMAIL";
 
     public static final String EXTRA_ORDER_PRICE =
             "com.example.androidapp.EXTRA_ORDER_PRICE";
@@ -62,6 +66,8 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
     private TextView tvOrderNumber;
     private TextView tvOrderTime;
     private TextView tvOrderDate;
+    private TextView tvOrderBank;
+    private TextView tvOrderEmail;
     private TextView tvOrderPrice;
     private ImageView imageView;
     private Button btnBack;
@@ -81,6 +87,9 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
     private String strOrderNumber ;
     private String strOrderDate ;
     private String strOrderTime;
+    private String strOrderBank;
+    private String strOrderEmail;
+    private String tmpDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +107,18 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         //Get data from intent to display UI
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ORDER_ID)){
+            tmpDate = intent.getStringExtra(EXTRA_ORDER_DATE);
             tvOrderName.setText(intent.getStringExtra(EXTRA_ORDER_NAME));
 
             int price = intent.getIntExtra(EXTRA_ORDER_PRICE, 0);
             tvOrderPrice.setText(String.format("%,d", price));
-
+            Log.d("test", intent.getStringExtra(EXTRA_ORDER_DATE));
             tvOrderAddress.setText(intent.getStringExtra(EXTRA_ORDER_ADDRESS));
             tvOrderTime.setText(intent.getStringExtra(EXTRA_ORDER_TIME));
             tvOrderNumber.setText(intent.getStringExtra(EXTRA_ORDER_NUMBER));
+            tvOrderBank.setText(intent.getStringExtra(EXTRA_ORDER_BANK));
+            tvOrderEmail.setText(intent.getStringExtra(EXTRA_ORDER_EMAIL));
+//            tvOrderDate.setText(intent.getStringExtra(EXTRA_ORDER_DATE));
             ship = intent.getBooleanExtra(EXTRA_CHECK_SHIP, ship);
             beforePaid = intent.getBooleanExtra(EXTRA_CHECK_PAID, beforePaid);
             currentPaid = beforePaid;
@@ -136,6 +149,9 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         strOrderAddress = tvOrderAddress.getText().toString().trim();
         strOrderNumber = tvOrderNumber.getText().toString().trim();
         strOrderTime = tvOrderTime.getText().toString().trim();
+        strOrderDate = tvOrderTime.getText().toString().trim();
+        strOrderBank = tvOrderTime.getText().toString().trim();
+        strOrderEmail = tvOrderTime.getText().toString().trim();
 
         //Checkbox to confirm paid
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -171,10 +187,12 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                     data.putExtra(EXTRA_CHECK_SHIP, ship);
                     data.putExtra(EXTRA_ORDER_NAME, strOrderName);
                     data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
-                    data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
+                    data.putExtra(EXTRA_ORDER_DATE, tmpDate);
                     data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
                     data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
                     data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
+                    data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
+                    data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
                     int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                     if (id != -1) {
                         data.putExtra(EXTRA_ORDER_ID, id);
@@ -214,10 +232,12 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                 data.putExtra(EXTRA_CHECK_PAID, currentPaid);
                 data.putExtra(EXTRA_ORDER_NAME, strOrderName);
                 data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
-                data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
+                data.putExtra(EXTRA_ORDER_DATE, tmpDate);
                 data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
                 data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
                 data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
+                data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
+                data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
 //                data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
                 int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                 if (id != -1) {
@@ -249,6 +269,8 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         tvOrderAddress = findViewById(R.id.order_address);
         tvOrderNumber = findViewById(R.id.order_phone);
         tvOrderTime = findViewById(R.id.order_time);
+        tvOrderBank = findViewById(R.id.order_bank);
+        tvOrderEmail = findViewById(R.id.order_email);
         imageView = findViewById(R.id.order_avatar);
         btnBack = findViewById(R.id.btn_back);
         checkIcon = findViewById(R.id.check_ic);

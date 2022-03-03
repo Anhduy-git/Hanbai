@@ -42,6 +42,10 @@ public class NewOrderActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_ORDER_DATE";
     public static final String EXTRA_ORDER_TIME =
             "com.example.androidapp.EXTRA_ORDER_TIME";
+    public static final String EXTRA_ORDER_BANK =
+            "com.example.androidapp.EXTRA_ORDER_BANK";
+    public static final String EXTRA_ORDER_EMAIL =
+            "com.example.androidapp.EXTRA_ORDER_EMAIL";
     public static final String EXTRA_ORDER_DISH_LIST =
             "com.example.androidapp.EXTRA_ORDER_DISH_LIST";
     public static final String EXTRA_ORDER_IMAGE =
@@ -53,6 +57,8 @@ public class NewOrderActivity extends AppCompatActivity {
     private EditText editOrderName;
     private TextView editOrderTime;
     private TextView editOrderDate;
+    private TextView editOrderBank;
+    private TextView editOrderEmail;
     private ImageView addOrderDate;
     private ImageView addOrderTime;
     private ImageView imageView;
@@ -61,7 +67,7 @@ public class NewOrderActivity extends AppCompatActivity {
     private Button btnAddOrder;
     private Button btnBack;
     private Button btnAddDish;
-    private Button btnAddClient;
+    private TextView btnAddClient;
     private String imageDir = "";
     private RecyclerView rcvData;
 //    private List<Dish> mListDish = new ArrayList<>();
@@ -116,6 +122,8 @@ public class NewOrderActivity extends AppCompatActivity {
         editOrderName = findViewById(R.id.add_order_name);
         editOrderAddress = findViewById(R.id.add_order_address);
         editOrderNumber = findViewById(R.id.add_order_number);
+        editOrderBank = findViewById(R.id.add_client_bank);
+        editOrderEmail = findViewById(R.id.add_client_email);
         btnBack = findViewById(R.id.btn_back);
         btnAddOrder = findViewById(R.id.add_new_order);
         btnAddDish = findViewById(R.id.new_product_btn);
@@ -198,6 +206,8 @@ public class NewOrderActivity extends AppCompatActivity {
         String strOrderNumber = editOrderNumber.getText().toString().trim();
         String strOrderDate = editOrderDate.getText().toString().trim();
         String strOrderTime = editOrderTime.getText().toString().trim();
+        String strOrderEmail = editOrderEmail.getText().toString().trim();
+        String strOrderBank = editOrderTime.getText().toString().trim();
 
         //Only compare the date
 //        DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
@@ -236,6 +246,8 @@ public class NewOrderActivity extends AppCompatActivity {
             data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
             data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
             data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
+            data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
+            data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
             data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
 //            data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
 

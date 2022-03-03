@@ -12,36 +12,25 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
+            android:background="@drawable/bg_transparent"
+            android:drawableLeft="@drawable/btn_back"
+            android:paddingLeft="10dp"></Button>
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_transparent"
-                android:drawableLeft="@drawable/btn_back"
-                android:paddingLeft="10dp"></Button>
-            <Button
-                android:id="@+id/paid_btn"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="130dp"
-                android:background="@drawable/bg_ship_btn"
-                android:drawableTop="@drawable/icon_payment"
-                android:paddingTop="4dp"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:translationY="2dp">
-
-            </Button>
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/paid_btn"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_ship_btn"
+            android:drawableTop="@drawable/icon_payment"
+            android:translationY="2dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"></Button>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -306,7 +295,8 @@
         android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 

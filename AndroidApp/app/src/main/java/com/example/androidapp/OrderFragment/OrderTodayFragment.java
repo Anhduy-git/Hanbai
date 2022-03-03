@@ -130,8 +130,10 @@ public class OrderTodayFragment extends Fragment {
             String number = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NUMBER);
             String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
+            String bank = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_BANK);
+            String email = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_EMAIL);
             String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
-            Client client = new Client(name, number, address, "", "", imageDir);
+            Client client = new Client(name, number, address, email, bank, imageDir);
             Order order = new Order(client, date, time, 0, false, false, null);
             orderViewModel.insert(order);
 //            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
@@ -169,6 +171,8 @@ public class OrderTodayFragment extends Fragment {
             String number = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NUMBER);
             String time = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_DATE);
+            String bank = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_BANK);
+            String email = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_EMAIL);
             String imageDir = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_IMAGE);
 
             boolean paid = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, false);
@@ -179,7 +183,7 @@ public class OrderTodayFragment extends Fragment {
                 Toast.makeText(getActivity(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Client client = new Client(name, number, address, "", "", imageDir);
+            Client client = new Client(name, number, address, email, bank, imageDir);
 //            mOrderListDish = data.getParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
 
