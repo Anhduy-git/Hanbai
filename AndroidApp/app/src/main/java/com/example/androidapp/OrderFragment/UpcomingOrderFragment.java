@@ -74,14 +74,11 @@ public class UpcomingOrderFragment extends Fragment {
             @Override
             public void onItemClick(UpcomingOrder upcomingOrder) {
                 Intent intent = new Intent(getActivity(), OrderInfoUpcomingActivity.class);
+                intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_CLIENT, upcomingOrder.getClient());
                 intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_ID, upcomingOrder.getId());
-                intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_NAME, upcomingOrder.getClient().getClientName());
                 intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_PRICE, upcomingOrder.getPrice());
-                intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_ADDRESS, upcomingOrder.getClient().getClientAddress());
-                intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_IMAGE, upcomingOrder.getClient().getImageDir());
                 intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_TIME, upcomingOrder.getTime());
                 intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_DATE, upcomingOrder.getDate());
-                intent.putExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_NUMBER, upcomingOrder.getClient().getClientNumber());
                 intent.putExtra(OrderInfoUpcomingActivity.EXTRA_CHECK_PAID, upcomingOrder.getPaid());
 //                intent.putParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) upcomingOrder.getOrderListDish());
                 startActivityForResult(intent, CONFIRM_ORDER_REQUEST);
@@ -113,13 +110,10 @@ public class UpcomingOrderFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_ORDER_REQUEST && resultCode == RESULT_OK) {
-            String name = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NAME);
-            String address = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_ADDRESS);
-            String number = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NUMBER);
+            Client client = data.getParcelableExtra(NewOrderActivity.EXTRA_ORDER_CLIENT);
             String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
-            String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
-            Client client = new Client(name, number, address, "", "", imageDir);
+
 //            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
 
@@ -129,13 +123,10 @@ public class UpcomingOrderFragment extends Fragment {
 
         } else if (requestCode == CONFIRM_ORDER_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_ID, -1);
-            String name = data.getStringExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_NAME);
-            String address = data.getStringExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_ADDRESS);
-            String number = data.getStringExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_NUMBER);
+            Client client = data.getParcelableExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_CLIENT);
             String time = data.getStringExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(OrderInfoUpcomingActivity.EXTRA_ORDER_DATE);
-            String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
-            Client client = new Client(name, number, address, "", "", imageDir);
+
 //            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
             boolean paid = data.getBooleanExtra(OrderInfoUpcomingActivity.EXTRA_CHECK_PAID, false);

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -27,14 +28,8 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
 
     public static final String EXTRA_ORDER_ID =
             "com.example.androidapp.EXTRA_ORDER_ID";
-    public static final String EXTRA_ORDER_NAME =
-            "com.example.androidapp.EXTRA_ORDER_NAME";
-    public static final String EXTRA_ORDER_ADDRESS =
-            "com.example.androidapp.EXTRA_ORDER_ADDRESS";
-    public static final String EXTRA_ORDER_IMAGE =
-            "com.example.androidapp.EXTRA_ORDER_IMAGE";
-    public static final String EXTRA_ORDER_NUMBER =
-            "com.example.androidapp.EXTRA_ORDER_NUMBER";
+    public static final String EXTRA_ORDER_CLIENT =
+            "com.example.androidapp.EXTRA_ORDER_CLIENT";
     public static final String EXTRA_ORDER_DATE =
             "com.example.androidapp.EXTRA_ORDER_DATE";
     public static final String EXTRA_ORDER_TIME =
@@ -53,6 +48,8 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
     private TextView tvOrderNumber;
     private TextView tvOrderTime;
     private TextView tvOrderDate;
+    private TextView tvOrderBank;
+    private TextView tvOrderEmail;
     private ImageView imageView;
     private Button btnBack;
 
@@ -86,26 +83,31 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
         //Get data from intent to display UI
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ORDER_ID)){
-            tvOrderName.setText(intent.getStringExtra(EXTRA_ORDER_NAME));
+            Client client = intent.getParcelableExtra(EXTRA_ORDER_CLIENT);
+            tvOrderName.setText(client.getClientName());
+            tvOrderNumber.setText(client.getClientNumber());
+            tvOrderAddress.setText(client.getClientAddress());
+            tvOrderBank.setText(client.getClientBank());
+            tvOrderEmail.setText(client.getClientEmail());
             int price = intent.getIntExtra(EXTRA_ORDER_PRICE, 0);
             tvOrderPrice.setText(String.format("%,d", price));
-            tvOrderAddress.setText(intent.getStringExtra(EXTRA_ORDER_ADDRESS));
             tvOrderTime.setText(intent.getStringExtra(EXTRA_ORDER_TIME));
-            tvOrderNumber.setText(intent.getStringExtra(EXTRA_ORDER_NUMBER));
-//            tvOrderDate.setText(intent.getStringExtra(EXTRA_ORDER_DATE));
+            tvOrderDate.setText(intent.getStringExtra(EXTRA_ORDER_DATE));
             beforePaid = intent.getBooleanExtra(EXTRA_CHECK_PAID, beforePaid);
             currentPaid = beforePaid;
 //            mListDish = intent.getParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST);
-            imageDir = intent.getStringExtra(EXTRA_ORDER_IMAGE);
+            imageDir = client.getImageDir();
             //read image from file
-            try {
-                File f = new File(imageDir);
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                imageView.setImageBitmap(b);
-            }
-            catch (FileNotFoundException e) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
-                imageView.setImageBitmap(bitmap);
+            if (imageDir != null) {
+                try {
+                    File f = new File(imageDir);
+                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(b);
+                }
+                catch (FileNotFoundException e) {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
+                    imageView.setImageBitmap(bitmap);
+                }
             }
         }
         //display list dish
@@ -135,8 +137,10 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
         String strOrderName = tvOrderName.getText().toString().trim();
         String strOrderAddress = tvOrderAddress.getText().toString().trim();
         String strOrderNumber = tvOrderNumber.getText().toString().trim();
-//        String strOrderDate = tvOrderDate.getText().toString().trim();
+        String strOrderDate = tvOrderDate.getText().toString().trim();
         String strOrderTime = tvOrderTime.getText().toString().trim();
+        String strOrderBank = tvOrderBank.getText().toString().trim();
+        String strOrderEmail = tvOrderEmail.getText().toString().trim();
 
         //Checkbox to confirm paid
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -158,13 +162,11 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
                 }
                 if (updated) {
                     Intent data = new Intent();
+                    Client client = new Client(strOrderName, strOrderNumber, strOrderAddress, strOrderEmail, strOrderBank, imageDir);
+                    data.putExtra(EXTRA_ORDER_CLIENT, client);
                     data.putExtra(EXTRA_CHECK_PAID, currentPaid);
-                    data.putExtra(EXTRA_ORDER_NAME, strOrderName);
-                    data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
-//                    data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
+                    data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
                     data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
-                    data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
-                    data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
 //                    data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
                     int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                     if (id != -1) {
@@ -204,9 +206,11 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
         tvOrderPrice = findViewById(R.id.order_price);
         tvOrderName = findViewById(R.id.order_name);
         tvOrderAddress = findViewById(R.id.order_address);
-//        tvOrderDate = findViewById(R.id.order_date);
+        tvOrderDate = findViewById(R.id.order_date);
         tvOrderNumber = findViewById(R.id.order_phone);
         tvOrderTime = findViewById(R.id.order_time);
+        tvOrderEmail = findViewById(R.id.order_email);
+        tvOrderBank = findViewById(R.id.order_bank);
         imageView = findViewById(R.id.order_avatar);
         btnBack = findViewById(R.id.btn_back);
         checkBox = findViewById(R.id.check_box);

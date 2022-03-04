@@ -18,7 +18,7 @@ import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderDao;
 
 //App database
 //Add more entities (tables) to database by listing them inside {}
-@Database(entities = {Client.class, Order.class, UpcomingOrder.class}, version = 7)
+@Database(entities = {Client.class, Order.class, UpcomingOrder.class}, version = 9)
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";

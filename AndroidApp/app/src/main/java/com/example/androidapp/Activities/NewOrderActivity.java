@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -50,6 +51,8 @@ public class NewOrderActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_ORDER_DISH_LIST";
     public static final String EXTRA_ORDER_IMAGE =
             "com.example.androidapp.EXTRA_ORDER_IMAGE";
+    public static final String EXTRA_ORDER_CLIENT =
+            "com.example.androidapp.EXTRA_ORDER_CLIENT";
 
     public static final int CHOOSE_CLIENT_REQUEST = 1;
     public static final int CHOOSE_DISH_REQUEST= 2;
@@ -207,7 +210,7 @@ public class NewOrderActivity extends AppCompatActivity {
         String strOrderDate = editOrderDate.getText().toString().trim();
         String strOrderTime = editOrderTime.getText().toString().trim();
         String strOrderEmail = editOrderEmail.getText().toString().trim();
-        String strOrderBank = editOrderTime.getText().toString().trim();
+        String strOrderBank = editOrderBank.getText().toString().trim();
 
         //Only compare the date
 //        DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
@@ -241,14 +244,10 @@ public class NewOrderActivity extends AppCompatActivity {
 //            }
 
             Intent data = new Intent();
-            data.putExtra(EXTRA_ORDER_NAME, strOrderName);
-            data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
+            Client client = new Client(strOrderName, strOrderNumber, strOrderAddress, strOrderEmail, strOrderBank, imageDir);
             data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
             data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
-            data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
-            data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
-            data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
-            data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
+            data.putExtra(EXTRA_ORDER_CLIENT, client);
 //            data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
 
             setResult(RESULT_OK, data);
@@ -274,25 +273,27 @@ public class NewOrderActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CHOOSE_CLIENT_REQUEST && resultCode == RESULT_OK) {
-            String clientName = data.getStringExtra(SubClientActivity.EXTRA_NAME);
-            String clientPhoneNumber = data.getStringExtra(SubClientActivity.EXTRA_PHONE_NUMBER);
-            String clientAddress = data.getStringExtra(SubClientActivity.EXTRA_ADDRESS);
-            imageDir = data.getStringExtra(SubClientActivity.EXTRA_IMAGE);
+            assert data != null;
+            Client client = data.getParcelableExtra(SubClientActivity.EXTRA_CLIENT);
 
             //Display client's info after having chosen from existing contact
-            editOrderName.setText(clientName);
-            editOrderNumber.setText(clientPhoneNumber);
-            editOrderAddress.setText(clientAddress);
-
+            editOrderName.setText(client.getClientName());
+            editOrderNumber.setText(client.getClientNumber());
+            editOrderAddress.setText(client.getClientAddress());
+            editOrderBank.setText(client.getClientBank());
+            editOrderEmail.setText(client.getClientEmail());
+            imageDir = client.getImageDir();
             //read image from file
-            try {
-                File f = new File(imageDir);
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                imageView.setImageBitmap(b);
-            }
-            catch (FileNotFoundException e) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
-                imageView.setImageBitmap(bitmap);
+            if (imageDir != null) {
+                try {
+                    File f = new File(imageDir);
+                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(b);
+                }
+                catch (FileNotFoundException e) {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
+                    imageView.setImageBitmap(bitmap);
+                }
             }
 
         }

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_new_order.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_order_info_today.xml" value="0.6" />
+        <entry key="app/src/main/res/layout/activity_order_info_upcoming.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/client_item_select_recycler.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/item_client.xml" value="0.35477178423236516" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.3333333333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

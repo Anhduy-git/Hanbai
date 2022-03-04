@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -84,7 +83,7 @@ public class InfoClientActivity extends AppCompatActivity {
         tvClientName = findViewById(R.id.view_client_name);
         tvClientNumber = findViewById(R.id.view_client_phone);
         tvClientAddress = findViewById(R.id.view_client_address);
-        tvClientEmail = findViewById(R.id.view_client_email);
+        tvClientEmail = findViewById(R.id.order_email);
         tvClientBank = findViewById(R.id.view_client_bank);
         imageView = findViewById(R.id.view_client_avatar);
         btnBack = findViewById(R.id.btn_back);

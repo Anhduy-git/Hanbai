@@ -93,15 +93,17 @@ public class ClientAdapter extends ListAdapter<Client, ClientAdapter.ClientViewH
         holder.tvClientNumber.setText(client.getClientNumber());
         holder.tvClientAddress.setText(client.getClientAddress());
         //read image from file
-        try {
-            File f=new File(client.getImageDir());
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            holder.imageView.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e) {
-            Resources res = holder.imageView.getResources();
-            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
-            holder.imageView.setImageBitmap(bitmap);
+        if (client.getImageDir() != null) {
+            try {
+                File f=new File(client.getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
         }
     }
 

@@ -50,7 +50,7 @@ public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrd
         public boolean areContentsTheSame(@NonNull UpcomingOrder oldItem, @NonNull UpcomingOrder newItem) {
             return oldItem.getClient().getClientName().equals(newItem.getClient().getClientName()) &&
                     oldItem.getClient().getClientAddress().equals(newItem.getClient().getClientAddress()) &&
-//                    oldItem.getDate().equals(newItem.getDate()) &&
+                    oldItem.getDate().equals(newItem.getDate()) &&
                     oldItem.getTime().equals(newItem.getTime()) &&
                     oldItem.getClient().getClientNumber().equals(newItem.getClient().getClientNumber()) &&
                     oldItem.getPrice() == newItem.getPrice() &&
@@ -89,22 +89,25 @@ public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrd
         holder.tvOrderTime.setText(upcomingOrder.getTime());
         holder.tvOrderPrice.setText(String.format("%,d", upcomingOrder.getPrice()) + " VND");
         //Read image from file
-//        try {
-//            File f=new File(upcomingOrder.getClient().getImageDir());
-//            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imageView.setImageBitmap(b);
-//        }
-//        catch (FileNotFoundException e) {
-//            Resources res = holder.imageView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
-//            holder.imageView.setImageBitmap(bitmap);
-//        }
+        if (upcomingOrder.getClient().getImageDir() != null) {
+            try {
+                File f=new File(upcomingOrder.getClient().getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
+        }
         //Handle flag
         if (upcomingOrder.getPaid()){
             holder.flagPaid.setVisibility(View.VISIBLE);
         } else {
             holder.flagPaid.setVisibility(View.INVISIBLE);
         }
+        holder.flagShip.setVisibility(View.GONE);
     }
 
     public UpcomingOrder getUpcomingOrderAt(int pos){
@@ -119,6 +122,7 @@ public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrd
         private final TextView tvOrderPrice;
         private final ImageView imageView;
         private final ImageView flagPaid;
+        private final ImageView flagShip;
         private final RelativeLayout item;
         private final SwipeRevealLayout swipeRevealLayout;
         private final RelativeLayout layoutDel;
@@ -134,6 +138,7 @@ public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrd
             tvOrderPrice = itemView.findViewById(R.id.order_price);
             imageView = itemView.findViewById(R.id.order_avatar);
             flagPaid = itemView.findViewById(R.id.paid_icon);
+            flagShip = itemView.findViewById(R.id.ship_icon);
 
             //This is the main layout in order_item_recycler
             item = itemView.findViewById(R.id.order_item);

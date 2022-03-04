@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -65,15 +66,17 @@ public class ClientSelectOnlyAdapter extends RecyclerView.Adapter<ClientSelectOn
         holder.tvClientNumber.setText(client.getClientNumber());
         holder.tvClientAddress.setText(client.getClientAddress());
         //read image from file
-        try {
-            File f=new File(client.getImageDir());
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            holder.imageView.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e) {
-            Resources res = holder.imageView.getResources();
-            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
-            holder.imageView.setImageBitmap(bitmap);
+        if (client.getImageDir() != null) {
+            try {
+                File f=new File(client.getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
         }
     }
 
@@ -128,7 +131,7 @@ public class ClientSelectOnlyAdapter extends RecyclerView.Adapter<ClientSelectOn
         private final TextView tvClientNumber;
         private final TextView tvClientAddress;
         private final ImageView imageView;
-        private final RelativeLayout item;
+        private final LinearLayout item;
 
         public ClientSelectViewHolder(@NonNull View itemView) {
             super(itemView);

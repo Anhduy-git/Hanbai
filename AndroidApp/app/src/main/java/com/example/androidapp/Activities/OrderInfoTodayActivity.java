@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -31,23 +31,12 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
 
     public static final String EXTRA_ORDER_ID =
             "com.example.androidapp.EXTRA_ORDER_ID";
-    public static final String EXTRA_ORDER_NAME =
-            "com.example.androidapp.EXTRA_ORDER_NAME";
-    public static final String EXTRA_ORDER_ADDRESS =
-            "com.example.androidapp.EXTRA_ORDER_ADDRESS";
-    public static final String EXTRA_ORDER_NUMBER =
-            "com.example.androidapp.EXTRA_ORDER_NUMBER";
     public static final String EXTRA_ORDER_DATE =
             "com.example.androidapp.EXTRA_ORDER_DATE";
     public static final String EXTRA_ORDER_TIME =
             "com.example.androidapp.EXTRA_ORDER_TIME";
-    public static final String EXTRA_ORDER_IMAGE =
-            "com.example.androidapp.EXTRA_ORDER_IMAGE";
-    public static final String EXTRA_ORDER_BANK =
-            "com.example.androidapp.EXTRA_ORDER_BANK";
-    public static final String EXTRA_ORDER_EMAIL =
-            "com.example.androidapp.EXTRA_ORDER_EMAIL";
-
+    public static final String EXTRA_ORDER_CLIENT =
+            "com.example.androidapp.EXTRA_ORDER_CLIENT";
     public static final String EXTRA_ORDER_PRICE =
             "com.example.androidapp.EXTRA_ORDER_PRICE";
 
@@ -87,7 +76,6 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
     private String strOrderTime;
     private String strOrderBank;
     private String strOrderEmail;
-    private String tmpDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,31 +93,31 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         //Get data from intent to display UI
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ORDER_ID)){
-            tmpDate = intent.getStringExtra(EXTRA_ORDER_DATE);
-            tvOrderName.setText(intent.getStringExtra(EXTRA_ORDER_NAME));
-
+            Client client = intent.getParcelableExtra(EXTRA_ORDER_CLIENT);
+            tvOrderName.setText(client.getClientName());
+            tvOrderAddress.setText(client.getClientAddress());
+            tvOrderNumber.setText(client.getClientNumber());
+            tvOrderBank.setText(client.getClientBank());
+            tvOrderEmail.setText(client.getClientEmail());
             int price = intent.getIntExtra(EXTRA_ORDER_PRICE, 0);
             tvOrderPrice.setText(String.format("%,d", price));
-            Log.d("test", intent.getStringExtra(EXTRA_ORDER_DATE));
-            tvOrderAddress.setText(intent.getStringExtra(EXTRA_ORDER_ADDRESS));
             tvOrderTime.setText(intent.getStringExtra(EXTRA_ORDER_TIME));
-            tvOrderNumber.setText(intent.getStringExtra(EXTRA_ORDER_NUMBER));
-            tvOrderBank.setText(intent.getStringExtra(EXTRA_ORDER_BANK));
-            tvOrderEmail.setText(intent.getStringExtra(EXTRA_ORDER_EMAIL));
-//            tvOrderDate.setText(intent.getStringExtra(EXTRA_ORDER_DATE));
+            tvOrderDate.setText(intent.getStringExtra(EXTRA_ORDER_DATE));
             ship = intent.getBooleanExtra(EXTRA_CHECK_SHIP, ship);
             beforePaid = intent.getBooleanExtra(EXTRA_CHECK_PAID, beforePaid);
             currentPaid = beforePaid;
-            imageDir = intent.getStringExtra(EXTRA_ORDER_IMAGE);
+            imageDir = client.getImageDir();
             //read image from file
-            try {
-                File f = new File(imageDir);
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                imageView.setImageBitmap(b);
-            }
-            catch (FileNotFoundException e) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
-                imageView.setImageBitmap(bitmap);
+            if (imageDir != null) {
+                try {
+                    File f = new File(imageDir);
+                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    imageView.setImageBitmap(b);
+                }
+                catch (FileNotFoundException e) {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
+                    imageView.setImageBitmap(bitmap);
+                }
             }
         }
 
@@ -147,9 +135,9 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         strOrderAddress = tvOrderAddress.getText().toString().trim();
         strOrderNumber = tvOrderNumber.getText().toString().trim();
         strOrderTime = tvOrderTime.getText().toString().trim();
-        strOrderDate = tvOrderTime.getText().toString().trim();
-        strOrderBank = tvOrderTime.getText().toString().trim();
-        strOrderEmail = tvOrderTime.getText().toString().trim();
+        strOrderDate = tvOrderDate.getText().toString().trim();
+        strOrderBank = tvOrderBank.getText().toString().trim();
+        strOrderEmail = tvOrderEmail.getText().toString().trim();
 
         //Checkbox to confirm paid
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -181,16 +169,12 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                 }
                 if (updated) {
                     Intent data = new Intent();
+                    Client client = new Client(strOrderName, strOrderNumber, strOrderAddress, strOrderEmail, strOrderBank, imageDir);
+                    data.putExtra(EXTRA_ORDER_CLIENT, client);
                     data.putExtra(EXTRA_CHECK_PAID, currentPaid);
                     data.putExtra(EXTRA_CHECK_SHIP, ship);
-                    data.putExtra(EXTRA_ORDER_NAME, strOrderName);
-                    data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
-                    data.putExtra(EXTRA_ORDER_DATE, tmpDate);
+                    data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
                     data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
-                    data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
-                    data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
-                    data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
-                    data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
                     int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                     if (id != -1) {
                         data.putExtra(EXTRA_ORDER_ID, id);
@@ -225,17 +209,13 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 alertDialog.dismiss();
                 Intent data = new Intent();
+                Client client = new Client(strOrderName, strOrderNumber, strOrderAddress, strOrderEmail, strOrderBank, imageDir);
+                data.putExtra(EXTRA_ORDER_CLIENT, client);
                 data.putExtra(EXTRA_CHECK_SHIP, true);
                 data.putExtra(EXTRA_CHECK_CONFIRM_SHIP, true);
                 data.putExtra(EXTRA_CHECK_PAID, currentPaid);
-                data.putExtra(EXTRA_ORDER_NAME, strOrderName);
-                data.putExtra(EXTRA_ORDER_ADDRESS, strOrderAddress);
-                data.putExtra(EXTRA_ORDER_DATE, tmpDate);
+                data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
                 data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
-                data.putExtra(EXTRA_ORDER_NUMBER, strOrderNumber);
-                data.putExtra(EXTRA_ORDER_IMAGE, imageDir);
-                data.putExtra(EXTRA_ORDER_BANK, strOrderBank);
-                data.putExtra(EXTRA_ORDER_EMAIL, strOrderEmail);
 //                data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
                 int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                 if (id != -1) {
@@ -268,7 +248,8 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         tvOrderNumber = findViewById(R.id.order_phone);
         tvOrderTime = findViewById(R.id.order_time);
         tvOrderBank = findViewById(R.id.order_bank);
-        tvOrderEmail = findViewById(R.id.view_client_email);
+        tvOrderEmail = findViewById(R.id.order_email);
+        tvOrderDate = findViewById(R.id.order_date);
         imageView = findViewById(R.id.order_avatar);
         btnBack = findViewById(R.id.btn_back);
         checkIcon = findViewById(R.id.check_ic);

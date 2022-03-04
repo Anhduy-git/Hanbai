@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -42,14 +43,9 @@ import java.util.List;
 
 public class SubClientActivity extends AppCompatActivity {
 
-    public static final String EXTRA_NAME =
-            "com.example.androidapp.EXTRA_NAME";
-    public static final String EXTRA_PHONE_NUMBER =
-            "com.example.androidapp.EXTRA_PHONE_NUMBER";
-    public static final String EXTRA_ADDRESS =
-            "com.example.androidapp.EXTRA_ADDRESS";
-    public static final String EXTRA_IMAGE =
-            "com.example.androidapp.EXTRA_IMAGE";
+
+    public static final String EXTRA_CLIENT =
+            "com.example.androidapp.EXTRA_CLIENT";
 
     private Button btnBack;
 
@@ -84,10 +80,7 @@ public class SubClientActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Client client) {
                 Intent data = new Intent();
-                data.putExtra(EXTRA_NAME, client.getClientName());
-                data.putExtra(EXTRA_PHONE_NUMBER, client.getClientNumber());
-                data.putExtra(EXTRA_ADDRESS, client.getClientAddress());
-                data.putExtra(EXTRA_IMAGE, client.getImageDir());
+                data.putExtra(EXTRA_CLIENT, client);
 
                 setResult(RESULT_OK, data);
                 finish();

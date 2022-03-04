@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidapp.Activities.InfoClientActivity;
 import com.example.androidapp.Activities.NewOrderActivity;
 import com.example.androidapp.Activities.OrderInfoTodayActivity;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
@@ -84,15 +85,12 @@ public class OrderTodayFragment extends Fragment {
             public void onItemClick(Order order) {
                 Intent intent = new Intent(getActivity(), OrderInfoTodayActivity.class);
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_ID, order.getId());
-                intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_NAME, order.getClient().getClientName());
-                intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_ADDRESS, order.getClient().getClientAddress());
+                intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_CLIENT, order.getClient());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_TIME, order.getTime());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_DATE, order.getDate());
-                intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_NUMBER, order.getClient().getClientNumber());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, order.getPaid());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_CHECK_SHIP, order.getShip());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_PRICE, order.getPrice());
-                intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_IMAGE, order.getClient().getImageDir());
 
                 startActivityForResult(intent, CONFIRM_ORDER_REQUEST);
             }
@@ -125,15 +123,10 @@ public class OrderTodayFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         //Add new order
         if (requestCode == ADD_ORDER_REQUEST && resultCode == RESULT_OK) {
-            String name = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NAME);
-            String address = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_ADDRESS);
-            String number = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NUMBER);
+
             String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
-            String bank = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_BANK);
-            String email = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_EMAIL);
-            String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
-            Client client = new Client(name, number, address, email, bank, imageDir);
+            Client client = data.getParcelableExtra(NewOrderActivity.EXTRA_ORDER_CLIENT);
             Order order = new Order(client, date, time, 0, false, false, null);
             orderViewModel.insert(order);
 //            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
@@ -166,15 +159,10 @@ public class OrderTodayFragment extends Fragment {
 //            //Update order (paid, ship)
         } else if (requestCode == CONFIRM_ORDER_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(OrderInfoTodayActivity.EXTRA_ORDER_ID, -1);
-            String name = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NAME);
-            String address = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_ADDRESS);
-            String number = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NUMBER);
+
             String time = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_DATE);
-            String bank = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_BANK);
-            String email = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_EMAIL);
-            String imageDir = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_IMAGE);
-
+            Client client = data.getParcelableExtra(OrderInfoTodayActivity.EXTRA_ORDER_CLIENT);
             boolean paid = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, false);
             boolean ship = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_SHIP, false);
             boolean confirmShip = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_CONFIRM_SHIP, false);
@@ -183,7 +171,6 @@ public class OrderTodayFragment extends Fragment {
                 Toast.makeText(getActivity(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Client client = new Client(name, number, address, email, bank, imageDir);
 //            mOrderListDish = data.getParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
 

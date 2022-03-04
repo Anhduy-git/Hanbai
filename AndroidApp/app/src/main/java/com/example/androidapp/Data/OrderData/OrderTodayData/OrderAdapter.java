@@ -49,7 +49,7 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
         public boolean areContentsTheSame(@NonNull Order oldItem, @NonNull Order newItem) {
             return oldItem.getClient().getClientName().equals(newItem.getClient().getClientName()) &&
                     oldItem.getClient().getClientAddress().equals(newItem.getClient().getClientAddress()) &&
-//                    oldItem.getDate().equals(newItem.getDate()) &&
+                    oldItem.getDate().equals(newItem.getDate()) &&
                     oldItem.getTime().equals(newItem.getTime()) &&
                     oldItem.getClient().getClientNumber().equals(newItem.getClient().getClientNumber()) &&
                     oldItem.getPrice() == newItem.getPrice() &&
@@ -89,16 +89,19 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
         holder.tvOrderTime.setText(order.getTime());
         holder.tvOrderPrice.setText(String.format("%,d", order.getPrice()) + " VND");
         //Read image from file
-//        try {
-//            File f=new File(order.getClient().getImageDir());
-//            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imageView.setImageBitmap(b);
-//        }
-//        catch (FileNotFoundException e) {
-//            Resources res = holder.imageView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
-//            holder.imageView.setImageBitmap(bitmap);
-//        }
+        if (order.getClient().getImageDir() != null) {
+            try {
+                File f=new File(order.getClient().getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
+        }
+
         //Handle flag
         if (order.getPaid()){
             holder.flagPaid.setVisibility(View.VISIBLE);
