@@ -25,10 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidapp.Activities.NewOrderActivity;
 import com.example.androidapp.Activities.OrderInfoTodayActivity;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderAdapter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderViewModel;
+import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.R;
 
 import java.text.ParseException;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.joda.time.DateTimeComparator;
 
 public class OrderTodayFragment extends Fragment {
     private Button btnAddNewOrder;
@@ -105,14 +108,14 @@ public class OrderTodayFragment extends Fragment {
 
 //
 //Button to launch New Today Order Activity
-//        btnAddNewOrder = (Button) view.findViewById(R.id.add_new_today_order);
-//        btnAddNewOrder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), NewOrderActivity.class);
-//                startActivityForResult(intent, ADD_ORDER_REQUEST);
-//            }
-//        });
+        btnAddNewOrder = (Button) view.findViewById(R.id.add_order_button);
+        btnAddNewOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewOrderActivity.class);
+                startActivityForResult(intent, ADD_ORDER_REQUEST);
+            }
+        });
         return view;
     }
 
@@ -121,27 +124,32 @@ public class OrderTodayFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Add new order
-//        if (requestCode == ADD_ORDER_REQUEST && resultCode == RESULT_OK) {
-//            String name = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NAME);
-//            String address = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_ADDRESS);
-//            String number = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NUMBER);
-//            String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
-//            String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
-//            String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
-//            Client client = new Client(name, number, address, imageDir);
+        if (requestCode == ADD_ORDER_REQUEST && resultCode == RESULT_OK) {
+            String name = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NAME);
+            String address = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_ADDRESS);
+            String number = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_NUMBER);
+            String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
+            String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
+            String bank = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_BANK);
+            String email = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_EMAIL);
+            String imageDir = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_IMAGE);
+            Client client = new Client(name, number, address, email, bank, imageDir);
+            Order order = new Order(client, date, time, 0, false, false, null);
+            orderViewModel.insert(order);
 //            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
 //
-//            //Only compare the date
+            //Only compare the date
 //            DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
 //            Calendar calendar = Calendar.getInstance();
 //            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 //            //Get the current date
-//            Date today  = calendar.getTime();
+//            Date today = calendar.getTime();
+
 //            try {
 //                Date orderDate = simpleDateFormat.parse(date);
 //                int ret = dateTimeComparator.compare(orderDate, today);
-//                if (ret > 0){
+//                if (ret > 0) {
 //                    //Move order to upcoming order if order's day > today.
 //                    UpcomingOrder upcomingOrder = new UpcomingOrder(client, date, time, price, false, mOrderListDish);
 //                    upcomingOrderViewModel.insert(upcomingOrder);
@@ -149,37 +157,39 @@ public class OrderTodayFragment extends Fragment {
 //                    Order order = new Order(client, date, time, price, false, false, mOrderListDish);
 //                    orderViewModel.insert(order);
 //                }
-//
+////
 //            } catch (ParseException ex) {
 //                Toast.makeText(getActivity(), "Lỗi", Toast.LENGTH_SHORT).show();
 //            }
 //
 //
 //            //Update order (paid, ship)
-//        } else if (requestCode == CONFIRM_ORDER_REQUEST && resultCode == RESULT_OK) {
-//            int id = data.getIntExtra(OrderInfoTodayActivity.EXTRA_ORDER_ID, -1);
-//            String name = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NAME);
-//            String address = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_ADDRESS);
-//            String number = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NUMBER);
-//            String time = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_TIME);
-//            String date = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_DATE);
-//            String imageDir = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_IMAGE);
-//
-//            boolean paid = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, false);
-//            boolean ship = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_SHIP, false);
-//            boolean confirmShip = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_CONFIRM_SHIP, false);
-//
-//            if (id == -1){
-//                Toast.makeText(getActivity(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//            Client client = new Client(name, number, address, imageDir);
+        } else if (requestCode == CONFIRM_ORDER_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(OrderInfoTodayActivity.EXTRA_ORDER_ID, -1);
+            String name = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NAME);
+            String address = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_ADDRESS);
+            String number = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_NUMBER);
+            String time = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_TIME);
+            String date = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_DATE);
+            String bank = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_BANK);
+            String email = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_EMAIL);
+            String imageDir = data.getStringExtra(OrderInfoTodayActivity.EXTRA_ORDER_IMAGE);
+
+            boolean paid = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, false);
+            boolean ship = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_SHIP, false);
+            boolean confirmShip = data.getBooleanExtra(OrderInfoTodayActivity.EXTRA_CHECK_CONFIRM_SHIP, false);
+
+            if (id == -1){
+                Toast.makeText(getActivity(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Client client = new Client(name, number, address, email, bank, imageDir);
 //            mOrderListDish = data.getParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_DISH_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
-//
-//            Order order = new Order(client, date, time, price, ship, paid, mOrderListDish);
-//            order.setId(id);
-//            orderViewModel.update(order);
+
+            Order order = new Order(client, date, time, 0, ship, paid, null);
+            order.setId(id);
+            orderViewModel.update(order);
 //            //if shipped, then move to history
 //            if(confirmShip) {
 //                HistoryOrderViewModel historyOrderViewModel;
@@ -188,8 +198,9 @@ public class OrderTodayFragment extends Fragment {
 //                HistoryOrder historyOrder = new HistoryOrder(client, order.getDate(), order.getTime(), order.getPrice(), order.getShip(), order.getPaid(), order.getOrderListDish());
 //                historyOrderViewModel.insert(historyOrder);
 //            }
-//        }
+        }
     }
+
 
 //    int calculateOrderPrice(List<Dish> listDish) {
 //        int price = 0;
@@ -211,7 +222,7 @@ public class OrderTodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                sound.start();
+//                sound.start();
                 orderViewModel.delete(order);
             }
         });

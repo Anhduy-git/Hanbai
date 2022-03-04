@@ -57,7 +57,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/cam_btn"
             android:translationY="-80dp"
             android:translationZ="1dp"></Button>
@@ -68,7 +68,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/lib_btn"
             android:translationY="-45dp"
             android:translationZ="1dp"></Button>
@@ -77,55 +77,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/card_view"
+        android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Name: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Number: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Address: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Email: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Bank: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edit_name"

@@ -12,11 +12,13 @@ import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
 import com.example.androidapp.Data.OrderData.OrderTodayData.DataConverter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
+import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrder;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
+import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderDao;
 
 //App database
 //Add more entities (tables) to database by listing them inside {}
-@Database(entities = {Client.class, Order.class}, version = 3)
+@Database(entities = {Client.class, Order.class, UpcomingOrder.class}, version = 7)
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";
@@ -25,6 +27,7 @@ public abstract class AppDatabase extends RoomDatabase{
     //Entities' DAO
     public abstract ClientDao clientDao();
     public abstract OrderDao orderDao();
+    public abstract UpcomingOrderDao upcomingOrderDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -41,7 +44,7 @@ public abstract class AppDatabase extends RoomDatabase{
 //        private DishDao dishDao;
         private OrderDao orderDao;
 //        private UnpaidOrderDao unpaidOrderDao;
-//        private UpcomingOrderDao upcomingOrderDao;
+        private UpcomingOrderDao upcomingOrderDao;
 //        private HistoryOrderDao historyOrderDao;
 
         private PopulateDbAsyncTask(AppDatabase db) {
@@ -49,7 +52,7 @@ public abstract class AppDatabase extends RoomDatabase{
 //            dishDao = db.dishDao();
             orderDao = db.orderDao();
 //            unpaidOrderDao = db.unpaidOrderDao();
-//            upcomingOrderDao = db.upcomingOrderDao();
+            upcomingOrderDao = db.upcomingOrderDao();
 //            historyOrderDao = db.historyOrderDao();
         }
 
