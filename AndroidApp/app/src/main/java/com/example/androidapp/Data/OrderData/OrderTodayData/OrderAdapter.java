@@ -3,6 +3,7 @@ package com.example.androidapp.Data.OrderData.OrderTodayData;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,11 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
                     oldItem.getDate().equals(newItem.getDate()) &&
                     oldItem.getTime().equals(newItem.getTime()) &&
                     oldItem.getClient().getClientNumber().equals(newItem.getClient().getClientNumber()) &&
-                    oldItem.getOrderListProduct().equals(newItem.getOrderListProduct());
+                    oldItem.getPrice() == newItem.getPrice() &&
+                    oldItem.getPaid() == newItem.getPaid() &&
+                    oldItem.getShip() == newItem.getShip();
+
+//                    oldItem.getOrderListProduct().equals(newItem.getOrderListProduct());
         }
     };
 
@@ -84,15 +89,30 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
         holder.tvOrderTime.setText(order.getTime());
         holder.tvOrderPrice.setText(String.format("%,d", order.getPrice()) + " VND");
         //Read image from file
-        try {
-            File f=new File(order.getClient().getImageDir());
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            holder.imageView.setImageBitmap(b);
+        if (order.getClient().getImageDir() != null) {
+            try {
+                File f=new File(order.getClient().getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
         }
-        catch (FileNotFoundException e) {
-            Resources res = holder.imageView.getResources();
-            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ava_client_default);
-            holder.imageView.setImageBitmap(bitmap);
+
+        //Handle flag
+        if (order.getPaid()){
+            holder.flagPaid.setVisibility(View.VISIBLE);
+        } else {
+            holder.flagPaid.setVisibility(View.INVISIBLE);
+        }
+
+        if (order.getShip()){
+            holder.flagShip.setVisibility(View.VISIBLE);
+        } else {
+            holder.flagShip.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -106,8 +126,10 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
         private final TextView tvOrderTime;
         private final TextView tvOrderPrice;
         private final ImageView imageView;
+        private final ImageView flagPaid;
+        private final ImageView flagShip;
         private final SwipeRevealLayout swipeRevealLayout;
-        private final LinearLayout layoutDel;
+        private final RelativeLayout layoutDel;
         private final RelativeLayout item;
 
         public OrderViewHolder(@NonNull View itemView) {
@@ -119,6 +141,8 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
             tvOrderTime = itemView.findViewById(R.id.order_time);
             tvOrderPrice = itemView.findViewById(R.id.order_price);
             imageView = itemView.findViewById(R.id.order_avatar);
+            flagPaid = itemView.findViewById(R.id.paid_icon);
+            flagShip = itemView.findViewById(R.id.ship_icon);
             //This is the main layout in order_item_recycler
             item = itemView.findViewById(R.id.order_item);
             //Set onClick method for each item

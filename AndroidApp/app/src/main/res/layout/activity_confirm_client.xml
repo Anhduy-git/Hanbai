@@ -38,7 +38,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
+            android:translationY="2dp"
             android:background="@drawable/confirm_icon"
             android:translationZ="1dp"></Button>
         <Button
@@ -46,7 +47,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/cam_btn"
             android:translationY="-80dp"
             android:translationZ="1dp">
@@ -57,65 +58,71 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/lib_btn"
             android:translationY="-45dp"
-            android:translationZ="1dp">
-        </Button>
+            android:translationZ="1dp"></Button>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/card_view"
+        android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Name: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Number: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Address: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Email: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Bank: "
-                android:textSize="17sp"
-                android:textColor="@color/f_color"></TextView>
+                android:textColor="@color/f_color"
+                android:textSize="17sp"></TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edit_name"
@@ -123,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_bottom_1"
-                android:text="Le Viet Luc "
                 android:inputType="text"
                 android:maxLines="1"
+                android:text="Le Viet Luc "
                 android:textColor="@color/f_color"
                 android:textCursorDrawable="@null"
                 android:textSize="17sp"></EditText>
@@ -136,9 +143,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_bottom_1"
-                android:text="012345678"
                 android:inputType="number"
                 android:maxLines="1"
+                android:text="012345678"
                 android:textColor="@color/f_color"
                 android:textCursorDrawable="@null"
                 android:textSize="17sp"></EditText>
@@ -149,9 +156,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_bottom_1"
-                android:text="123 Vo Van Kiet - P5 - Q5"
                 android:inputType="text"
                 android:maxLines="1"
+                android:text="123 Vo Van Kiet - P5 - Q5"
                 android:textColor="@color/f_color"
                 android:textCursorDrawable="@null"
                 android:textSize="17sp"></EditText>
@@ -162,9 +169,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_bottom_1"
-                android:text="11lucviet@gmail.com"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+                android:text="11lucviet@gmail.com"
                 android:textColor="@color/f_color"
                 android:textCursorDrawable="@null"
                 android:textSize="17sp"></EditText>
@@ -175,9 +182,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/border_bottom_1"
-                android:text="190 3456 2678 017 TECHCOMBANK"
                 android:inputType="text"
                 android:maxLines="1"
+                android:text="190 3456 2678 017 TECHCOMBANK"
                 android:textColor="@color/f_color"
                 android:textCursorDrawable="@null"
                 android:textSize="17sp"></EditText>

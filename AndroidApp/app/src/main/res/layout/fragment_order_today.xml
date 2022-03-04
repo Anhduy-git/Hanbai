@@ -9,9 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,6 +50,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_transparent"
+                android:paddingLeft="4dp"
                 android:drawableLeft="@drawable/plus_icon"></Button>
         </RelativeLayout>
 
@@ -61,7 +59,7 @@
             android:id="@+id/order_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>

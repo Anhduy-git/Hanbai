@@ -12,36 +12,25 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
+            android:background="@drawable/bg_transparent"
+            android:drawableLeft="@drawable/btn_back"
+            android:paddingLeft="10dp"></Button>
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_transparent"
-                android:drawableLeft="@drawable/btn_back"
-                android:paddingLeft="10dp"></Button>
-            <Button
-                android:id="@+id/paid_btn"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="130dp"
-                android:background="@drawable/bg_ship_btn"
-                android:drawableTop="@drawable/icon_payment"
-                android:paddingTop="4dp"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:translationY="2dp">
-
-            </Button>
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/paid_btn"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_ship_btn"
+            android:drawableTop="@drawable/icon_payment"
+            android:translationY="2dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"></Button>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -166,7 +155,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_email"
+                            android:id="@+id/order_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -178,7 +167,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_bank"
+                            android:id="@+id/order_bank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -197,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="-20dp"
+                    android:layout_marginLeft="-25dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/line_icon"></ImageView>
 
@@ -212,30 +201,52 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-
-                        android:orientation="horizontal">
-
-                        <TextView
+                        android:orientation="vertical">
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Time: "
-                            android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/clock_icon"></ImageView>
 
-                        <TextView
-                            android:id="@+id/order_time"
-
+                            <TextView
+                                android:id="@+id/order_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12h30"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/agenda_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="31/12/2022"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="75dp"
+                        android:layout_marginTop="80dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -243,7 +254,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total price: "
                             android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:textSize="15sp"></TextView>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -253,7 +264,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="400 000 000 "
+                                android:text="4 000 000 "
                                 android:textColor="@color/white"
                                 android:textSize="15sp"></TextView>
 
@@ -303,10 +314,11 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/order_dish_recycler"
+        android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 

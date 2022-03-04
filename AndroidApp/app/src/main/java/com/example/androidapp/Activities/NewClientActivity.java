@@ -1,18 +1,34 @@
 package com.example.androidapp.Activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,19 +38,28 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.androidapp.Data.ClientData.Client;
-import com.example.androidapp.HelperClass.ImageConverter;
 import com.example.androidapp.R;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NewClientActivity extends AppCompatActivity {
     public static final String EXTRA_CLIENT = "com.example.androidapp.EXTRA_CLIENT";
 
+    private final int GALLERY_REQUEST = 1;
+    private final int CAMERA_REQUEST = 2;
+    private final int PIC_CROP = 3;
+
     private Button btnBack;
     private Button btnAddClient;
-    private Button btnAddImage;
+    private Button btnGallery;
+    private Button btnCamera;
     private EditText editClientName;
     private EditText editClientNumber;
     private EditText editClientAddress;
@@ -42,6 +67,9 @@ public class NewClientActivity extends AppCompatActivity {
     private EditText editClientBank;
     private ImageView imageView;
     private boolean changeImg;
+    String currentPhotoPath;
+
+    private Uri picUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +101,24 @@ public class NewClientActivity extends AppCompatActivity {
             }
         });
 
+        //Choose image from gallery
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePictureFromGallery();
+            }
+        });
+
+        //Choose image from camera
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkRequestPermission()){
+                    takePictureFromCamera();
+                }
+            }
+        });
+
         //Add client button
         btnAddClient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +126,6 @@ public class NewClientActivity extends AppCompatActivity {
                 addClient();
             }
         });
-
     }
 
     private static void setWindowsFlag(Activity activity, final int Bits, Boolean on) {
@@ -103,6 +148,8 @@ public class NewClientActivity extends AppCompatActivity {
         editClientAddress = findViewById(R.id.edit_address);
         editClientEmail = findViewById(R.id.edit_email);
         editClientBank = findViewById(R.id.edit_bank);
+        btnGallery = findViewById(R.id.btn_gallery);
+        btnCamera = findViewById(R.id.btn_camera);
     }
 
     private void addClient(){
@@ -152,13 +199,140 @@ public class NewClientActivity extends AppCompatActivity {
         finish();
     }
 
+    private boolean checkRequestPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int cameraPermission = ActivityCompat.checkSelfPermission(NewClientActivity.this,
+                    Manifest.permission.CAMERA);
+            if (cameraPermission == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(
+                        NewClientActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        CAMERA_REQUEST);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void takePictureFromGallery(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, GALLERY_REQUEST);
+//        CropImage.activity()
+//                .setGuidelines(CropImageView.Guidelines.ON)
+//                .setAspectRatio(16, 10)
+//                .start(this);
+    }
+
+    private void takePictureFromCamera(){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (photoFile != null){
+                Uri photoURI = FileProvider.getUriForFile(this, "com.example.androidapp.fileprovider",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(intent, CAMERA_REQUEST);
+            }
+        }
+            //activityResultLauncher.launch(intent);
+//        CropImage.activity()
+//                .setAspectRatio(16, 10)
+//                .setAllowRotation(true)
+//                .start(NewClientActivity.this);
+    }
+
+
+//    On activity result for crop library
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_REQUEST) {
+            //CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                imageView.setRotation(0);
+
+                try {
+                    changeImg = true;
+                    Uri selectedImage = data.getData();
+                    imageView.setImageURI(selectedImage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if (requestCode == CAMERA_REQUEST){
+            if (resultCode == RESULT_OK) {
+                imageView.setRotation(0);
+
+                try {
+                    //set changed Img
+                    changeImg = true;
+                    //Bundle bundle = data.getExtras();
+                    Bitmap bitmapImage = BitmapFactory.decodeFile(currentPhotoPath);
+                    imageView.setRotation(90);
+                    imageView.setImageBitmap(bitmapImage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void rotateImage(Bitmap img, int degree) {
+
+    }
+
+//    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {
+//                    if (result.getResultCode() == RESULT_OK) {
+//                        Intent intent = result.getData();
+//
+//                        if (intent != null && ) {
+//                            Log.d("PHOTO", "success");
+//                            try {
+//                                //set changed Img
+//                                changeImg = true;
+//                                Uri selectedImage = intent.getData();
+//                                imageView.setImageURI(selectedImage);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//    );
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_REQUEST && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            try {
+                takePictureFromCamera();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            Toast.makeText(NewClientActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/your_app/app_data/imageClientDir
         File directory = cw.getDir("imageClientDir", Context.MODE_PRIVATE);
         // Create imageDir
         File myPath = new File(directory,fileName);
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(myPath);
@@ -175,4 +349,23 @@ public class NewClientActivity extends AppCompatActivity {
         }
         return directory.getAbsolutePath() + '/' + fileName;
     }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+
 }
+

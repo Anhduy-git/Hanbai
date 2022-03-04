@@ -19,6 +19,7 @@
             android:layout_marginLeft="10dp">
 
             <Button
+                android:id="@+id/btn_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/bg_transparent"
@@ -37,7 +38,11 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="100dp"
+
+            android:id="@+id/add_new_order"
+
+            android:layout_width="80dp"
+
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -59,56 +64,133 @@
         android:paddingEnd="20dp"
         android:paddingTop="10dp"
         android:paddingStart="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/cam_new_ava">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/order_avatar"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/cam_new_ava">
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                    <Button
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/lib_btn_1"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"></Button>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:background="@drawable/bg_th_color">
+
+                    <TextView
+                        android:id="@+id/new_client_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="from contact"
+                        android:textColor="@color/sec_color"
+                        android:textSize="15sp"></TextView>
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="15dp">
+
+                android:layout_marginLeft="10dp">
+
                 <EditText
+                    android:id="@+id/add_order_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/color_hint"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16dp"
+
+                    android:textSize="15sp"
                     android:maxLines="1"
+
                     android:hint="enter name's client"
                     android:inputType="text"
-                    android:background="@drawable/border_bottom"></EditText>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
                     android:textColor="@color/white"
                     android:textColorHint="@color/color_hint"
+                    ></EditText>
+
+                <EditText
+                    android:id="@+id/add_order_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16dp"
+
+                    android:textSize="15sp"
                     android:maxLines="1"
+
                     android:hint="enter number's client"
                     android:inputType="number"
-                    android:background="@drawable/border_bottom"></EditText>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
                     android:textColor="@color/white"
                     android:textColorHint="@color/color_hint"
+                    ></EditText>
+
+                <EditText
+                    android:id="@+id/add_order_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16dp"
+
+                    android:textSize="15sp"
                     android:maxLines="1"
                     android:hint="enter address's client"
                     android:inputType="text"
                     android:background="@drawable/border_bottom"></EditText>
+
+                <EditText
+                    android:id="@+id/add_client_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:hint="enter email's client"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/color_hint"
+                    android:textSize="15sp"></EditText>
+
+                <EditText
+                    android:id="@+id/add_client_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:hint="enter banking info's client"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/color_hint"
+                    android:textSize="15sp"></EditText>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,6 +204,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/add_order_time"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
                             android:layout_gravity="center"
@@ -130,13 +213,17 @@
                             android:src="@drawable/clock_icon"></ImageView>
 
                         <TextView
+                            android:id="@+id/add_order_time_tv"
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:layout_marginRight="5dp"
+
                             android:text="hh:mm"
                             android:textColor="@color/white"
+
                             android:background="@drawable/border_bottom"
-                            android:textSize="16sp"></TextView>
+                            android:textSize="15sp"></TextView>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -154,28 +241,19 @@
                             android:background="@drawable/agenda_icon"></ImageView>
 
                         <TextView
-                            android:id="@+id/order_date_tv"
+                            android:id="@+id/add_order_date_tv"
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:background="@drawable/border_bottom"
                             android:text="dd/mm/yy"
                             android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:textSize="15sp"></TextView>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:layout_width="240dp"
-            android:layout_height="32dp"
-            android:text="choose from your contact"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_sec_color"
-            android:layout_gravity="center_horizontal"></Button>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -183,6 +261,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/new_product_btn"
             android:layout_width="140dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
@@ -196,6 +275,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">

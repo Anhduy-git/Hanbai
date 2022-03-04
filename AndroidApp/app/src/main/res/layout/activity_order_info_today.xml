@@ -152,7 +152,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_email"
+                            android:id="@+id/order_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -164,7 +164,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_bank"
+                            android:id="@+id/order_bank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="-20dp"
+                    android:layout_marginLeft="-25dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/line_icon"></ImageView>
 
@@ -198,30 +198,54 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-
-                        android:orientation="horizontal">
-
-                        <TextView
+                        android:orientation="vertical">
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Time: "
-                            android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/clock_icon"></ImageView>
 
-                        <TextView
-                            android:id="@+id/order_time"
+                            <TextView
+                                android:id="@+id/order_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12h30"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
 
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/agenda_icon"></ImageView>
+
+                            <TextView
+                                android:id="@+id/order_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="31/12/2022"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="75dp"
+                        android:layout_marginTop="80dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -229,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total price: "
                             android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:textSize="15sp"></TextView>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -237,16 +261,17 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/order_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="400 000 000 "
+                                android:text="4 000 000"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"></TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="VND"
+                                android:text=" VND"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"></TextView>
                         </LinearLayout>
@@ -289,10 +314,11 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/order_dish_recycler"
+        android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="50dp"
+        android:paddingTop="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -300,14 +326,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="-60dp">
+        android:layout_marginTop="-50dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -324,6 +350,7 @@
             </TextView>
 
             <LinearLayout
+                android:id="@+id/check_box"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_checkbox"
@@ -336,7 +363,6 @@
                     android:visibility="invisible">
 
                     <ImageView
-                        android:id="@+id/icon_checking"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
@@ -349,13 +375,15 @@
         <Button
             android:id="@+id/order_ship_btn"
             android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/bg_gradient"
             android:text="Ship"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:layout_centerVertical="true"
             android:textSize="20dp"></Button>
     </RelativeLayout>
 </LinearLayout>
