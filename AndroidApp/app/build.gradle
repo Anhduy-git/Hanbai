@@ -25,6 +25,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -50,7 +52,16 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+
     //GSON
     implementation 'com.google.code.gson:gson:2.8.7'
+
+
+    // This library is used for crop image feature
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+    // This library is used for loading the
+    // cropped image into ImageView.
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_reveal_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +11,8 @@
     <!-- Your secondary layout here -->
     <RelativeLayout
         android:layout_width="75dp"
-        android:layout_height="75dp">
+        android:layout_height="75dp"
+        android:id="@+id/client_item_del" >
         <ImageView
             android:layout_width="23dp"
             android:layout_height="26dp"
@@ -19,15 +22,17 @@
 
     <!-- Your main layout here -->
     <LinearLayout
+        android:id="@+id/client_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingBottom="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/client_avatar"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_gravity="center_vertical"
@@ -74,6 +79,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/client_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -82,6 +88,7 @@
                     android:textSize="15sp"></TextView>
 
                 <TextView
+                    android:id="@+id/client_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -95,6 +102,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/client_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -102,12 +110,6 @@
                         android:textColor="@color/f_color"
                         android:textSize="15sp"></TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" VND"
-                        android:textColor="@color/f_color"
-                        android:textSize="15sp"></TextView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
