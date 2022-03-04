@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="-20dp"
+                    android:layout_marginLeft="-25dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/line_icon"></ImageView>
 
@@ -198,30 +198,53 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-
-                        android:orientation="horizontal">
-
-                        <TextView
+                        android:orientation="vertical">
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Time: "
-                            android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/clock_icon"></ImageView>
 
-                        <TextView
-                            android:id="@+id/order_time"
+                            <TextView
+                                android:id="@+id/order_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12h30"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
 
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"></TextView>
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp"
+                                android:maxHeight="18dp"
+                                android:src="@drawable/agenda_icon"></ImageView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="31/12/2022"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"></TextView>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="75dp"
+                        android:layout_marginTop="80dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -229,7 +252,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total price: "
                             android:textColor="@color/white"
-                            android:textSize="16sp"></TextView>
+                            android:textSize="15sp"></TextView>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -240,7 +263,7 @@
                                 android:id="@+id/order_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="400 000 000"
+                                android:text="4 000 000"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"></TextView>
 
