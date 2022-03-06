@@ -152,7 +152,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_email"
+                            android:id="@+id/order_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -164,7 +164,7 @@
                         </TextView>
 
                         <TextView
-                            android:id="@+id/view_client_bank"
+                            android:id="@+id/order_bank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -232,6 +232,9 @@
                                 android:src="@drawable/agenda_icon"></ImageView>
 
                             <TextView
+
+                                android:id="@+id/order_date"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="31/12/2022"
@@ -259,6 +262,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/order_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="4 000 000 "
@@ -298,6 +302,7 @@
         android:layout_marginTop="0dp">
 
         <Button
+            android:id="@+id/new_dish_btn"
             android:layout_width="140dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
@@ -311,7 +316,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/order_dish_recycler"
+        android:id="@+id/order_product_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
@@ -347,6 +352,7 @@
             </TextView>
 
             <LinearLayout
+                android:id="@+id/check_box"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_checkbox"

@@ -52,6 +52,7 @@
             android:translationZ="1dp"></Button>
 
         <Button
+            android:id="@+id/btn_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
@@ -62,6 +63,7 @@
             android:translationZ="1dp"></Button>
 
         <Button
+            android:id="@+id/btn_gallery"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
