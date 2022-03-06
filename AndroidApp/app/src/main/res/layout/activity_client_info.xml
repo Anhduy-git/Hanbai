@@ -125,13 +125,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-
                 android:layout_marginBottom="1dp"
                 android:maxLines="1"
                 android:text="190 3456 2678 017 TECHCOMBANK"
                 android:textColor="@color/black"
                 android:textSize="17sp"></TextView>
-
 
         </LinearLayout>
 </RelativeLayout>
