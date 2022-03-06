@@ -22,6 +22,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/black_trans"
             android:scaleType="centerCrop"></ImageView>
+
         <ImageView
             android:layout_width="18dp"
             android:layout_height="22dp"
