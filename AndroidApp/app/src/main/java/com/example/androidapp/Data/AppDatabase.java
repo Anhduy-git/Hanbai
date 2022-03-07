@@ -15,10 +15,13 @@ import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrder;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderDao;
+import com.example.androidapp.Data.ProductAttribute.ProductAttribute;
+import com.example.androidapp.Data.ProductAttribute.ProductAttributeDao;
+import com.example.androidapp.Data.ProductData.Product;
 
 //App database
 //Add more entities (tables) to database by listing them inside {}
-@Database(entities = {Client.class, Order.class, UpcomingOrder.class}, version = 9)
+@Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductAttribute.class, Product.class}, version = 1)
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";
@@ -28,12 +31,13 @@ public abstract class AppDatabase extends RoomDatabase{
     public abstract ClientDao clientDao();
     public abstract OrderDao orderDao();
     public abstract UpcomingOrderDao upcomingOrderDao();
+    public abstract ProductAttributeDao productAttributeDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
-                    //.allowMainThreadQueries()
+                    .allowMainThreadQueries()
                     .build();
         }
         return instance;
@@ -45,6 +49,7 @@ public abstract class AppDatabase extends RoomDatabase{
         private OrderDao orderDao;
 //        private UnpaidOrderDao unpaidOrderDao;
         private UpcomingOrderDao upcomingOrderDao;
+        private ProductAttributeDao productAttributeDao;
 //        private HistoryOrderDao historyOrderDao;
 
         private PopulateDbAsyncTask(AppDatabase db) {
@@ -54,6 +59,7 @@ public abstract class AppDatabase extends RoomDatabase{
 //            unpaidOrderDao = db.unpaidOrderDao();
             upcomingOrderDao = db.upcomingOrderDao();
 //            historyOrderDao = db.historyOrderDao();
+            productAttributeDao = db.productAttributeDao();
         }
 
         @Override

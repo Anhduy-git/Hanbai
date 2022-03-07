@@ -110,11 +110,12 @@
                     android:background="@drawable/bg_th_color">
 
                     <TextView
+                        android:id="@+id/new_client_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="from contact"
-                        android:textSize="15sp"
-                        android:textColor="@color/sec_color"></TextView>
+                        android:textColor="@color/sec_color"
+                        android:textSize="15sp"></TextView>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -170,27 +171,30 @@
                     android:background="@drawable/border_bottom"></EditText>
 
                 <EditText
+                    android:id="@+id/add_client_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/color_hint"
                     android:layout_marginBottom="8dp"
-                    android:textSize="15sp"
-                    android:maxLines="1"
+                    android:background="@drawable/border_bottom"
                     android:hint="enter email's client"
                     android:inputType="textEmailAddress"
-                    android:background="@drawable/border_bottom"></EditText>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:textColor="@color/white"
                     android:textColorHint="@color/color_hint"
+                    android:textSize="15sp"></EditText>
+
+                <EditText
+                    android:id="@+id/add_client_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="15sp"
-                    android:maxLines="1"
+                    android:background="@drawable/border_bottom"
                     android:hint="enter banking info's client"
                     android:inputType="text"
-                    android:background="@drawable/border_bottom"></EditText>
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/color_hint"
+                    android:textSize="15sp"></EditText>
 
                 <LinearLayout
                     android:layout_width="match_parent"
