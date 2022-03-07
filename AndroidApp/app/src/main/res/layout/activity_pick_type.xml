@@ -18,130 +18,147 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"></TextView>
+
         <LinearLayout
+            android:id="@+id/lst1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Fashion"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Food"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Medicine"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-device"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
-                android:textColor="@color/f_color"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="E-device"
+                android:textColor="@color/f_color"
+                android:textSize="16sp"></CheckBox>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/lst2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Accessory"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Book"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
                 android:text="Houseware"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
                 android:textColor="@color/f_color"
-                android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:textSize="16sp"></CheckBox>
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Other"
-                android:button="@drawable/bg_transparent"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textSize="16sp"
-                android:textColor="@color/f_color"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/custom_checkbox"
-                android:layout_marginRight="10dp"></CheckBox>
+                android:button="@drawable/bg_transparent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="Other"
+                android:textColor="@color/f_color"
+                android:textSize="16sp"></CheckBox>
         </LinearLayout>
     </LinearLayout>
+
     <Button
+        android:id="@+id/confirm_btn"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:background="@drawable/bg_transparent"
-        android:paddingLeft="-5dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"
-        android:drawableLeft="@drawable/arrow_right_alt_icon"></Button>
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bg_transparent"
+        android:drawableLeft="@drawable/arrow_right_alt_icon"
+        android:paddingLeft="-5dp"></Button>
 </RelativeLayout>
