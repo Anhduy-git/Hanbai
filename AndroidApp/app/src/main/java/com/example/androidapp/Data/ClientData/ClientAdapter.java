@@ -97,6 +97,7 @@ public class ClientAdapter extends ListAdapter<Client, ClientAdapter.ClientViewH
             try {
                 File f=new File(client.getImageDir());
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                //holder.imageView.setRotation(90);
                 holder.imageView.setImageBitmap(b);
             }
             catch (FileNotFoundException e) {

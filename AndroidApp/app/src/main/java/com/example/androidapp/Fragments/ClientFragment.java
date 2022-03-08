@@ -104,7 +104,7 @@ public class ClientFragment extends Fragment {
         //Click on an item to view info
         clientAdapter.setOnItemClickListener(new ClientAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(com.example.androidapp.Data.ClientData.Client client) {
+            public void onItemClick(Client client) {
                 Intent intent = new Intent(getActivity(), InfoClientActivity.class);
                 intent.putExtra(InfoClientActivity.EXTRA_CLIENT, client);
                 activityResultLauncher.launch(intent);

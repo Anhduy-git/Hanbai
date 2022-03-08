@@ -15,7 +15,9 @@
         app:contentPaddingTop="30dp"
         android:translationY="-30dp"
         android:translationZ="-3dp">
+
         <ImageView
+            android:id="@+id/client_avatar"
             android:layout_width="match_parent"
             android:layout_height="310dp"
             android:scaleType="centerCrop"
@@ -28,6 +30,7 @@
         android:layout_marginTop="40dp">
 
         <Button
+            android:id="@+id/btn_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
@@ -35,14 +38,17 @@
             android:translationZ="1dp"></Button>
 
         <Button
+            android:id="@+id/btn_confirm"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:translationY="2dp"
             android:background="@drawable/confirm_icon"
+            android:translationY="2dp"
             android:translationZ="1dp"></Button>
+
         <Button
+            android:id="@+id/btn_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
@@ -50,10 +56,10 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/cam_btn"
             android:translationY="-80dp"
-            android:translationZ="1dp">
-        </Button>
+            android:translationZ="1dp"></Button>
 
         <Button
+            android:id="@+id/btn_gallery"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
