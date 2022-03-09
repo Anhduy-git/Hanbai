@@ -67,7 +67,7 @@ public class NewClientActivity extends AppCompatActivity {
     private EditText editClientBank;
     private ImageView imageView;
     private boolean changeImg;
-    String currentPhotoPath;
+    private String currentPhotoPath;
 
     private Uri picUri;
 
@@ -365,7 +365,5 @@ public class NewClientActivity extends AppCompatActivity {
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
-
 }
 
