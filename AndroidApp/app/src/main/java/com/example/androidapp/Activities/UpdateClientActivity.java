@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,7 +16,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +32,6 @@ import android.widget.Toast;
 
 import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.ClientData.Client;
-import com.example.androidapp.Data.ClientData.ClientViewModel;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -133,7 +130,7 @@ public class UpdateClientActivity extends AppCompatActivity {
 
     private void initUI(){
         imageView = findViewById(R.id.client_avatar);
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.back_btn);
         btnConfirm = findViewById(R.id.btn_confirm);
         btnCamera = findViewById(R.id.btn_camera);
         btnGallery = findViewById(R.id.btn_gallery);

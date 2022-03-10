@@ -251,7 +251,7 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         tvOrderEmail = findViewById(R.id.order_email);
         tvOrderDate = findViewById(R.id.order_date);
         imageView = findViewById(R.id.order_avatar);
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.back_btn);
         checkIcon = findViewById(R.id.check_ic);
         checkBox = findViewById(R.id.check_box);
         btnShip = findViewById(R.id.order_ship_btn);

@@ -63,11 +63,12 @@
         <entry key="app/src/main/res/drawable/search_icon.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_client_info.xml" value="0.3302564102564103" />
         <entry key="app/src/main/res/layout/activity_confirm_client.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/activity_confirm_quantity_price_product.xml" value="0.11367753623188406" />
         <entry key="app/src/main/res/layout/activity_info_unpaid_order.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_new_client.xml" value="0.3302564102564103" />
         <entry key="app/src/main/res/layout/activity_new_order.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/activity_new_product.xml" value="0.16271186440677965" />
+        <entry key="app/src/main/res/layout/activity_new_product.xml" value="0.14666666666666667" />
         <entry key="app/src/main/res/layout/activity_order_info_today.xml" value="0.6" />
         <entry key="app/src/main/res/layout/activity_order_info_upcoming.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_pick_type.xml" value="0.33" />
