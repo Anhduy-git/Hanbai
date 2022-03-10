@@ -37,11 +37,7 @@ public class NewProductActivity extends AppCompatActivity {
     private Button addAttributeBtn;
     private Button nextBtn;
 
-public class NewProductActivity extends AppCompatActivity {
-    private ProductAttributeViewModel productAttributeViewModel;
-    private Spinner spinner;
-    private Button btnBack;
-    private ProductAttributeCategoryAdapter productAttributeCategoryAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +95,6 @@ public class NewProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
 
     }
