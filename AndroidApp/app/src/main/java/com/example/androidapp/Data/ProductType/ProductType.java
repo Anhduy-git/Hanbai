@@ -1,13 +1,13 @@
-package com.example.androidapp.Data.ProductAttribute;
+package com.example.androidapp.Data.ProductType;
 
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "productAttribute_table")
-public class ProductAttribute {
+@Entity(tableName = "productType_table")
+public class ProductType {
 
-    public ProductAttribute(String name) {
+    public ProductType(String name) {
         this.name = name;
     }
 

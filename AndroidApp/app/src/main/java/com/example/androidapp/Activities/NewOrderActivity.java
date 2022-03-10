@@ -127,7 +127,7 @@ public class NewOrderActivity extends AppCompatActivity {
         editOrderNumber = findViewById(R.id.add_order_number);
         editOrderBank = findViewById(R.id.add_client_bank);
         editOrderEmail = findViewById(R.id.add_client_email);
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.back_btn);
         btnAddOrder = findViewById(R.id.add_new_order);
         btnAddDish = findViewById(R.id.new_product_btn);
         btnAddClient = findViewById(R.id.new_client_btn);

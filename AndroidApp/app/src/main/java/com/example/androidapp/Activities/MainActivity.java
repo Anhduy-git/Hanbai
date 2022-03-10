@@ -2,7 +2,6 @@ package com.example.androidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -11,8 +10,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.androidapp.Data.ProductAttribute.ProductAttribute;
-import com.example.androidapp.Data.ProductAttribute.ProductAttributeViewModel;
+import com.example.androidapp.Data.ProductType.ProductType;
+import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
 import com.example.androidapp.Fragments.ViewPagerAdapter;
 import com.example.androidapp.PickTypeActivity;
 import com.example.androidapp.R;
@@ -23,18 +22,18 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
-    private ProductAttributeViewModel productAttributeViewModel;
+    private ProductTypeViewModel productTypeViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //view model
-        productAttributeViewModel = new ViewModelProvider(this).get(ProductAttributeViewModel.class);
+        productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         //Check if has data in attribute ?
-        List<ProductAttribute> attributeLst = productAttributeViewModel.getAllProductAttribute();
+        List<ProductType> typeLst = productTypeViewModel.getAllProductType();
 
-        if (attributeLst == null || attributeLst.size() == 0) {
+        if (typeLst == null || typeLst.size() == 0) {
             Intent intent = new Intent(MainActivity.this, PickTypeActivity.class);
             startActivity(intent);
         }

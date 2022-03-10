@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -107,7 +106,7 @@ public class InfoClientActivity extends AppCompatActivity {
         tvClientEmail = findViewById(R.id.order_email);
         tvClientBank = findViewById(R.id.view_client_bank);
         imageView = findViewById(R.id.view_client_avatar);
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.back_btn);
         btnEdit = findViewById(R.id.btn_edit);
     }
 

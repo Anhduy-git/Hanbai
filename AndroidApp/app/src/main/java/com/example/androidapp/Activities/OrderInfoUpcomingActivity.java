@@ -212,7 +212,7 @@ public class OrderInfoUpcomingActivity extends AppCompatActivity {
         tvOrderEmail = findViewById(R.id.order_email);
         tvOrderBank = findViewById(R.id.order_bank);
         imageView = findViewById(R.id.order_avatar);
-        btnBack = findViewById(R.id.btn_back);
+        btnBack = findViewById(R.id.back_btn);
         checkBox = findViewById(R.id.check_box);
         checkIcon = findViewById(R.id.check_ic);
         btnAddDish = findViewById(R.id.new_dish_btn);
