@@ -1,12 +1,15 @@
 package com.example.androidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,16 +37,23 @@ public class NewProductActivity extends AppCompatActivity {
     private Button addAttributeBtn;
     private Button nextBtn;
 
+public class NewProductActivity extends AppCompatActivity {
+    private ProductAttributeViewModel productAttributeViewModel;
+    private Spinner spinner;
+    private Button btnBack;
+    private ProductAttributeCategoryAdapter productAttributeCategoryAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_product);
+
 
         initUI();
 
 
         productTypeCategoryAdapter = new ProductTypeCategoryAdapter(this, R.layout.item_selected_spinner, getListCategory());
         spinner.setAdapter(productTypeCategoryAdapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -55,6 +65,7 @@ public class NewProductActivity extends AppCompatActivity {
 
             }
         });
+
 
         List<String> attribute = new ArrayList<>();
         //setup recylcer view
@@ -73,11 +84,13 @@ public class NewProductActivity extends AppCompatActivity {
 
         //button back
         backBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         //button next
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +103,7 @@ public class NewProductActivity extends AppCompatActivity {
 
 
     }
+
 
     private List<ProductType> getListCategory() {
         //view model
@@ -104,5 +118,6 @@ public class NewProductActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_btn);
         attributeLst = findViewById(R.id.attribute_list);
         addAttributeBtn = findViewById(R.id.add_attribute);
+
     }
 }

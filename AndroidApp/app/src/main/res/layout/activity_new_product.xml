@@ -8,7 +8,9 @@
     tools:context=".Activities.NewProductActivity">
 
     <Button
+
         android:id="@+id/back_btn"
+
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="10dp"
