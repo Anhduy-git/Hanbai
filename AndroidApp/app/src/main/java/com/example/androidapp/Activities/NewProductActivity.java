@@ -10,22 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.androidapp.ConfirmQuantityPriceProductActivity;
-import com.example.androidapp.Data.ClientData.ClientAdapter;
-import com.example.androidapp.Data.ProductAttribute.AddProductAttributeAdapter;
+import com.example.androidapp.AddQuantityPriceProductActivity;
+import com.example.androidapp.HelperClass.ProductAttributeAdapter;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeCategoryAdapter;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
+import com.example.androidapp.HelperClass.ProductAttribute;
+import com.example.androidapp.HelperClass.ProductAttributeItem;
 import com.example.androidapp.R;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class NewProductActivity extends AppCompatActivity {
@@ -63,17 +62,35 @@ public class NewProductActivity extends AppCompatActivity {
         });
 
 
-        List<String> attribute = new ArrayList<>();
+        List<ProductAttribute> attribute = new ArrayList<>();
         //setup recylcer view
         attributeLst.setLayoutManager(new LinearLayoutManager(this));
-        AddProductAttributeAdapter attributeAdapter = new AddProductAttributeAdapter(attribute);
+        ProductAttributeAdapter attributeAdapter = new ProductAttributeAdapter(attribute);
         attributeLst.setAdapter(attributeAdapter);
 
-        //add attribute btn
+        //add attribute
         addAttributeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attribute.add("New attribute");
+                ProductAttribute productAttribute = new ProductAttribute("New Attribute", new ArrayList<>());
+
+                attribute.add(new ProductAttribute("New Attribute", new ArrayList<>()));
+                attributeAdapter.notifyDataSetChanged();
+            }
+        });
+        //delete attribute
+        attributeAdapter.setOnItemClickDelListener(new ProductAttributeAdapter.OnItemClickDelListener() {
+            @Override
+            public void onItemClickDel(ProductAttribute productAttribute) {
+                attribute.remove(productAttribute);
+                attributeAdapter.notifyDataSetChanged();
+            }
+        });
+        //add attribute item
+        attributeAdapter.setOnItemClickAddListener(new ProductAttributeAdapter.OnItemClickAddListener() {
+            @Override
+            public void onItemClickAdd(int position) {
+                attribute.get(position).getProductAttributeItemList().add(new ProductAttributeItem("item"));
                 attributeAdapter.notifyDataSetChanged();
             }
         });
@@ -91,7 +108,7 @@ public class NewProductActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewProductActivity.this, ConfirmQuantityPriceProductActivity.class);
+                Intent intent = new Intent(NewProductActivity.this, AddQuantityPriceProductActivity.class);
                 startActivity(intent);
             }
         });

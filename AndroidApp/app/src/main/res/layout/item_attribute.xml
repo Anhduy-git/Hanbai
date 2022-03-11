@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <Button
+        android:id="@+id/del_btn"
         android:layout_width="26dp"
         android:layout_height="26dp"
+        android:layout_alignParentRight="true"
         android:background="@drawable/bg_f_color"
         android:drawableLeft="@drawable/close_icon"
-        android:paddingLeft="3dp"
-        android:layout_alignParentRight="true"></Button>
+        android:paddingLeft="3dp"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +59,7 @@
                 android:textSize="16dp"></TextView>
 
             <Button
+                android:id="@+id/add_btn"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:background="@drawable/bg_transparent"
@@ -64,6 +67,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_list"
             android:layout_width="match_parent"
             android:layout_height="45dp">
 
