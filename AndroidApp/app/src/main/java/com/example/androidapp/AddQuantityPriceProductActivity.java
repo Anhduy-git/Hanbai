@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ConfirmQuantityPriceProductActivity extends AppCompatActivity {
+public class AddQuantityPriceProductActivity extends AppCompatActivity {
 
     private Button backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirm_quantity_price_product);
+        setContentView(R.layout.activity_quantity_price);
 
         initUI();
         //button back
