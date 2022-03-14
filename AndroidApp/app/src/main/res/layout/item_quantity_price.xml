@@ -5,21 +5,25 @@
     android:background="@drawable/bg_main_color"
     android:orientation="vertical"
     android:padding="15dp">
+
     <TextView
+        android:id="@+id/attribute_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_color"
-        android:text="white"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/main_color"
-        android:textSize="16dp"
+        android:background="@drawable/bg_white_color"
         android:maxLines="1"
-        android:layout_gravity="center_horizontal"></TextView>
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="white"
+        android:textColor="@color/main_color"
+        android:textSize="16dp"></TextView>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_lst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

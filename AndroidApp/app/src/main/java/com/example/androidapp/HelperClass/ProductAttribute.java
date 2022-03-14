@@ -11,6 +11,10 @@ public class ProductAttribute {
         this.productAttributeItemList = productAttributeItemList;
     }
 
+    public void setAttributeTitle(String attributeTitle) {
+        this.attributeTitle = attributeTitle;
+    }
+
     public String getAttributeTitle() {
         return attributeTitle;
     }
