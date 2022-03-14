@@ -1,6 +1,8 @@
 package com.example.androidapp.HelperClass;
 
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,22 @@ public class ProductAttributeAdapter extends RecyclerView.Adapter<ProductAttribu
         }
 
         holder.tvAttributeName.setText(attribute.getAttributeTitle());
+        holder.tvAttributeName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mListProductAttribute.get(holder.getAdapterPosition()).setAttributeTitle(s.toString());
+            }
+        });
         setProductAttributeItemRecycler(holder.itemLst, mListProductAttribute.get(position).getProductAttributeItemList());
 //        holder.tvClientNumber.setText(client.getClientNumber());
 //        holder.tvClientress.setText(client.getClientAddress());
@@ -75,22 +93,24 @@ public class ProductAttributeAdapter extends RecyclerView.Adapter<ProductAttribu
 //        private final TextView tvClientName;
 //        private final TextView tvClientNumber;
         private final TextView tvAttributeName;
+        private final RecyclerView itemLst;
         private final Button btnDel;
         private final Button btnAdd;
-        private final RecyclerView itemLst;
+
 //        private final LinearLayout item;
 
         public ProductAttributeViewHolder(@NonNull View itemView) {
             super(itemView);
             tvAttributeName = itemView.findViewById(R.id.attribute_name);
+            itemLst = itemView.findViewById(R.id.item_list);
             btnDel = itemView.findViewById(R.id.del_btn);
             btnAdd = itemView.findViewById(R.id.add_btn);
-            itemLst = itemView.findViewById(R.id.item_list);
 //            tvClientName = itemView.findViewById(R.id.client_name);
 //            tvClientNumber = itemView.findViewById(R.id.client_number);
 //            tvClientAddress = itemView.findViewById(R.id.client_address);
 //            imageView = itemView.findViewById(R.id.client_avatar);
 //            item = itemView.findViewById(R.id.client_item);
+
             btnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,18 +129,6 @@ public class ProductAttributeAdapter extends RecyclerView.Adapter<ProductAttribu
                     }
                 }
             });
-//            btnDel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //Get pos
-//
-//                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION){
-//                        mListProductAttribute.remove(getAdapterPosition());
-//                        notifyItemRemoved(getAdapterPosition());
-//                        notifyItemRangeChanged(getAdapterPosition(), mListProductAttribute.size());
-//                    }
-//                }
-//            });
         }
     }
 

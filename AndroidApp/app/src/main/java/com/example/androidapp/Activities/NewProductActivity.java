@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -109,6 +110,12 @@ public class NewProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NewProductActivity.this, AddQuantityPriceProductActivity.class);
+                if (attribute.size() == 1) {
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                } else if (attribute.size() == 2) {
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_2, (ArrayList<? extends Parcelable>) attribute.get(1).getProductAttributeItemList());
+                }
                 startActivity(intent);
             }
         });

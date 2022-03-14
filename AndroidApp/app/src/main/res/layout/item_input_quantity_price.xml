@@ -13,12 +13,14 @@
             android:text="Type: "
             android:textColor="@color/white"
             android:textSize="16sp"></TextView>
+
         <TextView
+            android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="XXL"
             android:textColor="@color/white"
-            android:maxLines="1"
             android:textSize="16sp"></TextView>
     </LinearLayout>
     <LinearLayout
@@ -37,15 +39,17 @@
                 android:text="Price: "
                 android:textColor="@color/white"
                 android:textSize="16sp"></TextView>
+
             <EditText
+                android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom"
-                android:textCursorDrawable="@null"
-                android:textSize="16sp"
                 android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@color/white"
-                android:maxLines="1"></EditText>
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"></EditText>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -58,15 +62,17 @@
                 android:text="Quantity: "
                 android:textColor="@color/white"
                 android:textSize="16sp"></TextView>
+
             <EditText
+                android:id="@+id/quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom"
-                android:textCursorDrawable="@null"
-                android:textSize="16sp"
                 android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@color/white"
-                android:maxLines="1"></EditText>
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"></EditText>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

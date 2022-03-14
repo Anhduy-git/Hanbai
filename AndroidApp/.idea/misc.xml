@@ -96,7 +96,7 @@
         <entry key="app/src/main/res/layout/item_attribute_in_sub_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_client.xml" value="0.35477178423236516" />
         <entry key="app/src/main/res/layout/item_info_attribute.xml" value="0.33541666666666664" />
-        <entry key="app/src/main/res/layout/item_input_quantity_price.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_input_quantity_price.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/item_input_type_attribute.xml" value="0.14666666666666667" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.25" />

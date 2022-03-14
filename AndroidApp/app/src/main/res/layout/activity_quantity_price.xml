@@ -34,7 +34,9 @@
             android:textColor="@color/white"
             android:textSize="15dp"></Button>
     </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/price_quantity_lst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
