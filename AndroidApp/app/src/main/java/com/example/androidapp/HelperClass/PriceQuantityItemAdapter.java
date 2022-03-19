@@ -1,5 +1,7 @@
 package com.example.androidapp.HelperClass;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,44 @@ public class PriceQuantityItemAdapter extends RecyclerView.Adapter<PriceQuantity
         holder.tvPrice.setText(String.valueOf(priceQuantityItem.getPrice()));
 //        holder.tvClientNumber.setText(client.getClientNumber());
 //        holder.tvClientress.setText(client.getClientAddress());
+        holder.tvPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = s.toString().trim();
+                if (!str.equals("")) {
+                    mListPriceQuantityItem.get(holder.getAdapterPosition()).setPrice(Integer.parseInt(str));
+                }
+            }
+        });
+        holder.tvQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = s.toString().trim();
+                if (!str.equals("")) {
+                    mListPriceQuantityItem.get(holder.getAdapterPosition()).setQuantity(Integer.parseInt(str));
+                }
+            }
+        });
 
     }
 

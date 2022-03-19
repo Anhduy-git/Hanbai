@@ -15,6 +15,9 @@ import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrder;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderDao;
+import com.example.androidapp.Data.ProductData.ProductDao;
+import com.example.androidapp.Data.ProductDetailData.ProductDetail;
+import com.example.androidapp.Data.ProductDetailData.ProductDetailDao;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeDao;
 import com.example.androidapp.Data.ProductData.Product;
@@ -22,7 +25,7 @@ import com.example.androidapp.Data.ProductData.Product;
 //App database
 //Add more entities (tables) to database by listing them inside {}
 
-@Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class, Product.class}, version = 6)
+@Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class, Product.class, ProductDetail.class}, version = 10)
 
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
@@ -32,8 +35,10 @@ public abstract class AppDatabase extends RoomDatabase{
     //Entities' DAO
     public abstract ClientDao clientDao();
     public abstract OrderDao orderDao();
+    public abstract ProductDao productDao();
     public abstract UpcomingOrderDao upcomingOrderDao();
     public abstract ProductTypeDao productTypeDao();
+    public abstract ProductDetailDao productDetailDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -52,6 +57,8 @@ public abstract class AppDatabase extends RoomDatabase{
 //        private UnpaidOrderDao unpaidOrderDao;
         private UpcomingOrderDao upcomingOrderDao;
         private ProductTypeDao productTypeDao;
+        private ProductDao productDao;
+        private ProductDetailDao productDetailDao;
 //        private HistoryOrderDao historyOrderDao;
 
         private PopulateDbAsyncTask(AppDatabase db) {
@@ -62,6 +69,8 @@ public abstract class AppDatabase extends RoomDatabase{
             upcomingOrderDao = db.upcomingOrderDao();
 //            historyOrderDao = db.historyOrderDao();
             productTypeDao = db.productTypeDao();
+            productDao = db.productDao();
+            productDetailDao = db.productDetailDao();
         }
 
         @Override

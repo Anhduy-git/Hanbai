@@ -59,6 +59,7 @@ public class PriceQuantityAdapter extends RecyclerView.Adapter<PriceQuantityAdap
 //        holder.tvClientNumber.setText(client.getClientNumber());
 //        holder.tvClientress.setText(client.getClientAddress());
 
+
     }
 
     @Override

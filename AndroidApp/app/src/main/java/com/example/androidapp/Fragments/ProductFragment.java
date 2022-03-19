@@ -24,8 +24,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.androidapp.Activities.NewProductActivity;
+import com.example.androidapp.Activities.UpdateProductActivity;
+import com.example.androidapp.Data.ProductData.Product;
+import com.example.androidapp.Data.ProductData.ProductAdapter;
+import com.example.androidapp.Data.ProductData.ProductViewModel;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -36,11 +41,10 @@ public class ProductFragment extends Fragment {
     public static final int ADD_DISH_REQUEST = 1;
     public static final int EDIT_DISH_REQUEST = 2;
 
-//    private List<Dish> mListDish;
-//    private DishViewModel dishViewModel;
+    private ProductViewModel productViewModel;
     private Button btnAddDish;
-//    private EditText edtSearchBar;
-//    private DishAdapter dishAdapter;
+    private EditText editSearchBar;
+
 //    //confirm sound
 //    private MediaPlayer sound = null;
 //    public MenuFragment() {
@@ -59,59 +63,62 @@ public class ProductFragment extends Fragment {
         //Create Recycler View
         RecyclerView rcvData = view.findViewById(R.id.menu_recycler);;
         //rcvData.setHasFixedSize(true);
-        rcvData.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        rcvData.setLayoutManager(staggeredGridLayoutManager);
 
 //        //Create DISH ADAPTER
-//        dishAdapter = new DishAdapter(mListDish);
-//        rcvData.setAdapter(dishAdapter);
+        List<Product> mListProduct = new ArrayList<>();
+        ProductAdapter productAdapter = new ProductAdapter(mListProduct);
+        rcvData.setAdapter(productAdapter);
 //
 //        //Create DISH VIEW MODEL
-//        dishViewModel = new ViewModelProvider(getActivity()).get(DishViewModel.class);
-//        dishViewModel.getAllDishes().observe(getActivity(), new Observer<List<Dish>>() {
-//            @Override
-//
-//            //Method DISPLAY the list on screen
-//            public void onChanged(List<Dish> dishes) {
-//                //use for filter
-//                dishAdapter.setDish(dishes);
-//                //use for animation
-//                dishAdapter.submitList(dishes);
-//
-//            }
-//        });
+        productViewModel = new ViewModelProvider(getActivity()).get(ProductViewModel.class);
+        productViewModel.getAllProduct().observe(getActivity(), new Observer<List<Product>>() {
+            @Override
+
+            //Method DISPLAY the list on screen
+            public void onChanged(List<Product> products) {
+                //use for filter
+                productAdapter.setProduct(products);
+                //use for animation
+                productAdapter.submitList(products);
+
+            }
+        });
 
 
 //        //Create search bar listener for SEARCH METHOD
-//        edtSearchBar.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                //Empty on purpose
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                //Empty on purpose
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                dishAdapter.getFilter().filter(s.toString());
-//            }
-//        });
+        editSearchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Empty on purpose
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Empty on purpose
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                productAdapter.getFilter().filter(s.toString());
+            }
+        });
 //
 //        //Method CLICK TO VIEW info of an item in Recycler View
-//        dishAdapter.setOnItemClickListener(new DishAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Dish dish) {
-//                Intent intent = new Intent(getActivity(), UpdateDishActivity.class);
-//                intent.putExtra(UpdateDishActivity.EXTRA_DISH_ID, dish.getDishID());
-//                intent.putExtra(UpdateDishActivity.EXTRA_DISH_NAME, dish.getName());
-//                intent.putExtra(UpdateDishActivity.EXTRA_DISH_PRICE, dish.getPrice());
-//                intent.putExtra(UpdateDishActivity.EXTRA_OLD_IMAGE, dish.getImageDir());
-//
-//                startActivityForResult(intent, EDIT_DISH_REQUEST);
-//            }
-//        });
+        productAdapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Product product) {
+                Intent intent = new Intent(getActivity(), UpdateProductActivity.class);
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_ID, product.getProductID());
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_NAME, product.getName());
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_TYPE, product.getType());
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_ATTRIBUTE_1, product.getAttribute1());
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_ATTRIBUTE_2, product.getAttribute2());
+
+                startActivityForResult(intent, EDIT_DISH_REQUEST);
+            }
+        });
 //        //Delete item
 //        dishAdapter.setOnItemClickDelListener(new DishAdapter.OnItemClickDelListener() {
 //            @Override
@@ -135,6 +142,7 @@ public class ProductFragment extends Fragment {
     //Method to init UI components
     private void initUi (View view) {
         btnAddDish = view.findViewById(R.id.btn_add_product);
+        editSearchBar = view.findViewById(R.id.product_search_bar);
 //        edtSearchBar = view.findViewById(R.id.dish_search_bar);
     }
 

@@ -1,5 +1,6 @@
 package com.example.androidapp.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.androidapp.AddQuantityPriceProductActivity;
@@ -36,6 +38,8 @@ public class NewProductActivity extends AppCompatActivity {
     private RecyclerView attributeLst;
     private Button addAttributeBtn;
     private Button nextBtn;
+    private EditText productName;
+
 
 
     @Override
@@ -43,11 +47,11 @@ public class NewProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_product);
 
-
         initUI();
+        //get list type
+        List<ProductType> productTypeList = getListCategory();
 
-
-        productTypeCategoryAdapter = new ProductTypeCategoryAdapter(this, R.layout.item_selected_spinner, getListCategory());
+        productTypeCategoryAdapter = new ProductTypeCategoryAdapter(this, R.layout.item_selected_spinner, productTypeList);
         spinner.setAdapter(productTypeCategoryAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -109,18 +113,34 @@ public class NewProductActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Integer idx = spinner.getSelectedItemPosition();
+                String strProductType = productTypeList.get(idx).getName();
+                String strProductName = productName.getText().toString().trim();
+
                 Intent intent = new Intent(NewProductActivity.this, AddQuantityPriceProductActivity.class);
+                //put data
+                intent.putExtra(AddQuantityPriceProductActivity.EXTRA_PRODUCT_NAME, strProductName);
+                intent.putExtra(AddQuantityPriceProductActivity.EXTRA_PRODUCT_TYPE, strProductType);
                 if (attribute.size() == 1) {
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
                 } else if (attribute.size() == 2) {
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_2, (ArrayList<? extends Parcelable>) attribute.get(1).getProductAttributeItemList());
+                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
+                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_2, attribute.get(1).getAttributeTitle());
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_2, (ArrayList<? extends Parcelable>) attribute.get(1).getProductAttributeItemList());
                 }
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
 
+    }
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            onBackPressed();
+        }
     }
 
 
@@ -137,6 +157,6 @@ public class NewProductActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_btn);
         attributeLst = findViewById(R.id.attribute_list);
         addAttributeBtn = findViewById(R.id.add_attribute);
-
+        productName = findViewById(R.id.product_name);
     }
 }
