@@ -27,6 +27,7 @@
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <ImageView
+                    android:id="@+id/product_image"
                     android:layout_width="match_parent"
                     android:layout_height="340dp"
                     android:scaleType="centerCrop"
@@ -63,15 +64,17 @@
                         android:text="Name: "
                         android:textSize="17sp"
                         android:textColor="@color/f_color"></TextView>
+
                     <EditText
+                        android:id="@+id/product_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_bottom_1"
-                        android:textCursorDrawable="@null"
-                        android:textSize="17sp"
                         android:inputType="text"
+                        android:maxLines="1"
                         android:textColor="@color/f_color"
-                        android:maxLines="1"></EditText>
+                        android:textCursorDrawable="@null"
+                        android:textSize="17sp"></EditText>
                 </LinearLayout>
 
                 <LinearLayout

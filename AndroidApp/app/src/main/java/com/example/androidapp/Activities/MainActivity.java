@@ -2,9 +2,11 @@ package com.example.androidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
@@ -102,5 +104,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
     }
 }

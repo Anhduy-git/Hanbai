@@ -19,8 +19,12 @@
             android:name=".Activities.UpdateClientActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.UpdateProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddQuantityPriceProductActivity"
             android:exported="false" />
+
         <activity
             android:name=".Activities.InfoClientActivity"
             android:exported="false" />
