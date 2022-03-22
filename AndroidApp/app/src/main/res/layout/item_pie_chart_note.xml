@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/name_part_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fashion"
+            android:textColor="@color/f_color"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/f_color"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:id="@+id/percent_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="@color/f_color"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="% ("
+            android:textColor="@color/f_color"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:id="@+id/num_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/f_color"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="orders)"
+            android:textColor="@color/f_color"
+            android:textSize="15sp">
+        </TextView>
+    </LinearLayout>
+
+</RelativeLayout>
