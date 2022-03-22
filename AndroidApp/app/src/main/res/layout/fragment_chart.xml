@@ -24,7 +24,7 @@
         android:layout_marginEnd="5dp"
         android:paddingStart="20dp"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="30dp"
         android:background="@drawable/bg_revenue"
         android:orientation="horizontal">
 
@@ -32,10 +32,24 @@
             android:layout_width="60dp"
             android:layout_height="160dp">
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/thumb_chart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <View
+                android:id="@+id/col_day"
+                android:layout_width="30dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/bg_col_day">
+            </View>
+
+            <View
+                android:id="@+id/col_month"
+                android:layout_width="30dp"
+                android:layout_height="160dp"
+                android:background="@drawable/bg_col_month"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true">
+            </View>
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"

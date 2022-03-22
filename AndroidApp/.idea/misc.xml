@@ -22,12 +22,16 @@
         <entry key="..\:/PencilPhilosophy/AndroidApp/app/src/main/res/layout/fragment_product.xml" value="0.2957427536231884" />
         <entry key="..\:/PencilPhilosophy/AndroidApp/app/src/main/res/layout/fragment_unpaid_order.xml" value="0.2957427536231884" />
         <entry key="..\:/PencilPhilosophy/AndroidApp/app/src/main/res/layout/fragment_upcoming_order.xml" value="0.2957427536231884" />
+        <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable-v24/bg_alert_dialog.xml" value="0.37864583333333335" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable-v24/bg_cancel_btn_alert.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable-v24/bg_checkbox.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable-v24/bg_delete_btn_alert.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/arrow_drop_down_icon.xml" value="0.21875" />
+        <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/arrow_icon.xml" value="0.37864583333333335" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/arrow_right_alt_icon.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_bottom_nav.xml" value="0.21875" />
+        <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_col_day.xml" value="0.37864583333333335" />
+        <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_col_month.xml" value="0.37864583333333335" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_confirm_btn_alert.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_f_color.xml" value="0.21875" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/drawable/bg_gradient.xml" value="0.21875" />
@@ -55,6 +59,7 @@
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/activity_sub_menu.xml" value="0.29483695652173914" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/alert_dialog_delete.xml" value="0.29483695652173914" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/alert_dialog_ship.xml" value="0.29483695652173914" />
+        <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/alert_dialog_unpaid.xml" value="0.29483695652173914" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/client_item_select_recycler.xml" value="0.2957427536231884" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/fragment_chart.xml" value="0.2957427536231884" />
         <entry key="..\:/PencilPhilosophyAndroidApp/AndroidApp/app/src/main/res/layout/fragment_client.xml" value="0.2957427536231884" />
