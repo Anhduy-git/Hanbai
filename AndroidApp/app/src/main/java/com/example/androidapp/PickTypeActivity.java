@@ -13,12 +13,12 @@ import android.widget.LinearLayout;
 import com.example.androidapp.Activities.MainActivity;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
+import com.google.android.flexbox.FlexboxLayout;
 
 public class PickTypeActivity extends AppCompatActivity {
 
     private Button confirmBtn;
-    private LinearLayout lst1;
-    private LinearLayout lst2;
+    private FlexboxLayout lst1;
     private ProductTypeViewModel productTypeViewModel;
 
     @Override
@@ -32,20 +32,18 @@ public class PickTypeActivity extends AppCompatActivity {
         //init view
         confirmBtn = findViewById(R.id.confirm_btn);
         lst1 = findViewById(R.id.lst1);
-        lst2 = findViewById(R.id.lst2);
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAllAttribute(lst1);
-                checkAllAttribute(lst2);
                 Intent intent = new Intent(PickTypeActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
     }
-    public void checkAllAttribute(LinearLayout lst) {
+    public void checkAllAttribute(FlexboxLayout lst) {
         for (int i = 0; i < lst.getChildCount(); i++) {
             final CheckBox attribute = (CheckBox)lst.getChildAt(i);
             if (attribute.isChecked()) {

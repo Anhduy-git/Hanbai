@@ -26,6 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/bg_transparent"
+            android:paddingLeft="5dp"
             android:drawableLeft="@drawable/plus_icon"></Button>
     </RelativeLayout>
 

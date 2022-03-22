@@ -31,38 +31,16 @@
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/back_btn_1"
             android:translationZ="1dp"></Button>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="15dp"
-            android:translationY="-45dp"
-            android:translationZ="1dp">
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/cam_btn"
-                android:layout_marginEnd="10dp"></Button>
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/lib_btn"></Button>
-        </LinearLayout>
     </RelativeLayout>
 
     <Button
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/card_view"
         android:translationY="-20dp"

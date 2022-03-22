@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingTop="5dp"
     tools:context=".OrderFragment.UpcomingOrderFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,8 +22,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_transparent"
-                android:paddingLeft="4dp"
-                android:drawableLeft="@drawable/plus_icon"></Button>
+                android:drawableLeft="@drawable/plus_icon"
+                android:paddingLeft="5dp"></Button>
 
         </RelativeLayout>
 
