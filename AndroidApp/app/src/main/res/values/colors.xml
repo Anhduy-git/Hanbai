@@ -15,4 +15,7 @@
     <color name="f_color">#001219</color>
     <color name="color_hint">#E9E9E9</color>
     <color name="num_color">#AE2012</color>
+    <color name="thumb_color">#dcf0e9</color>
+    <color name="text_re_month_color">#1CA778</color>
+    <color name="text_re_day_color">#005F73</color>
 </resources>
