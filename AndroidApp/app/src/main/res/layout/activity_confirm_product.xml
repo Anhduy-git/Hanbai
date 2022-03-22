@@ -7,8 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ConfirmProductActivity">
     <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/back_btn_1"></Button>
@@ -112,13 +112,13 @@
             android:layout_marginEnd="10dp"
             android:translationY="-60dp">
             <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:background="@drawable/cam_btn"
                 android:layout_marginEnd="10dp"></Button>
             <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:background="@drawable/lib_btn"></Button>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

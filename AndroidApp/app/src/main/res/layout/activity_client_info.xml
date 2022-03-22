@@ -31,8 +31,8 @@
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/back_btn_1"
             android:translationZ="1dp"></Button>
@@ -46,8 +46,8 @@
 
         <Button
             android:id="@+id/btn_edit"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
@@ -78,7 +78,7 @@
                 android:maxLines="1"
                 android:text="012345678"
                 android:textColor="@color/black"
-                android:textSize="17sp"></TextView>
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/view_client_address"
@@ -88,7 +88,7 @@
                 android:maxLines="1"
                 android:text="123 Vo Van Kiet - P5 - Q5"
                 android:textColor="@color/black"
-                android:textSize="17sp"></TextView>
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/order_email"
@@ -98,7 +98,7 @@
                 android:maxLines="1"
                 android:text="11lucviet@gmail.com"
                 android:textColor="@color/black"
-                android:textSize="17sp"></TextView>
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/view_client_bank"
@@ -109,7 +109,7 @@
                 android:maxLines="1"
                 android:text="190 3456 2678 017 TECHCOMBANK"
                 android:textColor="@color/black"
-                android:textSize="17sp"></TextView>
+                android:textSize="16sp"></TextView>
 
         </LinearLayout>
 </RelativeLayout>

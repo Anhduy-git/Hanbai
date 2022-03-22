@@ -124,23 +124,26 @@
         <entry key="app/src/main/res/drawable/search_icon.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_client_info.xml" value="0.3302564102564103" />
         <entry key="app/src/main/res/layout/activity_confirm_client.xml" value="0.33541666666666664" />
-        <entry key="app/src/main/res/layout/activity_confirm_product.xml" value="0.4466666666666667" />
+        <entry key="app/src/main/res/layout/activity_confirm_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_confirm_quantity_price_product.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_info_unpaid_order.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31979166666666664" />
         <entry key="app/src/main/res/layout/activity_new_client.xml" value="0.3302564102564103" />
-        <entry key="app/src/main/res/layout/activity_new_order.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/activity_new_product.xml" value="0.16271186440677965" />
-        <entry key="app/src/main/res/layout/activity_order_info_today.xml" value="0.6" />
+        <entry key="app/src/main/res/layout/activity_new_order.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_new_product.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_order_info_today.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_order_info_upcoming.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_pick_type.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_product_info.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_product_info.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_quantity_price.xml" value="0.3302564102564103" />
+        <entry key="app/src/main/res/layout/activity_revenue_chart.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_sub_contact.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sub_menu.xml" value="0.33" />
         <entry key="app/src/main/res/layout/alert_dialog_ship.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/client_item_select_recycler.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/fragment_chart_day.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/fragment_chart_month.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_client.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/fragment_history_all.xml" value="0.33541666666666664" />
@@ -170,6 +173,7 @@
         <entry key="app/src/main/res/menu/history_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/menu/order_bottom_nav.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/menu/revenue_chart_bottom_nav.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3515625" />
       </map>
     </option>

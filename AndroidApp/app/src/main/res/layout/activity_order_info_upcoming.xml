@@ -37,18 +37,17 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/bg_gradient"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="10dp">
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="500dp"
                 android:layout_height="wrap_content"
+                android:weightSum="10"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="266dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="6.8"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:orientation="horizontal">
@@ -56,6 +55,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -64,7 +64,7 @@
                             android:text="Name: "
                             android:layout_marginBottom="2dp"
                             android:textColor="@color/white"
-                            android:textSize="16sp">
+                            android:textSize="15sp">
 
                         </TextView>
 
@@ -74,7 +74,7 @@
                             android:text="Number: "
                             android:layout_marginBottom="3dp"
                             android:textColor="@color/white"
-                            android:textSize="16sp">
+                            android:textSize="15sp">
 
                         </TextView>
 
@@ -84,7 +84,7 @@
                             android:text="Andress: "
                             android:layout_marginBottom="5dp"
                             android:textColor="@color/white"
-                            android:textSize="16sp">
+                            android:textSize="15sp">
 
                         </TextView>
 
@@ -94,7 +94,7 @@
                             android:text="Email: "
                             android:layout_marginBottom="3dp"
                             android:textColor="@color/white"
-                            android:textSize="16sp">
+                            android:textSize="15sp">
 
                         </TextView>
 
@@ -104,7 +104,7 @@
                             android:text="Bank: "
 
                             android:textColor="@color/white"
-                            android:textSize="16sp">
+                            android:textSize="15sp">
 
                         </TextView>
 
@@ -112,6 +112,7 @@
 
                     <LinearLayout
                         android:layout_width="180dp"
+                        android:paddingTop="6dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -119,7 +120,7 @@
                             android:id="@+id/order_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="3dp"
                             android:maxLines="1"
                             android:text="Le Viet Luc"
                             android:textColor="@color/white"
@@ -131,7 +132,7 @@
                             android:id="@+id/order_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="3dp"
                             android:maxLines="1"
                             android:text="012345678"
                             android:textColor="@color/white"
@@ -143,7 +144,7 @@
                             android:id="@+id/order_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="3dp"
                             android:maxLines="1"
                             android:text="123 Vo Van Kiet - P5 - Q5"
                             android:textColor="@color/white"
@@ -155,7 +156,7 @@
                             android:id="@+id/order_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="3dp"
                             android:maxLines="1"
                             android:text="11lucviet@gmail.com"
                             android:textColor="@color/white"
@@ -167,7 +168,7 @@
                             android:id="@+id/order_bank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="3dp"
                             android:maxLines="1"
                             android:text="190 3456 2678 017 TCB"
                             android:textColor="@color/white"
@@ -176,11 +177,11 @@
                         </TextView>
 
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
                     android:layout_height="110dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="-25dp"
@@ -188,7 +189,8 @@
                     android:src="@drawable/line_icon"></ImageView>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
@@ -204,8 +206,8 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="5dp"
                                 android:maxHeight="18dp"
@@ -217,29 +219,30 @@
                                 android:layout_height="wrap_content"
                                 android:text="12h30"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"></TextView>
+                                android:maxLines="1"
+                                android:textSize="14sp"></TextView>
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="5dp"
                                 android:maxHeight="18dp"
                                 android:src="@drawable/agenda_icon"></ImageView>
 
                             <TextView
-
                                 android:id="@+id/order_date"
-
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="31/12/2022"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"></TextView>
+                                android:maxLines="1"
+                                android:textSize="14sp"></TextView>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -254,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total price: "
                             android:textColor="@color/white"
-                            android:textSize="15sp"></TextView>
+                            android:textSize="14sp"></TextView>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -265,22 +268,25 @@
                                 android:id="@+id/order_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4 000 000 "
+                                android:text="4 000 000"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"></TextView>
+                                android:maxLines="1"
+                                android:textSize="14sp"></TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="VND"
+                                android:text=" VND"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"></TextView>
+                                android:maxLines="1"
+                                android:textSize="14sp"></TextView>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
 
         </RelativeLayout>
+
 
 
         <de.hdodenhof.circleimageview.CircleImageView
