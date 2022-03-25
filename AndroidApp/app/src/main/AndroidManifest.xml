@@ -25,6 +25,12 @@
             android:name=".Activities.UpdateProductActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.UpdateProductActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.UpdateProductActivity3"
+            android:exported="false" />
+        <activity
             android:name=".AddQuantityPriceProductActivity"
             android:exported="false" />
         <activity
@@ -57,6 +63,9 @@
             android:exported="false" />
         <activity
             android:name=".Activities.SubClientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SubProductActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.OrderInfoTodayActivity"

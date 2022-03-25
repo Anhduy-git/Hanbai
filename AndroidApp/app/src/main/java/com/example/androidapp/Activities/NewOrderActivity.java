@@ -55,7 +55,7 @@ public class NewOrderActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_ORDER_CLIENT";
 
     public static final int CHOOSE_CLIENT_REQUEST = 1;
-    public static final int CHOOSE_DISH_REQUEST= 2;
+    public static final int CHOOSE_PRODUCT_REQUEST= 2;
 
     private EditText editOrderName;
     private TextView editOrderTime;
@@ -69,7 +69,7 @@ public class NewOrderActivity extends AppCompatActivity {
     private EditText editOrderNumber;
     private Button btnAddOrder;
     private Button btnBack;
-    private Button btnAddDish;
+    private Button btnAddProduct;
     private TextView btnAddClient;
     private String imageDir = "";
     private RecyclerView rcvData;
@@ -119,6 +119,14 @@ public class NewOrderActivity extends AppCompatActivity {
                 startActivityForResult(intent, CHOOSE_CLIENT_REQUEST);
             }
         });
+        //Button to choose product
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewOrderActivity.this, SubProductActivity.class);
+                startActivityForResult(intent, CHOOSE_PRODUCT_REQUEST);
+            }
+        });
     }
 
     private void initUi () {
@@ -129,7 +137,7 @@ public class NewOrderActivity extends AppCompatActivity {
         editOrderEmail = findViewById(R.id.add_client_email);
         btnBack = findViewById(R.id.back_btn);
         btnAddOrder = findViewById(R.id.add_new_order);
-        btnAddDish = findViewById(R.id.new_product_btn);
+        btnAddProduct = findViewById(R.id.new_product_btn);
         btnAddClient = findViewById(R.id.new_client_btn);
         editOrderDate = findViewById(R.id.add_order_date_tv);
         editOrderTime = findViewById(R.id.add_order_time_tv);

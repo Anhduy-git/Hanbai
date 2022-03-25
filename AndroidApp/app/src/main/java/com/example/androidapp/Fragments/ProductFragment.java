@@ -1,10 +1,7 @@
 package com.example.androidapp.Fragments;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +24,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.androidapp.Activities.NewProductActivity;
 import com.example.androidapp.Activities.UpdateProductActivity;
+import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.ProductData.Product;
 import com.example.androidapp.Data.ProductData.ProductAdapter;
 import com.example.androidapp.Data.ProductData.ProductViewModel;
@@ -44,6 +41,8 @@ public class ProductFragment extends Fragment {
     private ProductViewModel productViewModel;
     private Button btnAddDish;
     private EditText editSearchBar;
+    private RecyclerView rcvData;
+    private ProductAdapter productAdapter;
 
 //    //confirm sound
 //    private MediaPlayer sound = null;
@@ -61,14 +60,14 @@ public class ProductFragment extends Fragment {
 //        sound = MediaPlayer.create(getActivity(), R.raw.confirm_sound);
 
         //Create Recycler View
-        RecyclerView rcvData = view.findViewById(R.id.menu_recycler);;
+        rcvData = view.findViewById(R.id.product_lst);;
         //rcvData.setHasFixedSize(true);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         rcvData.setLayoutManager(staggeredGridLayoutManager);
 
 //        //Create DISH ADAPTER
         List<Product> mListProduct = new ArrayList<>();
-        ProductAdapter productAdapter = new ProductAdapter(mListProduct);
+        productAdapter = new ProductAdapter(mListProduct);
         rcvData.setAdapter(productAdapter);
 //
 //        //Create DISH VIEW MODEL
@@ -120,12 +119,12 @@ public class ProductFragment extends Fragment {
             }
         });
 //        //Delete item
-//        dishAdapter.setOnItemClickDelListener(new DishAdapter.OnItemClickDelListener() {
-//            @Override
-//            public void onItemClickDel(Dish dish) {
-//                confirmDelDialog(dish);
-//            }
-//        });
+        productAdapter.setOnItemClickDelListener(new ProductAdapter.OnItemClickDelListener() {
+            @Override
+            public void onItemClickDel(Product product) {
+                confirmDelDialog(product);
+            }
+        });
 
         //Method CLICK the add button
         btnAddDish.setOnClickListener(new View.OnClickListener() {
@@ -137,9 +136,17 @@ public class ProductFragment extends Fragment {
         });
 
         return view;
+
+    }
+    //reset adapter on resume
+    @Override
+    public void onResume() {
+        super.onResume();
+        productAdapter.notifyDataSetChanged();
+        rcvData.setAdapter(productAdapter);
     }
 
-    //Method to init UI components
+        //Method to init UI components
     private void initUi (View view) {
         btnAddDish = view.findViewById(R.id.btn_add_product);
         editSearchBar = view.findViewById(R.id.product_search_bar);
@@ -181,35 +188,39 @@ public class ProductFragment extends Fragment {
 //
 //
 //
-//    private void confirmDelDialog(Dish dish) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
-//        View view = LayoutInflater.from(getActivity()).inflate(R.layout.alert_dialog_delete, (RelativeLayout)getView().findViewById(R.id.layout_dialog)
-//        );
-//        builder.setView(view);
-//        AlertDialog alertDialog = builder.create();
-//
-//        //confirm delete btn
-//        view.findViewById(R.id.confirm_dialog_btn).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//                sound.start();
-//                //delete the old image
-//                File oldImage = new File(dish.getImageDir());
-//                boolean deleted = oldImage.delete();
-//                dishViewModel.deleteDish(dish);
-//            }
-//        });
-//        //cancel btn
-//        view.findViewById(R.id.cancel_dialog_btn).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//        if (alertDialog.getWindow() != null) {
-//            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-//        }
-//        alertDialog.show();
-//    }
+    private void confirmDelDialog(Product product) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.alert_dialog_delete, (RelativeLayout)getView().findViewById(R.id.layout_dialog)
+        );
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+
+        //confirm delete btn
+        view.findViewById(R.id.confirm_dialog_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                //delete old data detail
+                AppDatabase.getInstance(getActivity()).
+                        productDetailDao().deleteAllProductDetailWithName(product.getName());
+                //delete the old image
+                File oldImage = new File(product.getImageDir());
+                boolean deleted = oldImage.delete();
+                productViewModel.delete(product);
+
+
+            }
+        });
+        //cancel btn
+        view.findViewById(R.id.cancel_dialog_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        if (alertDialog.getWindow() != null) {
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }
 }

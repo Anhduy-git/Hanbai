@@ -18,6 +18,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/product_ava_default"></ImageView>
         <RelativeLayout
+            android:id="@+id/product_del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone">
@@ -28,6 +29,7 @@
                 android:scaleType="centerCrop"></ImageView>
 
             <ImageView
+                android:id="@+id/product_del_icon"
                 android:layout_width="18dp"
                 android:layout_height="22dp"
                 android:layout_alignParentRight="true"

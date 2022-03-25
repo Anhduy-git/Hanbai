@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -69,12 +70,12 @@ public class UpdateProductActivity extends AppCompatActivity {
     private final int GALLERY_REQUEST = 1;
     private final int CAMERA_REQUEST = 2;
     private final int IMAGE_SIZE = 500;
-
+    public static final Integer CONFIRM_REQUEST = 3;
     private TextView productName;
     private TextView productPrice;
     private TextView productType;
     private TextView productQuantity;
-
+    private Button updateBtn;
     private ImageView imageView;
     private Button btnBack;
     private Button btnUpdate;
@@ -83,6 +84,12 @@ public class UpdateProductActivity extends AppCompatActivity {
     private List<ProductDetail> productDetails;
     private String attributeItemSelected1;
     private String attributeItemSelected2;
+    private String name;
+    private String type;
+    private List<ProductAttributeItem>attribute1ItemList = new ArrayList<>();
+    private List<ProductAttributeItem>attribute2ItemList = new ArrayList<>();
+    private String attribute1, attribute2;
+    private int productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +119,12 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String attribute1, attribute2;
-
         if (intent.hasExtra(EXTRA_PRODUCT_ID)) {
-            String name = intent.getStringExtra(EXTRA_PRODUCT_NAME);
-            String type = intent.getStringExtra(EXTRA_PRODUCT_TYPE);
+            name = intent.getStringExtra(EXTRA_PRODUCT_NAME);
+            type = intent.getStringExtra(EXTRA_PRODUCT_TYPE);
             attribute1 = intent.getStringExtra(EXTRA_PRODUCT_ATTRIBUTE_1);
             attribute2 = intent.getStringExtra(EXTRA_PRODUCT_ATTRIBUTE_2);
-
+            productId = intent.getIntExtra(EXTRA_PRODUCT_ID, -1);
             productName.setText(name);
             productType.setText(type);
 
@@ -135,8 +140,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 
             //2 attribute
             if (attribute1 != null && attribute2 != null) {
-                List<ProductAttributeItem>attribute1ItemList = new ArrayList<>();
-                List<ProductAttributeItem>attribute2ItemList = new ArrayList<>();
+
                 //Algorithm for filter attribute
                 boolean addFullAtt2 = false;
                 for (int i = 0; i < productDetails.size(); i++) {
@@ -178,7 +182,6 @@ public class UpdateProductActivity extends AppCompatActivity {
             }
             //1 attribute
             else if (attribute1 != null && attribute2 == null) {
-                List<ProductAttributeItem>attribute1ItemList = new ArrayList<>();
                 //Algorithm for filter attribute
 
                 for (int i = 0; i < productDetails.size(); i++) {
@@ -238,6 +241,31 @@ public class UpdateProductActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        //update
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpdateProductActivity.this, UpdateProductActivity2.class);
+                intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_TYPE, type);
+                intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_NAME, name);
+                if (attribute1 != null) {
+                    intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_ATTRIBUTE1, attribute1);
+                }
+                if (attribute2 != null) {
+                    intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_ATTRIBUTE2, attribute2);
+                }
+                if (attribute1ItemList.size() > 0) {
+                    intent.putParcelableArrayListExtra(UpdateProductActivity2.EXTRA_PRODUCT_ATTRIBUTE1_LIST, (ArrayList<? extends Parcelable>) attribute1ItemList);
+                }
+                if (attribute1ItemList.size() > 0) {
+                    intent.putParcelableArrayListExtra(UpdateProductActivity2.EXTRA_PRODUCT_ATTRIBUTE2_LIST, (ArrayList<? extends Parcelable>) attribute2ItemList);
+                }
+                //put id to update
+                intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_ID, productId);
+
+                startActivityForResult(intent, CONFIRM_REQUEST);
+            }
+        });
 
 //        btnAddImage.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -255,6 +283,7 @@ public class UpdateProductActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private static void setWindowsFlag(Activity activity, final int Bits, Boolean on) {
         Window win = activity.getWindow();
@@ -276,6 +305,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         imageView = findViewById(R.id.product_image);
         btnBack = findViewById(R.id.back_btn);
         attributeRecycler = findViewById(R.id.attribute_list);
+        updateBtn = findViewById(R.id.update_btn);
     }
 
 //    private void updateProduct() {
@@ -377,7 +407,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+        else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 //update image
                 btnUpdate.setVisibility(View.VISIBLE);
@@ -388,6 +418,10 @@ public class UpdateProductActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        //back to product fragment when update successfully
+        else if (requestCode == CONFIRM_REQUEST && resultCode == RESULT_OK) {
+            onBackPressed();
         }
     }
 

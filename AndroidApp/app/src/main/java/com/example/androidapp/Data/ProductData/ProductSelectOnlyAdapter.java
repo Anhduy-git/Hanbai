@@ -1,10 +1,5 @@
 package com.example.androidapp.Data.ProductData;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,25 +15,20 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.androidapp.R;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends ListAdapter<Product, ProductAdapter.ProductViewHolder> implements Filterable {
+public class ProductSelectOnlyAdapter extends ListAdapter<Product, ProductSelectOnlyAdapter.ProductViewHolder> implements Filterable {
     private List<Product> mListProduct;
     private List<Product> mListProductFull;
     private OnItemClickListener listener;
-    private OnItemClickDelListener delListener;
     private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private int currentDel = -1;
 
-    public ProductAdapter(List<Product> mListProduct) {
+    public ProductSelectOnlyAdapter(List<Product> mListProduct) {
         super(DIFF_CALLBACK);
         this.mListProduct = mListProduct;
         //Open 1 card only when delete
@@ -179,33 +168,6 @@ public class ProductAdapter extends ListAdapter<Product, ProductAdapter.ProductV
                     }
                 }
             });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                    itemDelLayout.setVisibility(View.VISIBLE);
-                    itemDelLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            itemDelLayout.setVisibility(View.GONE);
-                        }
-                    });
-                    return true;
-                }
-            });
-            //Set delete when click layout del
-            itemDelIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Get pos
-                    int pos = getAdapterPosition();
-                    //Get del Product
-                    Product Product = getProductAt(pos);
-                    if (delListener != null && pos != RecyclerView.NO_POSITION){
-                        delListener.onItemClickDel(Product);
-                    }
-                }
-            });
         }
     }
 
@@ -219,12 +181,7 @@ public class ProductAdapter extends ListAdapter<Product, ProductAdapter.ProductV
         this.listener = listener;
     }
 
-    public interface OnItemClickDelListener{
-        void onItemClickDel(Product Product);
-    }
-    public void setOnItemClickDelListener(ProductAdapter.OnItemClickDelListener delListener){
-        this.delListener = delListener;
-    }
+
 
 
 }
