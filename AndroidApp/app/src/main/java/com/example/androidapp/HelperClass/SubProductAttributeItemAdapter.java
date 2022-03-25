@@ -1,14 +1,9 @@
 package com.example.androidapp.HelperClass;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,24 +13,24 @@ import com.example.androidapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class    ProductInfoAttributeItemAdapter extends RecyclerView.Adapter<ProductInfoAttributeItemAdapter.ProductInfoAttributeItemViewHolder> {
-    private List<ProductAttributeItem> mListProductInfoAttributeItem;
+public class    SubProductAttributeItemAdapter extends RecyclerView.Adapter<SubProductAttributeItemAdapter.SubProductAttributeItemViewHolder> {
+    private List<ProductAttributeItem> mListSubProductAttributeItem;
     private ArrayList<Integer> selectCheck = new ArrayList<>();
     //    private OnItemClickDelListener listener;
     private OnItemClickListener clickListener;
     private boolean isClicked = false;
 
-    public ProductInfoAttributeItemAdapter(List<ProductAttributeItem> mListProductInfoAttributeItem) {
-        this.mListProductInfoAttributeItem = mListProductInfoAttributeItem;
+    public SubProductAttributeItemAdapter(List<ProductAttributeItem> mListSubProductAttributeItem) {
+        this.mListSubProductAttributeItem = mListSubProductAttributeItem;
         selectCheck.add(1);
-        for (int i = 1; i < mListProductInfoAttributeItem.size(); i++) {
+        for (int i = 1; i < mListSubProductAttributeItem.size(); i++) {
             selectCheck.add(0);
         }
     }
 
 
-    public void setProductInfoAttributeItem(List<ProductAttributeItem> mListProductInfoAttributeItem) {
-        this.mListProductInfoAttributeItem = mListProductInfoAttributeItem;
+    public void setSubProductAttributeItem(List<ProductAttributeItem> mListSubProductAttributeItem) {
+        this.mListSubProductAttributeItem = mListSubProductAttributeItem;
         //initilize selectCheck
 
         notifyDataSetChanged();
@@ -43,21 +38,21 @@ public class    ProductInfoAttributeItemAdapter extends RecyclerView.Adapter<Pro
 
     //Get the client position
     public ProductAttributeItem getAttributeItemAt(int position) {
-        return mListProductInfoAttributeItem.get(position);
+        return mListSubProductAttributeItem.get(position);
     }
 
     @NonNull
     @Override
-    public ProductInfoAttributeItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SubProductAttributeItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_type_attribute, parent, false);
 
-        return new ProductInfoAttributeItemViewHolder(view);
+        return new SubProductAttributeItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductInfoAttributeItemViewHolder holder, int position) {
-        ProductAttributeItem attributeItem = mListProductInfoAttributeItem.get(position);
+    public void onBindViewHolder(@NonNull SubProductAttributeItemViewHolder holder, int position) {
+        ProductAttributeItem attributeItem = mListSubProductAttributeItem.get(position);
         if (attributeItem == null) {
             return;
         }
@@ -85,21 +80,21 @@ public class    ProductInfoAttributeItemAdapter extends RecyclerView.Adapter<Pro
 
     @Override
     public int getItemCount() {
-        if (mListProductInfoAttributeItem != null) {
-            return mListProductInfoAttributeItem.size();
+        if (mListSubProductAttributeItem != null) {
+            return mListSubProductAttributeItem.size();
         }
         return 0;
     }
 
 
-    public class ProductInfoAttributeItemViewHolder extends RecyclerView.ViewHolder {
+    public class SubProductAttributeItemViewHolder extends RecyclerView.ViewHolder {
 
         //        private final TextView tvClientName;
 //        private final TextView tvClientNumber;
         private final CheckBox attributeItemName;
 //        private final LinearLayout item;
 
-        public ProductInfoAttributeItemViewHolder(@NonNull View itemView) {
+        public SubProductAttributeItemViewHolder(@NonNull View itemView) {
             super(itemView);
             attributeItemName = itemView.findViewById(R.id.attribute_item_name);
 //            tvClientName = itemView.findViewById(R.id.client_name);
@@ -132,9 +127,9 @@ public class    ProductInfoAttributeItemAdapter extends RecyclerView.Adapter<Pro
 //                    //Get pos
 //
 //                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION){
-//                        mListProductInfoAttributeItem.remove(getAdapterPosition());
+//                        mListSubProductAttributeItem.remove(getAdapterPosition());
 //                        notifyItemRemoved(getAdapterPosition());
-//                        notifyItemRangeChanged(getAdapterPosition(), mListProductInfoAttributeItem.size());
+//                        notifyItemRangeChanged(getAdapterPosition(), mListSubProductAttributeItem.size());
 //                    }
 //                }
 //            });
@@ -142,11 +137,11 @@ public class    ProductInfoAttributeItemAdapter extends RecyclerView.Adapter<Pro
         }
     }
 
-//    //Interface to click on a dish item
+    //    //Interface to click on a dish item
     public interface OnItemClickListener {
         void onItemClick(int pos);
     }
-//
+    //
 //    //Method item click listener
     public void setOnItemClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;

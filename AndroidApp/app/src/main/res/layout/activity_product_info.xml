@@ -39,14 +39,14 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/update_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/card_view"
-        android:translationY="-20dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/edit_btn">
-    </Button>
+        android:background="@drawable/edit_btn"
+        android:translationY="-20dp"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"

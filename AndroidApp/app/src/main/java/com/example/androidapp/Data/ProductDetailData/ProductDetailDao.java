@@ -29,4 +29,7 @@ public interface ProductDetailDao {
     @Query("DELETE FROM product_detail_table")
     void deleteAllProductDetail();
 
+    @Query("DELETE FROM product_detail_table WHERE name =:name_s")
+    void deleteAllProductDetailWithName(String name_s);
+
 }
