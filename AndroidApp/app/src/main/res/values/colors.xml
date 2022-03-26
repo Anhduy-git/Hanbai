@@ -18,4 +18,21 @@
     <color name="thumb_color">#dcf0e9</color>
     <color name="text_re_month_color">#1CA778</color>
     <color name="text_re_day_color">#005F73</color>
+
+
+<!--colors in pie chart-->
+    <color name="color1">#E9D8A6</color>
+    <color name="color2">#EE9B00</color>
+    <color name="color3">#CA6702</color>
+    <color name="color4">#BB3E03</color>
+    <color name="color5">#89543A</color>
+    <color name="color6">#005F73</color>
+    <color name="color7">#94D2BD</color>
+    <color name="color8">#001219</color>
+
+
+
+    <!--    <color name="color7">#CA6702</color>-->
+<!--    <color name="color8">#CA6702</color>-->
+
 </resources>
