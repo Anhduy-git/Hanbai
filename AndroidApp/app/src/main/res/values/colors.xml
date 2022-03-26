@@ -18,6 +18,7 @@
     <color name="thumb_color">#dcf0e9</color>
     <color name="text_re_month_color">#1CA778</color>
     <color name="text_re_day_color">#005F73</color>
+    <color name="text_num_orders">#949494</color>
 
 
 <!--colors in pie chart-->
