@@ -45,10 +45,9 @@
                 android:id="@+id/col_month"
                 android:layout_width="30dp"
                 android:layout_height="160dp"
-                android:background="@drawable/bg_col_month"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true">
-            </View>
+                android:background="@drawable/bg_col_month"></View>
 
         </RelativeLayout>
         <RelativeLayout
@@ -167,10 +166,11 @@
             android:paddingTop="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie_chart"
-            android:layout_width="200dp"
-            android:layout_height="200dp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart"
+                android:layout_width="177dp"
+                android:layout_height="200dp" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

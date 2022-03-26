@@ -1,62 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/legend_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
->
+    android:padding="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <View
+            android:id="@+id/legend_color"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
+            android:background="@color/main_color"></View>
+
         <TextView
-            android:id="@+id/name_part_chart"
+            android:id="@+id/legend_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="fashion"
             android:textColor="@color/f_color"
-            android:textSize="15sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=":"
             android:layout_marginEnd="5dp"
+            android:text=":"
             android:textColor="@color/f_color"
-            android:textSize="15sp">
-        </TextView>
+            android:textSize="15sp"></TextView>
+
         <TextView
-            android:id="@+id/percent_value"
+            android:id="@+id/legend_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
             android:textColor="@color/f_color"
-            android:textSize="15sp">
-        </TextView>
+            android:textSize="13sp"></TextView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="% ("
             android:textColor="@color/f_color"
-            android:textSize="15sp">
-        </TextView>
+            android:textSize="13sp"></TextView>
+
         <TextView
-            android:id="@+id/num_order"
+            android:id="@+id/legend_num_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
             android:layout_marginEnd="5dp"
+            android:text="4"
             android:textColor="@color/f_color"
-            android:textSize="15sp">
-        </TextView>
+            android:textSize="13sp"></TextView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="orders)"
             android:textColor="@color/f_color"
-            android:textSize="15sp">
-        </TextView>
+            android:textSize="13sp"></TextView>
     </LinearLayout>
 
 </RelativeLayout>
