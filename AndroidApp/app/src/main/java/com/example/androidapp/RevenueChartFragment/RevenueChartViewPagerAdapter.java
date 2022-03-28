@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.androidapp.Fragments.ViewPagerAdapter;
 import com.example.androidapp.OrderFragment.OrderTodayFragment;
 import com.example.androidapp.OrderFragment.UnpaidOrderFragment;
 import com.example.androidapp.OrderFragment.UpcomingOrderFragment;
