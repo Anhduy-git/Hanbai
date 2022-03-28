@@ -162,17 +162,25 @@ public class ChartFragment extends Fragment {
     //Temporary
     private void calculateProductTypePercentage(){
         productTypePercentage = new ArrayList<>();
-        productTypePercentage.add(Double.valueOf(30));
-        productTypePercentage.add(Double.valueOf(20));
-        productTypePercentage.add(Double.valueOf(50));
+        for (int i = 0; i < productTypeList.size(); i++){
+            productTypePercentage.add(Double.valueOf(30*i));
+        }
+
+//        productTypePercentage.add(Double.valueOf(30));
+//        productTypePercentage.add(Double.valueOf(20));
+//        productTypePercentage.add(Double.valueOf(50));
     }
 
     //Temporary
     private void calculateProductTypeOrders(){
         productTypeOrders = new ArrayList<>();
-        productTypeOrders.add(26);
-        productTypeOrders.add(30);
-        productTypeOrders.add(15);
+        for (int i = 0; i < productTypeList.size(); i++) {
+            productTypeOrders.add(10 * i);
+        }
+
+//        productTypeOrders.add(26);
+//        productTypeOrders.add(30);
+//        productTypeOrders.add(15);
     }
 
     private void loadPieChartData(){

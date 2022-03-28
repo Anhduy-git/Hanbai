@@ -8,6 +8,7 @@
     tools:context=".RevenueChartFragment.ChartMonthFragment">
 
     <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart_month"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8">
@@ -30,12 +31,14 @@
                 android:text="Revenue: "
                 android:textColor="@color/f_color"
                 android:textSize="17dp"/>
+
             <TextView
+                android:id="@+id/month_revenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="200000"
                 android:textColor="@color/f_color"
-                android:textSize="17dp"/>
+                android:textSize="17dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,18 +51,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quantity of order: "
+                android:text="Number of orders: "
                 android:textColor="@color/f_color"
-                android:textSize="17dp"/>
+                android:textSize="17dp" />
+
             <TextView
+                android:id="@+id/month_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1200"
                 android:textColor="@color/f_color"
-                android:textSize="17dp"/>
+                android:textSize="17dp" />
         </LinearLayout>
     </LinearLayout>
 
