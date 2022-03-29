@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,9 @@ import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.ProductData.Product;
 import com.example.androidapp.Data.ProductData.ProductAdapter;
 import com.example.androidapp.Data.ProductData.ProductViewModel;
+import com.example.androidapp.Data.ProductType.ProductType;
+import com.example.androidapp.Data.ProductType.ProductTypeAdapter;
+import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
 import com.example.androidapp.R;
 
 import java.io.File;
@@ -39,10 +43,15 @@ public class ProductFragment extends Fragment {
     public static final int EDIT_DISH_REQUEST = 2;
 
     private ProductViewModel productViewModel;
+    private ProductTypeViewModel productTypeViewModel;
     private Button btnAddDish;
     private EditText editSearchBar;
     private RecyclerView rcvData;
+    private RecyclerView rcvType;
     private ProductAdapter productAdapter;
+    private ProductTypeAdapter productTypeAdapter;
+    private List<ProductType> mListProductType = new ArrayList<>();
+    private List<Product> mListProduct = new ArrayList<>();
 
 //    //confirm sound
 //    private MediaPlayer sound = null;
@@ -59,33 +68,17 @@ public class ProductFragment extends Fragment {
 //        //Sound
 //        sound = MediaPlayer.create(getActivity(), R.raw.confirm_sound);
 
-        //Create Recycler View
-        rcvData = view.findViewById(R.id.product_lst);;
-        //rcvData.setHasFixedSize(true);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-        rcvData.setLayoutManager(staggeredGridLayoutManager);
 
-//        //Create DISH ADAPTER
-        List<Product> mListProduct = new ArrayList<>();
-        productAdapter = new ProductAdapter(mListProduct);
-        rcvData.setAdapter(productAdapter);
-//
-//        //Create DISH VIEW MODEL
-        productViewModel = new ViewModelProvider(getActivity()).get(ProductViewModel.class);
-        productViewModel.getAllProduct().observe(getActivity(), new Observer<List<Product>>() {
+        setUpProductTypeList(view);
+        setUpProductList(view);
+
+
+        productTypeAdapter.setOnItemClickAddListener(new ProductTypeAdapter.OnItemClickAddListener() {
             @Override
-
-            //Method DISPLAY the list on screen
-            public void onChanged(List<Product> products) {
-                //use for filter
-                productAdapter.setProduct(products);
-                //use for animation
-                productAdapter.submitList(products);
-
+            public void onItemClickAdd(int position) {
+                productTypeViewModel.insert(new ProductType("test"));
             }
         });
-
-
 //        //Create search bar listener for SEARCH METHOD
         editSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -222,5 +215,54 @@ public class ProductFragment extends Fragment {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
         alertDialog.show();
+
+
     }
+    private void setUpProductTypeList(View view) {
+        //Type list
+        //Create Recycler View
+        rcvType = view.findViewById(R.id.type_list);;
+        //rcvData.setHasFixedSize(true);
+        rcvType.setLayoutManager(new LinearLayoutManager(rcvType.getContext(), RecyclerView.HORIZONTAL, false));
+        productTypeAdapter = new ProductTypeAdapter(mListProductType);
+        rcvType.setAdapter(productTypeAdapter);
+        productTypeViewModel = new ViewModelProvider(getActivity()).get(ProductTypeViewModel.class);
+        productTypeViewModel.getAllProductTypeLive().observe(getActivity(), new Observer<List<ProductType>>() {
+            @Override
+
+            //Method DISPLAY the list on screen
+            public void onChanged(List<ProductType> productTypes) {
+                //use for animation
+                productTypeAdapter.setProductType(productTypes);
+            }
+        });
+    }
+
+    private void setUpProductList(View view) {
+        //Product list
+        //Create Recycler View
+        rcvData = view.findViewById(R.id.product_lst);;
+        //rcvData.setHasFixedSize(true);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        rcvData.setLayoutManager(staggeredGridLayoutManager);
+//        //Create Product ADAPTER
+        productAdapter = new ProductAdapter(mListProduct);
+        rcvData.setAdapter(productAdapter);
+//
+//        //Create Product VIEW MODEL
+        productViewModel = new ViewModelProvider(getActivity()).get(ProductViewModel.class);
+        productViewModel.getAllProduct().observe(getActivity(), new Observer<List<Product>>() {
+            @Override
+
+            //Method DISPLAY the list on screen
+            public void onChanged(List<Product> products) {
+                //use for filter
+                productAdapter.setProduct(products);
+                //use for animation
+                productAdapter.submitList(products);
+
+            }
+        });
+    }
+
 }

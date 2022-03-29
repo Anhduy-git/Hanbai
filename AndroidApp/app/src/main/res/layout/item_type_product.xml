@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/type_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Book"
-    android:textSize="16dp"
-    android:textColor="@color/f_color"
-    android:background="@drawable/bg_th_color"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
-</TextView>
+    android:layout_marginRight="10dp"
+    android:background="@drawable/bg_th_color"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp"
+    android:text="Book"
+    android:textColor="@color/f_color"
+    android:textSize="16dp"></TextView>

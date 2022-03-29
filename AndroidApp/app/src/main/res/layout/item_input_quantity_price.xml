@@ -41,7 +41,7 @@
                 android:textSize="16sp"></TextView>
 
             <EditText
-                android:id="@+id/price"
+                android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom"

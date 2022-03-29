@@ -13,7 +13,7 @@ import com.example.androidapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class    SubProductAttributeItemAdapter extends RecyclerView.Adapter<SubProductAttributeItemAdapter.SubProductAttributeItemViewHolder> {
+public class SubProductAttributeItemAdapter extends RecyclerView.Adapter<SubProductAttributeItemAdapter.SubProductAttributeItemViewHolder> {
     private List<ProductAttributeItem> mListSubProductAttributeItem;
     private ArrayList<Integer> selectCheck = new ArrayList<>();
     //    private OnItemClickDelListener listener;

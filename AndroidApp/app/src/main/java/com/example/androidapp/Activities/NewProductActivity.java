@@ -77,9 +77,9 @@ public class NewProductActivity extends AppCompatActivity {
         addAttributeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProductAttribute productAttribute = new ProductAttribute("New Attribute", new ArrayList<>());
 
-                attribute.add(new ProductAttribute("New Attribute", new ArrayList<>()));
+
+                attribute.add(new ProductAttribute("", new ArrayList<>()));
                 attributeAdapter.notifyDataSetChanged();
                 //gone add btn
                 if (attribute.size() == 2) {

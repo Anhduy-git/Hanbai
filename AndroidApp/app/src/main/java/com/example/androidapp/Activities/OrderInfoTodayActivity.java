@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +20,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.androidapp.Data.ClientData.Client;
+import com.example.androidapp.Data.ProductData.ProductOrderAdapter;
+import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderInfoTodayActivity extends AppCompatActivity {
 
@@ -42,7 +48,8 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
 
     public static final String EXTRA_CHECK_CONFIRM_SHIP =
             "com.example.androidapp.EXTRA_CHECK_CONFIRM_SHIP";
-
+    public static final String EXTRA_ORDER_PRODUCT_LIST =
+            "com.example.androidapp.EXTRA_ORDER_PRODUCT_LIST";
     public static final String EXTRA_CHECK_PAID =
             "com.example.androidapp.EXTRA_CHECK_PAID";
     public static final String EXTRA_CHECK_SHIP =
@@ -76,6 +83,8 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
     private String strOrderTime;
     private String strOrderBank;
     private String strOrderEmail;
+    private List<ProductDetail> mListProduct = new ArrayList<>();
+    private final ProductOrderAdapter productOrderAdapter = new ProductOrderAdapter(mListProduct);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +116,7 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
             beforePaid = intent.getBooleanExtra(EXTRA_CHECK_PAID, beforePaid);
             currentPaid = beforePaid;
             imageDir = client.getImageDir();
+            mListProduct = intent.getParcelableArrayListExtra(EXTRA_ORDER_PRODUCT_LIST);
             //read image from file
             if (imageDir != null) {
                 try {
@@ -120,6 +130,7 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                 }
             }
         }
+        productOrderAdapter.setProduct(mListProduct);
 
         //Check if Paid for checkbox:
         if (currentPaid){
@@ -175,6 +186,7 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                     data.putExtra(EXTRA_CHECK_SHIP, ship);
                     data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
                     data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
+                    data.putParcelableArrayListExtra(EXTRA_ORDER_PRODUCT_LIST, (ArrayList<? extends Parcelable>) mListProduct);
                     int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                     if (id != -1) {
                         data.putExtra(EXTRA_ORDER_ID, id);
@@ -216,6 +228,7 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                 data.putExtra(EXTRA_CHECK_PAID, currentPaid);
                 data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
                 data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
+                data.putParcelableArrayListExtra(EXTRA_ORDER_PRODUCT_LIST, (ArrayList<? extends Parcelable>) mListProduct);
 //                data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
                 int id = getIntent().getIntExtra(EXTRA_ORDER_ID, -1);
                 if (id != -1) {
@@ -261,7 +274,9 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
     private void initRecyclerView() {
         //Dish view holder and recycler view and displaying
         rcvData = findViewById(R.id.order_product_recycler);
-        rcvData.setLayoutManager(new LinearLayoutManager(this));
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        rcvData.setLayoutManager(staggeredGridLayoutManager);
+        rcvData.setAdapter(productOrderAdapter);
     }
 
     @SuppressLint("WrongConstant")

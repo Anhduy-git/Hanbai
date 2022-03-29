@@ -1,10 +1,16 @@
 package com.example.androidapp.Data.ProductDetailData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.androidapp.Data.ClientData.Client;
+import com.example.androidapp.Data.ProductData.Product;
+
 @Entity(tableName = "product_detail_table")
-public class ProductDetail {
+public class ProductDetail implements  Parcelable{
     @PrimaryKey(autoGenerate = true)
     private int ProductID;
     private String name;
@@ -77,5 +83,42 @@ public class ProductDetail {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    protected ProductDetail(Parcel in) {
+        ProductID = in.readInt();
+        name = in.readString();
+        attribute1 = in.readString();
+        attribute2 = in.readString();
+        price = in.readInt();
+        quantity = in.readInt();
+        imgDir = in.readString();
+    }
+
+    public static final Parcelable.Creator<ProductDetail> CREATOR = new Parcelable.Creator<ProductDetail>() {
+        @Override
+        public ProductDetail createFromParcel(Parcel in) {
+            return new ProductDetail(in);
+        }
+
+        @Override
+        public ProductDetail[] newArray(int size) {
+            return new ProductDetail[size];
+        }
+    };
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(ProductID);
+        dest.writeString(name);
+        dest.writeString(attribute1);
+        dest.writeString(attribute2);
+        dest.writeInt(price);
+        dest.writeInt(quantity);
+        dest.writeString(imgDir);
     }
 }

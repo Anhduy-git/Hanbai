@@ -1,9 +1,14 @@
 package com.example.androidapp.Data.ProductData;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -18,93 +23,76 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.androidapp.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductSelectOnlyAdapter extends ListAdapter<Product, ProductSelectOnlyAdapter.ProductViewHolder> implements Filterable {
+//Adapter for RecyclerView
+public class ProductSelectOnlyAdapter extends RecyclerView.Adapter<ProductSelectOnlyAdapter.ProductSelectOnlyViewHolder> implements Filterable {
     private List<Product> mListProduct;
     private List<Product> mListProductFull;
     private OnItemClickListener listener;
-    private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
-    private int currentDel = -1;
 
     public ProductSelectOnlyAdapter(List<Product> mListProduct) {
-        super(DIFF_CALLBACK);
         this.mListProduct = mListProduct;
-        //Open 1 card only when delete
-        viewBinderHelper.setOpenOnlyOne(true);
     }
-    //setup for animation
-    private static final DiffUtil.ItemCallback<Product> DIFF_CALLBACK = new DiffUtil.ItemCallback<Product>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull Product oldItem, @NonNull Product newItem) {
-            return oldItem.getProductID() == newItem.getProductID();
-        }
-
-        @Override
-        public boolean areContentsTheSame(@NonNull Product oldItem, @NonNull Product newItem) {
-            return oldItem.getName().equals(newItem.getName()) &&
-                    oldItem.getImageDir().equals(newItem.getImageDir());
-        }
-    };
 
     public void setProduct(List<Product> mListProduct) {
         this.mListProduct = mListProduct;
         this.mListProductFull = new ArrayList<>(mListProduct);
-
         notifyDataSetChanged();
-    }
-
-    //Get the Product position
-    public Product getProductAt(int postition) {
-        return getItem(postition);
     }
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductSelectOnlyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_product, parent, false);
 
-        return new ProductViewHolder(view);
+        return new ProductSelectOnlyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = getItem(position);
+    public void onBindViewHolder(@NonNull ProductSelectOnlyViewHolder holder, int position) {
+        Product product = mListProduct.get(position);
         if (product == null) {
             return;
         }
-        //Provide id object
-//        viewBinderHelper.bind(holder.swipeRevealLayout, Integer.toString(Product.getProductID()));
 
         holder.tvProductName.setText(product.getName());
-//        if (currentDel == position) {
-//            holder.itemDel.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.itemDel.setVisibility(View.GONE);
-//        }
+
         //read image from file
 
 //        try {
-//            File f=new File(Product.getImageDir());
+//            File f=new File(product.getImageDir());
 //            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imgView.setImageBitmap(b);
+//            holder.imageView.setImageBitmap(b);
 //        }
 //        catch (FileNotFoundException e) {
-//            Resources res = holder.imgView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rec_ava_Product_default);
-//            holder.imgView.setImageBitmap(bitmap);
+//            Resources res = holder.imageView.getResources();
+//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rec_ava_dish_default);
+//            holder.imageView.setImageBitmap(bitmap);
 //        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        if (mListProduct != null) {
+            return mListProduct.size();
+        }
+        return 0;
     }
 
     @Override
     public Filter getFilter() {
-        return ProductFilter;
+        return productFilter;
     }
 
     //Create a filter object for searching
-    private Filter ProductFilter = new Filter() {
+    private Filter productFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Product> filteredList = new ArrayList<>();
@@ -135,53 +123,57 @@ public class ProductSelectOnlyAdapter extends ListAdapter<Product, ProductSelect
         }
     };
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public class ProductSelectOnlyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvProductName;
-        private final ImageView imgView;
-        private RelativeLayout itemDelLayout;
-        private ImageView itemDelIcon;
-//        private final SwipeRevealLayout swipeRevealLayout;
-////        private final LinearLayout layoutDel;
-//        private final RelativeLayout item;
 
-        public ProductViewHolder(@NonNull View itemView) {
+
+        public ProductSelectOnlyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvProductName = itemView.findViewById(R.id.product_name);
-            imgView = itemView.findViewById(R.id.product_img);
-            itemDelLayout = itemView.findViewById(R.id.product_del);
-            itemDelIcon = itemView.findViewById(R.id.product_del_icon);
-
-//            swipeRevealLayout = itemView.findViewById(R.id.swipe_reveal_layout);
-//            layoutDel = itemView.findViewById(R.id.menu_item_del);
-            //This is the main layout in order_item_recycler
+//            tvProductPrice = itemView.findViewById(R.id.dish_price);
+//            imageView = itemView.findViewById(R.id.dish_pic_view);
 //            item = itemView.findViewById(R.id.menu_item);
-            //Set onClick method for each item
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    v.setFocusableInTouchMode(true);
+                    v.requestFocus();
+                    v.setFocusableInTouchMode(false);
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(getItem(position));
+                        listener.onItemClick(mListProduct.get(position));
                     }
                 }
             });
+            itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        // run scale animation and make it bigger
+                        Animation anim = AnimationUtils.loadAnimation(itemView.getContext(), R.anim.scale_in);
+                        itemView.startAnimation(anim);
+                        anim.setFillAfter(true);
+                    } else {
+                        // run scale animation and make it smaller
+                        Animation anim = AnimationUtils.loadAnimation(itemView.getContext(), R.anim.scale_out);
+                        itemView.startAnimation(anim);
+                        anim.setFillAfter(true);
+                    }
+                }
+            });
+
         }
     }
 
-    //Interface to click on a Product item
+    //Interface to click on a dish item
     public interface OnItemClickListener {
-        void onItemClick(Product Product);
+        void onItemClick(Product dish);
     }
 
     //Method item click listener
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
-
-
-
-
 }

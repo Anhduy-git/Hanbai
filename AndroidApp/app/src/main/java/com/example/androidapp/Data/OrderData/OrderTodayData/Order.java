@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ProductData.Product;
+import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class Order {
     private boolean paid;
 
     @ColumnInfo(name = "Product_list")
-    private List<Product> orderListProduct;
+    private List<ProductDetail> orderListProduct;
 
     //Constructor
     public Order(Client client, String date, String time,
-                 int price, boolean ship, boolean paid, List<Product> orderListProduct) {
+                 int price, boolean ship, boolean paid, List<ProductDetail> orderListProduct) {
         this.client = client;
         this.date = date;
         this.time = time;
@@ -70,7 +71,7 @@ public class Order {
         return paid;
     }
 
-    public List<Product> getOrderListProduct() {
+    public List<ProductDetail> getOrderListProduct() {
         return orderListProduct;
     }
 
