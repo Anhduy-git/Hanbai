@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapp.R;
@@ -121,7 +120,7 @@ public class PriceQuantityItemAdapter extends RecyclerView.Adapter<PriceQuantity
         public PriceQuantityItemViewHolder(@NonNull View itemView) {
             super(itemView);
             tvType = itemView.findViewById(R.id.type);
-            tvPrice = itemView.findViewById(R.id.price);
+            tvPrice = itemView.findViewById(R.id.product_price);
             tvQuantity = itemView.findViewById(R.id.quantity);
 //            tvClientName = itemView.findViewById(R.id.client_name);
 //            tvClientNumber = itemView.findViewById(R.id.client_number);

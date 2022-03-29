@@ -28,27 +28,7 @@ public class Client implements Parcelable {
         this.imageDir = imageDir;
     }
 
-    protected Client(Parcel in) {
-        clientId = in.readInt();
-        clientName = in.readString();
-        clientNumber = in.readString();
-        clientAddress = in.readString();
-        clientEmail = in.readString();
-        clientBank = in.readString();
-        imageDir = in.readString();
-    }
 
-    public static final Creator<Client> CREATOR = new Creator<Client>() {
-        @Override
-        public Client createFromParcel(Parcel in) {
-            return new Client(in);
-        }
-
-        @Override
-        public Client[] newArray(int size) {
-            return new Client[size];
-        }
-    };
 
     public int getClientId() {
         return clientId;
@@ -75,6 +55,28 @@ public class Client implements Parcelable {
         this.imageDir = imageDir;
     }
 
+
+    protected Client(Parcel in) {
+        clientId = in.readInt();
+        clientName = in.readString();
+        clientNumber = in.readString();
+        clientAddress = in.readString();
+        clientEmail = in.readString();
+        clientBank = in.readString();
+        imageDir = in.readString();
+    }
+
+    public static final Creator<Client> CREATOR = new Creator<Client>() {
+        @Override
+        public Client createFromParcel(Parcel in) {
+            return new Client(in);
+        }
+
+        @Override
+        public Client[] newArray(int size) {
+            return new Client[size];
+        }
+    };
     @Override
     public int describeContents() {
         return 0;

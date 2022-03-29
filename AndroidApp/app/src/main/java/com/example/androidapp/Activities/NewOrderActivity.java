@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -12,7 +13,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,13 +26,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.androidapp.Data.ClientData.Client;
+import com.example.androidapp.Data.ProductData.Product;
+import com.example.androidapp.Data.ProductData.ProductOrderAdapter;
+import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class NewOrderActivity extends AppCompatActivity {
 
@@ -47,8 +55,8 @@ public class NewOrderActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_ORDER_BANK";
     public static final String EXTRA_ORDER_EMAIL =
             "com.example.androidapp.EXTRA_ORDER_EMAIL";
-    public static final String EXTRA_ORDER_DISH_LIST =
-            "com.example.androidapp.EXTRA_ORDER_DISH_LIST";
+    public static final String EXTRA_ORDER_PRODUCT_LIST =
+            "com.example.androidapp.EXTRA_ORDER_PRODUCT_LIST";
     public static final String EXTRA_ORDER_IMAGE =
             "com.example.androidapp.EXTRA_ORDER_IMAGE";
     public static final String EXTRA_ORDER_CLIENT =
@@ -73,8 +81,8 @@ public class NewOrderActivity extends AppCompatActivity {
     private TextView btnAddClient;
     private String imageDir = "";
     private RecyclerView rcvData;
-//    private List<Dish> mListDish = new ArrayList<>();
-//    final DishOrderAdapter dishOrderAdapter = new DishOrderAdapter(mListDish);
+    private List<ProductDetail> mListProduct = new ArrayList<>();
+    final ProductOrderAdapter productOrderAdapter = new ProductOrderAdapter(mListProduct);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,10 +155,11 @@ public class NewOrderActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        //Dish view holder and recycler view and displaying
+
         rcvData = findViewById(R.id.order_product_recycler);
-        rcvData.setLayoutManager(new LinearLayoutManager(this));
-//        rcvData.setAdapter(dishOrderAdapter);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        rcvData.setLayoutManager(staggeredGridLayoutManager);
+        rcvData.setAdapter(productOrderAdapter);
     }
 
     private void setupDateTimePicker() {
@@ -256,7 +265,7 @@ public class NewOrderActivity extends AppCompatActivity {
             data.putExtra(EXTRA_ORDER_DATE, strOrderDate);
             data.putExtra(EXTRA_ORDER_TIME, strOrderTime);
             data.putExtra(EXTRA_ORDER_CLIENT, client);
-//            data.putParcelableArrayListExtra(EXTRA_ORDER_DISH_LIST, (ArrayList<? extends Parcelable>) mListDish);
+            data.putParcelableArrayListExtra(EXTRA_ORDER_PRODUCT_LIST, (ArrayList<? extends Parcelable>) mListProduct);
 
             setResult(RESULT_OK, data);
 
@@ -305,31 +314,34 @@ public class NewOrderActivity extends AppCompatActivity {
             }
 
         }
-//        else if (requestCode == CHOOSE_DISH_REQUEST && resultCode == RESULT_OK) {
-//            Dish dish = data.getParcelableExtra(SubMenuActivity.EXTRA_DISH);
-//            int dishQuantity = data.getIntExtra(SubMenuActivity.EXTRA_DISH_QUANTITY, 0);
-//            //check if dish existed
-//            int checkExist = 0;
-//
-//            for (int i = 0; i < mListDish.size(); i++) {
-//                if (mListDish.get(i).getName().equals(dish.getName()) &&
-//                        mListDish.get(i).getPrice() == dish.getPrice()) {
-//                    checkExist = 1;
-//                    mListDish.get(i).setQuantity(mListDish.get(i).getQuantity() + dishQuantity);
-//                    break;
-//                }
-//            }
-//
-//            if (checkExist == 0) {
-//                dish.setQuantity(dishQuantity);
-//                mListDish.add(dish);
-//            }
-//            //generate id for all dish
-//            for (int i = 1; i <= mListDish.size(); i++) {
-//                mListDish.get(i - 1).setDishID(i);
-//            }
-//            //Display the chosen dish to the current order
-//            dishOrderAdapter.setDish(mListDish);
-//        }
+        else if (requestCode == CHOOSE_PRODUCT_REQUEST && resultCode == RESULT_OK) {
+            Log.d("test", "haha");
+            assert data != null;
+            ProductDetail productDetail = data.getParcelableExtra(SubProductActivity.EXTRA_PRODUCT);
+            int productQuantity = data.getIntExtra(SubProductActivity.EXTRA_PRODUCT_QUANTITY, 0);
+            //check if dish existed
+            int checkExist = 0;
+
+            for (int i = 0; i < mListProduct.size(); i++) {
+                if (mListProduct.get(i).getName().equals(productDetail.getName()) &&
+                        mListProduct.get(i).getAttribute1().equals(productDetail.getAttribute1())
+                && mListProduct.get(i).getAttribute2().equals(productDetail.getAttribute2())) {
+                    checkExist = 1;
+                    mListProduct.get(i).setQuantity(mListProduct.get(i).getQuantity() + productQuantity);
+                    break;
+                }
+            }
+
+            if (checkExist == 0) {
+                productDetail.setQuantity(productQuantity);
+                mListProduct.add(productDetail);
+            }
+            //generate id for all dish
+            for (int i = 1; i <= mListProduct.size(); i++) {
+                mListProduct.get(i - 1).setProductID(i);
+            }
+            //Display the chosen dish to the current order
+            productOrderAdapter.setProduct(mListProduct);
+        }
     }
 }

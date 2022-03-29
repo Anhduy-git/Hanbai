@@ -29,7 +29,7 @@ import com.example.androidapp.HelperClass.DateConverter;
 //Add more entities (tables) to database by listing them inside {}
 
 @Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class,
-        Product.class, ProductDetail.class, MonthRevenue.class}, version = 3)
+        Product.class, ProductDetail.class, MonthRevenue.class}, version = 5)
 
 @TypeConverters({DataConverter.class, DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase{

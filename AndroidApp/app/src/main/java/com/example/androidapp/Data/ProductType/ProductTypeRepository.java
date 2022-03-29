@@ -3,6 +3,8 @@ package com.example.androidapp.Data.ProductType;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.androidapp.Data.AppDatabase;
 
 
@@ -11,10 +13,12 @@ import java.util.List;
 public class ProductTypeRepository {
     private ProductTypeDao productTypeDao;
     private List<ProductType> allProductType;
+    private LiveData<List<ProductType>> allProductTypeLive;
     public ProductTypeRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
         productTypeDao = database.productTypeDao();
         allProductType = productTypeDao.getAllProductType();
+        allProductTypeLive = productTypeDao.getAllProductTypeLive();
     }
     public void insert(ProductType productType){
         new InsertNoteAsyncTask(productTypeDao).execute(productType);
@@ -27,6 +31,9 @@ public class ProductTypeRepository {
 
     public List<ProductType> getAllProductType(){
         return allProductType;
+    }
+    public LiveData<List<ProductType>> getAllProductTypeLive(){
+        return allProductTypeLive;
     }
 
     private static class InsertNoteAsyncTask extends AsyncTask<ProductType, Void, Void> {

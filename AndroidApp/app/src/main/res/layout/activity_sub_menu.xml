@@ -8,20 +8,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/back_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/bg_transparent"
-            android:drawableLeft="@drawable/btn_back"
-            android:paddingLeft="10dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/back_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_transparent"
+                android:drawableLeft="@drawable/btn_back"
+                android:paddingLeft="10dp" />
+
+            <Button
+                android:id="@+id/add_product_btn"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_transparent"
+                android:drawableLeft="@drawable/plus_icon"
+                android:paddingLeft="5dp"></Button>
+        </RelativeLayout>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:background="@drawable/bg_searching"
-            android:layout_margin="10dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/icon_searching"
@@ -30,10 +46,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
-                android:src="@drawable/icon_searching">
-            </ImageView>
+                android:src="@drawable/icon_searching"></ImageView>
 
             <EditText
+                android:id="@+id/product_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -46,7 +62,7 @@
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="17sp"/>
+                android:textSize="17sp" />
 
         </RelativeLayout>
 
@@ -69,7 +85,9 @@
         android:translationZ="1dp"
         android:layout_alignParentBottom="true"
         android:padding="10dp">
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/attribute_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -91,24 +109,30 @@
                 android:orientation="horizontal"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true">
+
                 <Button
+                    android:id="@+id/decrease_btn"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@drawable/bg_transparent"
-                    android:paddingLeft="2dp"
-                    android:drawableLeft="@drawable/down_arrow_icon"></Button>
+                    android:drawableLeft="@drawable/down_arrow_icon"
+                    android:paddingLeft="2dp"></Button>
+
                 <EditText
+                    android:id="@+id/product_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/bg_transparent"
+                    android:maxLines="1"
+                    android:minWidth="10dp"
                     android:text="1"
                     android:textColor="@color/f_color"
-                    android:textSize="17sp"
-                    android:maxLines="1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"></EditText>
+                    android:textSize="17sp"></EditText>
+
                 <Button
+                    android:id="@+id/increase_btn"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@drawable/bg_transparent"

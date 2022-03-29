@@ -32,6 +32,7 @@ import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderAdapter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderViewModel;
 import com.example.androidapp.Data.ClientData.Client;
+import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.R;
 
 import java.text.ParseException;
@@ -91,7 +92,7 @@ public class OrderTodayFragment extends Fragment {
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_CHECK_PAID, order.getPaid());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_CHECK_SHIP, order.getShip());
                 intent.putExtra(OrderInfoTodayActivity.EXTRA_ORDER_PRICE, order.getPrice());
-
+                intent.putParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_PRODUCT_LIST, (ArrayList<? extends Parcelable>) order.getOrderListProduct());
                 startActivityForResult(intent, CONFIRM_ORDER_REQUEST);
             }
         });
@@ -127,9 +128,10 @@ public class OrderTodayFragment extends Fragment {
             String time = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_TIME);
             String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
             Client client = data.getParcelableExtra(NewOrderActivity.EXTRA_ORDER_CLIENT);
-            Order order = new Order(client, date, time, 0, false, false, null);
+            List<ProductDetail> mOrderListProduct = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_PRODUCT_LIST);
+            Order order = new Order(client, date, time, 0, false, false, mOrderListProduct);
             orderViewModel.insert(order);
-//            mOrderListDish = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_DISH_LIST);
+
 //            int price = calculateOrderPrice(mOrderListDish);
 //
             //Only compare the date
@@ -171,10 +173,10 @@ public class OrderTodayFragment extends Fragment {
                 Toast.makeText(getActivity(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                 return;
             }
-//            mOrderListDish = data.getParcelableArrayListExtra(OrderInfoTodayActivity.EXTRA_ORDER_DISH_LIST);
+            List<ProductDetail> mOrderListProduct = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_PRODUCT_LIST);
 //            int price = calculateOrderPrice(mOrderListDish);
 
-            Order order = new Order(client, date, time, 0, ship, paid, null);
+            Order order = new Order(client, date, time, 0, ship, paid, mOrderListProduct);
             order.setId(id);
             orderViewModel.update(order);
 //            //if shipped, then move to history
