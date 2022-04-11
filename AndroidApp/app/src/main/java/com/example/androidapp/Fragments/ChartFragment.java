@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import com.example.androidapp.Activities.NewClientActivity;
 import com.example.androidapp.Activities.RevenueChartActivity;
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientViewModel;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeListAdapter;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
@@ -53,6 +56,7 @@ public class ChartFragment extends Fragment {
     private View monthCol;
     private TextView tvMonthRev;
     private TextView tvDayRev;
+    private TextView tvTotalMonthOrders;
     private PieChart pieChart;
     private ProductTypeViewModel productTypeViewModel;
     private ProductTypeListAdapter productTypeListAdapter;
@@ -60,6 +64,7 @@ public class ChartFragment extends Fragment {
     private List<ProductType> productTypeList;
     private List<Double> productTypePercentage;
     private List<Integer> productTypeOrders;
+    private MonthRevenueViewModel monthRevenueViewModel;
 
     private final double TOTAL_HEIGHT = 160;
     private double monthColHeight = 130;
@@ -67,6 +72,7 @@ public class ChartFragment extends Fragment {
 
     //Test number for display chart
     private int totalMonthRev;
+    private int totalMonthOrders;
     private double dayRevTest = 200000;
     private double monthRevTest = 500000;
 
@@ -89,6 +95,8 @@ public class ChartFragment extends Fragment {
         loadColors();
         setUpPieChart();
         loadPieChartData();
+        displayTotalOrders();
+
     
         //create recycler view and adapter
         RecyclerView rcvData = v.findViewById(R.id.pie_chart_note);
@@ -114,6 +122,7 @@ public class ChartFragment extends Fragment {
         pieChart = view.findViewById(R.id.pie_chart);
         tvDayRev = view.findViewById(R.id.revenue_day);
         tvMonthRev = view.findViewById(R.id.revenue_month);
+        tvTotalMonthOrders = view.findViewById(R.id.total_orders);
     }
 
     private static int dpToPx(int dp) {
@@ -181,6 +190,19 @@ public class ChartFragment extends Fragment {
 //        productTypeOrders.add(26);
 //        productTypeOrders.add(30);
 //        productTypeOrders.add(15);
+    }
+
+    private void displayTotalOrders(){
+        monthRevenueViewModel = new ViewModelProvider(this).get(MonthRevenueViewModel.class);
+        monthRevenueViewModel.getAllMonthRevenues().observe(getActivity(), new Observer<List<MonthRevenue>>() {
+            @Override
+            public void onChanged(List<MonthRevenue> monthRevenues) {
+                int size = monthRevenues.size();
+                totalMonthOrders = monthRevenues.get(size - 1).getNumberOfOrders();
+                tvTotalMonthOrders.setText(String.valueOf(totalMonthOrders).trim());
+            }
+        });
+
     }
 
     private void loadPieChartData(){

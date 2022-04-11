@@ -98,7 +98,6 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
         initUi();
         initRecyclerView();
 
-
         //Get data from intent to display UI
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ORDER_ID)){
@@ -193,15 +192,10 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                     }
 
                     setResult(RESULT_OK, data);
-
                     finish();
                 } else {
                     onBackPressed();
                 }
-
-
-
-
             }
         });
 
@@ -235,8 +229,6 @@ public class OrderInfoTodayActivity extends AppCompatActivity {
                     data.putExtra(EXTRA_ORDER_ID, id);
                 }
                 setResult(RESULT_OK, data);
-
-
                 finish();
             }
         });

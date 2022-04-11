@@ -3,10 +3,12 @@ package com.example.androidapp.Data;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
@@ -25,13 +27,17 @@ import com.example.androidapp.Data.ProductType.ProductTypeDao;
 import com.example.androidapp.Data.ProductData.Product;
 import com.example.androidapp.HelperClass.DateConverter;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.Executors;
+
 //App database
 //Add more entities (tables) to database by listing them inside {}
 
 @Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class,
-        Product.class, ProductDetail.class, MonthRevenue.class}, version = 5)
+        Product.class, ProductDetail.class, MonthRevenue.class}, version = 1)
 
-@TypeConverters({DataConverter.class, DateConverter.class})
+@TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
     private static final String DATABASE_NAME = "database.db";
     private static AppDatabase instance;
@@ -85,4 +91,21 @@ public abstract class AppDatabase extends RoomDatabase{
             return null;
         }
     }
+
+//    private static AppDatabase buildDatabase(final Context context){
+//        return Room.databaseBuilder(context, AppDatabase.class, "database.db")
+//                .addCallback(new Callback() {
+//                    @Override
+//                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//                        super.onCreate(db);
+//                        Executors.newSingleThreadExecutor().execute(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Date nowDate = Calendar.getInstance().getTime();
+//                                getInstance(context).monthRevenueDao().insertMonthRevenue(new MonthRevenue(nowDate, 0, 0));
+//                            }
+//                        });
+//                    }
+//                }).build();
+//    }
 }

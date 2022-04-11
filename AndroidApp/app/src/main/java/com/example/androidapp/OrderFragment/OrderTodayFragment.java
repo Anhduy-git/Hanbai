@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,10 @@ import android.widget.Toast;
 import com.example.androidapp.Activities.InfoClientActivity;
 import com.example.androidapp.Activities.NewOrderActivity;
 import com.example.androidapp.Activities.OrderInfoTodayActivity;
+import com.example.androidapp.Data.AppDatabase;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenueDao;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderAdapter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderViewModel;
@@ -35,6 +41,7 @@ import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,9 +57,14 @@ public class OrderTodayFragment extends Fragment {
     public static final int CONFIRM_ORDER_REQUEST = 2;
     //View model
     private OrderViewModel orderViewModel;
+    private MonthRevenueViewModel monthRevenueViewModel;
+    private int numberOfOrders = 0;
+
+    //private MonthRevenue monthRevenue;
 
     //sound
     private MediaPlayer sound = null;
+
 
     @Nullable
     @Override
@@ -63,6 +75,7 @@ public class OrderTodayFragment extends Fragment {
         RecyclerView rcvData = (RecyclerView) view.findViewById(R.id.order_recycler);
         rcvData.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+        monthRevenueViewModel = new ViewModelProvider(getActivity()).get(MonthRevenueViewModel.class);
 
         final OrderAdapter orderAdapter = new OrderAdapter();
         rcvData.setAdapter(orderAdapter);
@@ -75,7 +88,6 @@ public class OrderTodayFragment extends Fragment {
                 orderAdapter.submitList(orders);
 //                //Display number of order today
 //                numOrderToday.setText(String.format("%d", orders.size()));
-
             }
         });
 
@@ -187,8 +199,43 @@ public class OrderTodayFragment extends Fragment {
 //                HistoryOrder historyOrder = new HistoryOrder(client, order.getDate(), order.getTime(), order.getPrice(), order.getShip(), order.getPaid(), order.getOrderListDish());
 //                historyOrderViewModel.insert(historyOrder);
 //            }
+
+            Date nowDate = Calendar.getInstance().getTime();
+            DateFormat formatter = new SimpleDateFormat("MM/yyyy");
+            String strDate = formatter.format(nowDate);
+
+//            monthRevenueViewModel.getAllMonthRevenues().observe(getActivity(), new Observer<List<MonthRevenue>>() {
+//                @Override
+//                public void onChanged(List<MonthRevenue> monthRevenues) {
+//                    int size = monthRevenues.size();
+//                    int monthTotalOrders = monthRevenues.get(size - 1).getNumberOfOrders();
+//
+//                    MonthRevenue monthRevenue= new MonthRevenue(strDate, 0, 1 + monthTotalOrders);
+//                    Log.d("Total: ", String.valueOf(monthTotalOrders));
+//                    monthRevenueViewModel.updateMonthRevenue(monthRevenue);
+//                    monthRevenueViewModel.getAllMonthRevenues().removeObserver(this);
+//                }
+//            });
+
+            int monthID = monthRevenueViewModel.getAllMonthRevenuesSync().get(0).getId();
+            int totalOrderNumber = monthRevenueViewModel.getAllMonthRevenuesSync().get(0).getNumberOfOrders();
+            MonthRevenue newMonthRevenue = new MonthRevenue(strDate, 0, 1 + totalOrderNumber);
+
+            if (monthID == -1) {
+                Log.d("Update: ", "failed");
+                return;
+            }
+            newMonthRevenue.setId(monthID);
+
+            //MonthRevenueDao monthRevenueDao = AppDatabase.getInstance(getActivity()).monthRevenueDao();
+            //monthRevenueDao.update(monthID, totalOrderNumber + 1);
+            monthRevenueViewModel.updateMonthRevenue(newMonthRevenue);
         }
+
+        //ko biet
+        // phai tat app di :v
     }
+
 
 
 //    int calculateOrderPrice(List<Dish> listDish) {

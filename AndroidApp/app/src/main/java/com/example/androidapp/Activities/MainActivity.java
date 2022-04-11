@@ -9,9 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
 import com.example.androidapp.Fragments.ViewPagerAdapter;
@@ -19,16 +23,28 @@ import com.example.androidapp.PickTypeActivity;
 import com.example.androidapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
     private ProductTypeViewModel productTypeViewModel;
+
+    private MonthRevenueViewModel monthRevenueViewModel;
+    private MonthRevenue monthRevenue;
+    private Date nowDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Create this month revenue object
+        prepopulateDatabase();
 
         //view model
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
@@ -49,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -108,5 +123,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
+    }
+
+    private void prepopulateDatabase(){
+        nowDate = Calendar.getInstance().getTime();
+        DateFormat formatter = new SimpleDateFormat("MM/yyyy");
+        String strDate = formatter.format(nowDate);
+
+        monthRevenueViewModel = new ViewModelProvider(this).get(MonthRevenueViewModel.class);
+        monthRevenueViewModel.getAllMonthRevenues().observe(this, new Observer<List<MonthRevenue>>() {
+            @Override
+            public void onChanged(List<MonthRevenue> monthRevenues) {
+                if (monthRevenues.isEmpty()) {
+                    monthRevenue = new MonthRevenue(strDate, 0, 0);
+                    monthRevenueViewModel.insertMonthRevenue(monthRevenue);
+                }
+                monthRevenueViewModel.getAllMonthRevenues().removeObserver(this);
+            }
+        });
+    }
+
+    private void checkDate(){
+        //implement later
     }
 }

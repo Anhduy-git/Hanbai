@@ -7,16 +7,19 @@ import androidx.lifecycle.LiveData;
 
 import com.example.androidapp.Data.AppDatabase;
 
+import java.time.Month;
 import java.util.List;
 
 public class MonthRevenueRepository {
     private MonthRevenueDao monthRevenueDao;
     private LiveData<List<MonthRevenue>> allMonthRevenues;
+    private List<MonthRevenue> allMonthRevenuesSync;
 
     public MonthRevenueRepository(Application application) {
         AppDatabase database = AppDatabase.getInstance(application);
         monthRevenueDao = database.monthRevenueDao();
         allMonthRevenues = monthRevenueDao.getAllMonthRevenues();
+        allMonthRevenuesSync = monthRevenueDao.getAllMonthRevenuesSync();
     }
 
     public void insertMonthRevenue(MonthRevenue monthRevenue) {
@@ -31,10 +34,10 @@ public class MonthRevenueRepository {
         new DeleteMonthRevenueAsyncTask(monthRevenueDao).execute(monthRevenue);
     }
 
-    
     public LiveData<List<MonthRevenue>> getAllMonthRevenues() {
         return allMonthRevenues;
     }
+    public List<MonthRevenue> getAllMonthRevenuesSync() { return allMonthRevenuesSync;}
 
     private static class InsertMonthRevenueAsyncTask extends AsyncTask<MonthRevenue, Void, Void> {
         private MonthRevenueDao monthRevenueDao;
