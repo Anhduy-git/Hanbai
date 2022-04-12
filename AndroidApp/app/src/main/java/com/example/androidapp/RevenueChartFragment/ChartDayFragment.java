@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.androidapp.Data.AppDatabase;
+import com.example.androidapp.Data.DayRevenueData.DayRevenue;
 import com.example.androidapp.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -23,11 +25,14 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChartDayFragment extends Fragment {
     //Variables
     private BarChart barChart;
     private TextView tvDailyRevenue;
+
+    private ArrayList<BarEntry> entries = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,11 +55,10 @@ public class ChartDayFragment extends Fragment {
     }
 
     private void loadBarChartData(){
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        //test
-        int n = 10;
-        for (int i = 1; i < n; i++){
-            entries.add(new BarEntry(2010 + i, 30*i));
+        List<DayRevenue> dayRevenueList = AppDatabase.getInstance(getActivity()).dayRevenueDao().getAllDayRevenues();
+        for (DayRevenue dayRevenue : dayRevenueList) {
+            int day = Integer.valueOf(dayRevenue.getCurrentDate().substring(0,2));
+            entries.add(new BarEntry(day, (float) dayRevenue.getDayRevenue()));
         }
 
         BarDataSet barDataSet = new BarDataSet(entries, "");

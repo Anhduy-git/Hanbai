@@ -10,14 +10,14 @@ import java.util.List;
 
 public class MonthRevenueViewModel extends AndroidViewModel {
     private MonthRevenueRepository repository;
-    private LiveData<List<MonthRevenue>> allMonthRevenues;
-    private List<MonthRevenue> allMonthRevenuesSync;
+    private LiveData<List<MonthRevenue>> allMonthRevenuesLive;
+    private List<MonthRevenue> allMonthRevenues;
 
     public MonthRevenueViewModel(@NonNull Application application) {
         super(application);
         repository = new MonthRevenueRepository(application);
+        allMonthRevenuesLive = repository.getAllMonthRevenuesLive();
         allMonthRevenues = repository.getAllMonthRevenues();
-        allMonthRevenuesSync = repository.getAllMonthRevenuesSync();
     }
 
     public void insertMonthRevenue(MonthRevenue monthRevenue) {
@@ -28,15 +28,13 @@ public class MonthRevenueViewModel extends AndroidViewModel {
         repository.updateMonthRevenue(monthRevenue);
     }
 
-
-
     public void deleteMonthRevenue(MonthRevenue monthRevenue) {
         repository.deleteMonthRevenue(monthRevenue);
     }
 
-    public LiveData<List<MonthRevenue>> getAllMonthRevenues() {
-        return allMonthRevenues;
+    public LiveData<List<MonthRevenue>> getAllMonthRevenuesLive() {
+        return allMonthRevenuesLive;
     }
 
-    public List<MonthRevenue> getAllMonthRevenuesSync() { return allMonthRevenuesSync;}
+    public List<MonthRevenue> getAllMonthRevenues() { return allMonthRevenues;}
 }

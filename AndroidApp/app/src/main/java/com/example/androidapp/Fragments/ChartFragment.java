@@ -29,8 +29,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapp.Activities.NewClientActivity;
 import com.example.androidapp.Activities.RevenueChartActivity;
+import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientViewModel;
+import com.example.androidapp.Data.DayRevenueData.DayRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
 import com.example.androidapp.Data.ProductType.ProductType;
@@ -47,34 +49,48 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ChartFragment extends Fragment {
     private Button moreInfoBtn;
     private View dayCol;
     private View monthCol;
+
     private TextView tvMonthRev;
     private TextView tvDayRev;
     private TextView tvTotalMonthOrders;
+
     private PieChart pieChart;
+
     private ProductTypeViewModel productTypeViewModel;
+    private MonthRevenueViewModel monthRevenueViewModel;
+
     private ProductTypeListAdapter productTypeListAdapter;
+
     private ArrayList<Integer> colorList;
     private List<ProductType> productTypeList;
     private List<Double> productTypePercentage;
     private List<Integer> productTypeOrders;
-    private MonthRevenueViewModel monthRevenueViewModel;
+
+    private Date nowDate;
+    private DateFormat formatter;
+    private String strCurrentMonth;
+    private String strCurrentDay;
 
     private final double TOTAL_HEIGHT = 160;
     private double monthColHeight = 130;
     private double dayColHeight = 100;
 
     //Test number for display chart
-    private int totalMonthRev;
+    private double totalMonthRev;
     private int totalMonthOrders;
-    private double dayRevTest = 200000;
-    private double monthRevTest = 500000;
+    private double dayRevenue;
+    private double monthRevenue;
 
     @Nullable
     @Override
@@ -82,20 +98,29 @@ public class ChartFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
         productTypeList = getListCategory();
 
+        //Date related
+        nowDate = Calendar.getInstance().getTime();
+        formatter = new SimpleDateFormat("MM/yyyy");
+        strCurrentMonth = formatter.format(nowDate);
+        formatter = new SimpleDateFormat("dd/MM/yyyy");
+        strCurrentDay = formatter.format(nowDate);
+
         initUI(v);
+
         //Calculate necessary data
-        calculateColHeight(dayRevTest, monthRevTest);
+        calculateColHeight();
         calculateProductTypePercentage();
         calculateProductTypeOrders();
 
-        //set up bar "view"
+        //set up "bar view"
         displayBarChart();
+        displayCurrentMonthRevenue();
 
         //set up pie chart
         loadColors();
         setUpPieChart();
         loadPieChartData();
-        displayTotalOrders();
+        displayCurrentMonthTotalOrders();
 
     
         //create recycler view and adapter
@@ -130,7 +155,13 @@ public class ChartFragment extends Fragment {
     }
 
     //Temporary algorithm
-    private void calculateColHeight(double dayRevenue, double monthRevenue){
+    private void calculateColHeight(){
+        List<MonthRevenue> monthRevenueList = AppDatabase.getInstance(getActivity()).monthRevenueDao().getAllMonthRevenues();
+        List<DayRevenue> dayRevenueList = AppDatabase.getInstance(getActivity()).dayRevenueDao().getAllDayRevenues();
+
+        monthRevenue = getMonth(monthRevenueList, strCurrentMonth).getMonthRevenue();
+        dayRevenue = getDay(dayRevenueList, strCurrentDay).getDayRevenue();
+
         double totalRevenue = dayRevenue + monthRevenue;
         double dayRatio = dayRevenue / totalRevenue;
         double monthRatio = monthRevenue / totalRevenue;
@@ -142,8 +173,8 @@ public class ChartFragment extends Fragment {
     private void displayBarChart(){
         monthCol.getLayoutParams().height = dpToPx((int) monthColHeight);
         dayCol.getLayoutParams().height = dpToPx((int) dayColHeight);
-        tvDayRev.setText(String.valueOf(dayRevTest));
-        tvMonthRev.setText(String.valueOf(monthRevTest));
+        tvDayRev.setText(String.valueOf(dayRevenue));
+        tvMonthRev.setText(String.valueOf(monthRevenue));
     }
 
     private void setUpPieChart(){
@@ -192,26 +223,13 @@ public class ChartFragment extends Fragment {
 //        productTypeOrders.add(15);
     }
 
-    private void displayTotalOrders(){
-        monthRevenueViewModel = new ViewModelProvider(this).get(MonthRevenueViewModel.class);
-        monthRevenueViewModel.getAllMonthRevenues().observe(getActivity(), new Observer<List<MonthRevenue>>() {
-            @Override
-            public void onChanged(List<MonthRevenue> monthRevenues) {
-                int size = monthRevenues.size();
-                totalMonthOrders = monthRevenues.get(size - 1).getNumberOfOrders();
-                tvTotalMonthOrders.setText(String.valueOf(totalMonthOrders).trim());
-            }
-        });
-
-    }
-
     private void loadPieChartData(){
         //Entries
         ArrayList<PieEntry> entries = new ArrayList<>();
         //value i is for testing
         int i = 1;
         for (ProductType productType : productTypeList){
-            entries.add(new PieEntry(30 * i, productType.getName()));
+            entries.add(new PieEntry(0 * i, productType.getName()));
             i *= 2;
         }
 
@@ -230,10 +248,54 @@ public class ChartFragment extends Fragment {
         //pieChart.animateY(1400, Easing.EaseInOutQuad);
     }
 
+    private void displayCurrentMonthTotalOrders(){
+        monthRevenueViewModel = new ViewModelProvider(this).get(MonthRevenueViewModel.class);
+        monthRevenueViewModel.getAllMonthRevenuesLive().observe(getActivity(), new Observer<List<MonthRevenue>>() {
+            @Override
+            public void onChanged(List<MonthRevenue> monthRevenues) {
+                totalMonthOrders = getMonth(monthRevenues, strCurrentMonth).getNumberOfOrders();
+                tvTotalMonthOrders.setText(String.valueOf(totalMonthOrders).trim());
+            }
+        });
+    }
+
+    private void displayCurrentMonthRevenue() {
+        monthRevenueViewModel = new ViewModelProvider(this).get(MonthRevenueViewModel.class);
+        monthRevenueViewModel.getAllMonthRevenuesLive().observe(getActivity(), new Observer<List<MonthRevenue>>() {
+            @Override
+            public void onChanged(List<MonthRevenue> monthRevenues) {
+                totalMonthRev = getMonth(monthRevenues, strCurrentMonth).getMonthRevenue();
+                tvMonthRev.setText(String.valueOf(totalMonthRev).trim());
+            }
+        });
+    }
+
+
+
     private List<ProductType> getListCategory() {
         //view model
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         return productTypeViewModel.getAllProductType();
+    }
+
+    private MonthRevenue getMonth(List<MonthRevenue> monthRevenueList, String currentDate) {
+        MonthRevenue temp = new MonthRevenue("", 0, 0);
+        for (MonthRevenue monthRevenue : monthRevenueList) {
+            if (monthRevenue.getCurrentDate().equals(currentDate)) {
+                temp = monthRevenue;
+            }
+        }
+        return temp;
+    }
+
+    private DayRevenue getDay(List<DayRevenue> dayRevenueList, String currentDate) {
+        DayRevenue temp = new DayRevenue("", 0, 0);
+        for (DayRevenue dayRevenue : dayRevenueList) {
+            if (dayRevenue.getCurrentDate().equals(currentDate)) {
+                temp = dayRevenue;
+            }
+        }
+        return temp;
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(

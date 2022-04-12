@@ -18,16 +18,12 @@ public interface MonthRevenueDao {
     @Update
     void updateMonthRevenue(MonthRevenue monthRevenue);
 
-
-    @Query("Update month_revenue_table set number_order=:numberOfOrders where month_id =:id" )
-    void update(int id, int numberOfOrders);
-
     @Delete
     void deleteMonthRevenue(MonthRevenue monthRevenue);
 
     @Query("SELECT * FROM month_revenue_table")
-    LiveData<List<MonthRevenue>> getAllMonthRevenues();
+    LiveData<List<MonthRevenue>> getAllMonthRevenuesLive();
 
     @Query("SELECT * FROM month_revenue_table")
-    List<MonthRevenue> getAllMonthRevenuesSync();
+    List<MonthRevenue> getAllMonthRevenues();
 }

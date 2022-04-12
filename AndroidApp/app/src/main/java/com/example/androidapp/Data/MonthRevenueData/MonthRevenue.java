@@ -10,10 +10,8 @@ import java.util.Date;
 
 @Entity(tableName = "month_revenue_table")
 public class MonthRevenue {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "month_id")
-    int id;
-
     @NonNull
     private String currentDate; //"MM/yyyy"
 
@@ -28,13 +26,13 @@ public class MonthRevenue {
         this.numberOfOrders = numberOfOrders;
     }
 
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
+//    public int getId(){
+//        return id;
+//    }
+//
+//    public void setId(int id){
+//        this.id = id;
+//    }
 
     public String getCurrentDate() {
         return currentDate;

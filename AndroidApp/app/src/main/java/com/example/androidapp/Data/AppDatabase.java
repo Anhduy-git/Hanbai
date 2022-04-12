@@ -12,6 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
+import com.example.androidapp.Data.DayRevenueData.DayRevenue;
+import com.example.androidapp.Data.DayRevenueData.DayRevenueDao;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueDao;
 import com.example.androidapp.Data.OrderData.OrderTodayData.DataConverter;
@@ -25,6 +27,8 @@ import com.example.androidapp.Data.ProductDetailData.ProductDetailDao;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeDao;
 import com.example.androidapp.Data.ProductData.Product;
+import com.example.androidapp.Data.ProductTypeRevenue.ProductTypeRevenue;
+import com.example.androidapp.Data.ProductTypeRevenue.ProductTypeRevenueDao;
 import com.example.androidapp.HelperClass.DateConverter;
 
 import java.util.Calendar;
@@ -35,7 +39,8 @@ import java.util.concurrent.Executors;
 //Add more entities (tables) to database by listing them inside {}
 
 @Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class,
-        Product.class, ProductDetail.class, MonthRevenue.class}, version = 1)
+        Product.class, ProductDetail.class, MonthRevenue.class, DayRevenue.class,
+        ProductTypeRevenue.class}, version = 2)
 
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
@@ -50,6 +55,8 @@ public abstract class AppDatabase extends RoomDatabase{
     public abstract ProductTypeDao productTypeDao();
     public abstract ProductDetailDao productDetailDao();
     public abstract MonthRevenueDao monthRevenueDao();
+    public abstract DayRevenueDao dayRevenueDao();
+    public abstract ProductTypeRevenueDao productTypeRevenueDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -72,6 +79,8 @@ public abstract class AppDatabase extends RoomDatabase{
         private ProductDetailDao productDetailDao;
 //        private HistoryOrderDao historyOrderDao;
         private MonthRevenueDao monthRevenueDao;
+        private DayRevenueDao dayRevenueDao;
+        private ProductTypeRevenueDao productTypeRevenueDao;
 
         private PopulateDbAsyncTask(AppDatabase db) {
             clientDao = db.clientDao();
@@ -84,6 +93,8 @@ public abstract class AppDatabase extends RoomDatabase{
             productDao = db.productDao();
             productDetailDao = db.productDetailDao();
             monthRevenueDao = db.monthRevenueDao();
+            dayRevenueDao = db.dayRevenueDao();
+            productTypeRevenueDao = db.productTypeRevenueDao();
         }
 
         @Override

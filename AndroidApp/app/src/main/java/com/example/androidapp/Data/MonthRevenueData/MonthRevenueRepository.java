@@ -12,14 +12,14 @@ import java.util.List;
 
 public class MonthRevenueRepository {
     private MonthRevenueDao monthRevenueDao;
-    private LiveData<List<MonthRevenue>> allMonthRevenues;
-    private List<MonthRevenue> allMonthRevenuesSync;
+    private LiveData<List<MonthRevenue>> allMonthRevenuesLive;
+    private List<MonthRevenue> allMonthRevenues;
 
     public MonthRevenueRepository(Application application) {
         AppDatabase database = AppDatabase.getInstance(application);
         monthRevenueDao = database.monthRevenueDao();
+        allMonthRevenuesLive = monthRevenueDao.getAllMonthRevenuesLive();
         allMonthRevenues = monthRevenueDao.getAllMonthRevenues();
-        allMonthRevenuesSync = monthRevenueDao.getAllMonthRevenuesSync();
     }
 
     public void insertMonthRevenue(MonthRevenue monthRevenue) {
@@ -34,10 +34,10 @@ public class MonthRevenueRepository {
         new DeleteMonthRevenueAsyncTask(monthRevenueDao).execute(monthRevenue);
     }
 
-    public LiveData<List<MonthRevenue>> getAllMonthRevenues() {
-        return allMonthRevenues;
+    public LiveData<List<MonthRevenue>> getAllMonthRevenuesLive() {
+        return allMonthRevenuesLive;
     }
-    public List<MonthRevenue> getAllMonthRevenuesSync() { return allMonthRevenuesSync;}
+    public List<MonthRevenue> getAllMonthRevenues() { return allMonthRevenues;}
 
     private static class InsertMonthRevenueAsyncTask extends AsyncTask<MonthRevenue, Void, Void> {
         private MonthRevenueDao monthRevenueDao;

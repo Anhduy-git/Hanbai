@@ -31,6 +31,8 @@ import com.example.androidapp.Activities.InfoClientActivity;
 import com.example.androidapp.Activities.NewOrderActivity;
 import com.example.androidapp.Activities.OrderInfoTodayActivity;
 import com.example.androidapp.Data.AppDatabase;
+import com.example.androidapp.Data.DayRevenueData.DayRevenue;
+import com.example.androidapp.Data.DayRevenueData.DayRevenueViewModel;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueDao;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
@@ -44,6 +46,7 @@ import com.example.androidapp.R;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,7 +60,6 @@ public class OrderTodayFragment extends Fragment {
     public static final int CONFIRM_ORDER_REQUEST = 2;
     //View model
     private OrderViewModel orderViewModel;
-    private MonthRevenueViewModel monthRevenueViewModel;
     private int numberOfOrders = 0;
 
     //private MonthRevenue monthRevenue;
@@ -74,8 +76,6 @@ public class OrderTodayFragment extends Fragment {
 
         RecyclerView rcvData = (RecyclerView) view.findViewById(R.id.order_recycler);
         rcvData.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        monthRevenueViewModel = new ViewModelProvider(getActivity()).get(MonthRevenueViewModel.class);
 
         final OrderAdapter orderAdapter = new OrderAdapter();
         rcvData.setAdapter(orderAdapter);
@@ -144,7 +144,7 @@ public class OrderTodayFragment extends Fragment {
             Order order = new Order(client, date, time, 0, false, false, mOrderListProduct);
             orderViewModel.insert(order);
 
-//            int price = calculateOrderPrice(mOrderListDish);
+//          int price = calculateOrderPrice(mOrderListDish);
 //
             //Only compare the date
 //            DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
@@ -200,43 +200,77 @@ public class OrderTodayFragment extends Fragment {
 //                historyOrderViewModel.insert(historyOrder);
 //            }
 
+            //Update month number of orders
+            //Get current date
             Date nowDate = Calendar.getInstance().getTime();
             DateFormat formatter = new SimpleDateFormat("MM/yyyy");
-            String strDate = formatter.format(nowDate);
+            String strCurrentMonth = formatter.format(nowDate);
+            formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strCurrentDay = formatter.format(nowDate);
 
-//            monthRevenueViewModel.getAllMonthRevenues().observe(getActivity(), new Observer<List<MonthRevenue>>() {
-//                @Override
-//                public void onChanged(List<MonthRevenue> monthRevenues) {
-//                    int size = monthRevenues.size();
-//                    int monthTotalOrders = monthRevenues.get(size - 1).getNumberOfOrders();
-//
-//                    MonthRevenue monthRevenue= new MonthRevenue(strDate, 0, 1 + monthTotalOrders);
-//                    Log.d("Total: ", String.valueOf(monthTotalOrders));
-//                    monthRevenueViewModel.updateMonthRevenue(monthRevenue);
-//                    monthRevenueViewModel.getAllMonthRevenues().removeObserver(this);
-//                }
-//            });
+            if (confirmShip) {
+                List<MonthRevenue> monthRevenueList = AppDatabase.getInstance(getActivity()).monthRevenueDao().getAllMonthRevenues();
+                List<DayRevenue> dayRevenueList = AppDatabase.getInstance(getActivity()).dayRevenueDao().getAllDayRevenues();
 
-            int monthID = monthRevenueViewModel.getAllMonthRevenuesSync().get(0).getId();
-            int totalOrderNumber = monthRevenueViewModel.getAllMonthRevenuesSync().get(0).getNumberOfOrders();
-            MonthRevenue newMonthRevenue = new MonthRevenue(strDate, 0, 1 + totalOrderNumber);
-
-            if (monthID == -1) {
-                Log.d("Update: ", "failed");
-                return;
+                //Update the entry in database
+                updateDayRevenue(dayRevenueList, strCurrentDay, order);
+                updateMonthRevenue(monthRevenueList, strCurrentMonth, order);
             }
-            newMonthRevenue.setId(monthID);
-
-            //MonthRevenueDao monthRevenueDao = AppDatabase.getInstance(getActivity()).monthRevenueDao();
-            //monthRevenueDao.update(monthID, totalOrderNumber + 1);
-            monthRevenueViewModel.updateMonthRevenue(newMonthRevenue);
         }
-
-        //ko biet
-        // phai tat app di :v
     }
 
+    private void updateDayRevenue(List<DayRevenue> dayRevenueList, String strCurrentDay, Order order) {
+        DayRevenueViewModel dayRevenueViewModel = new ViewModelProvider(getActivity())
+                .get(DayRevenueViewModel.class);
 
+        DayRevenue currentDay = getDay(dayRevenueList, strCurrentDay);
+        int totalDayOrderNumber = currentDay.getNumberOfOrders();
+        double totalDayRevenue = currentDay.getDayRevenue();
+
+        DayRevenue newDayRevenue = new DayRevenue(strCurrentDay,
+                order.getPrice() + totalDayRevenue,
+                1 + totalDayOrderNumber);
+        dayRevenueViewModel.updateDayRevenue(newDayRevenue);
+    }
+
+    private void updateMonthRevenue(List<MonthRevenue> monthRevenueList, String strCurrentMonth, Order order) {
+        MonthRevenueViewModel monthRevenueViewModel = new ViewModelProvider(getActivity())
+                .get(MonthRevenueViewModel.class);
+
+        MonthRevenue currentMonth = getMonth(monthRevenueList, strCurrentMonth);
+        int totalMonthOrderNumber = currentMonth.getNumberOfOrders();
+        double totalMonthRevenue = currentMonth.getMonthRevenue();
+
+        MonthRevenue newMonthRevenue = new MonthRevenue(strCurrentMonth,
+                order.getPrice() + totalMonthRevenue,
+                1 + totalMonthOrderNumber);
+        monthRevenueViewModel.updateMonthRevenue(newMonthRevenue);
+    }
+
+    private MonthRevenue getMonth(List<MonthRevenue> monthRevenueList, String currentDate) {
+        MonthRevenue temp = new MonthRevenue("", 0, 0);
+        for (MonthRevenue monthRevenue : monthRevenueList) {
+            if (monthRevenue.getCurrentDate().equals(currentDate)) {
+                temp = monthRevenue;
+            }
+        }
+
+        return temp;
+    }
+
+    private DayRevenue getDay(List<DayRevenue> dayRevenueList, String currentDate) {
+        DayRevenue temp = new DayRevenue("", 0, 0);
+        for (DayRevenue dayRevenue : dayRevenueList) {
+            if (dayRevenue.getCurrentDate().equals(currentDate)) {
+                temp = dayRevenue;
+            }
+        }
+        return temp;
+    }
+
+    private void updateProductTypeRevenue() {
+
+    }
 
 //    int calculateOrderPrice(List<Dish> listDish) {
 //        int price = 0;
