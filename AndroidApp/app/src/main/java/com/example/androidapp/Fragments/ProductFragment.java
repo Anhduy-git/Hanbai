@@ -67,11 +67,8 @@ public class ProductFragment extends Fragment {
         initUi(view);
 //        //Sound
 //        sound = MediaPlayer.create(getActivity(), R.raw.confirm_sound);
-
-
         setUpProductTypeList(view);
         setUpProductList(view);
-
 
         productTypeAdapter.setOnItemClickAddListener(new ProductTypeAdapter.OnItemClickAddListener() {
             @Override
@@ -183,7 +180,8 @@ public class ProductFragment extends Fragment {
 //
     private void confirmDelDialog(Product product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.alert_dialog_delete, (RelativeLayout)getView().findViewById(R.id.layout_dialog)
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.alert_dialog_delete,
+                (RelativeLayout)getView().findViewById(R.id.layout_dialog)
         );
         builder.setView(view);
         AlertDialog alertDialog = builder.create();

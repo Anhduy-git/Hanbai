@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.androidapp.Data.AppDatabase;
+import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -20,18 +22,34 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class ChartMonthFragment extends Fragment {
     private BarChart barChart;
     private TextView tvMonthlyRevenue;
 
+    private Date nowDate;
+    private DateFormat formatter;
+    private String strDate;
+
+    private ArrayList<BarEntry> entries = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart_month, container, false);
+
+        //Date related
+        nowDate = Calendar.getInstance().getTime();
+        formatter = new SimpleDateFormat("MM/yyyy");
+        strDate = formatter.format(nowDate);
+
         initUI(v);
 
         setUpBarChart();
@@ -46,12 +64,19 @@ public class ChartMonthFragment extends Fragment {
         tvMonthlyRevenue = v.findViewById(R.id.month_revenue);
     }
 
+    private void setUpBarChart(){
+        barChart.setFitBars(true);
+        barChart.getDescription().setEnabled(false);
+        barChart.getLegend().setEnabled(true);
+        barChart.setDrawValueAboveBar(true);
+    }
+
     private void loadBarChartData(){
-        ArrayList<BarEntry> entries = new ArrayList<>();
         //test
-        int n = 10;
-        for (int i = 1; i < n; i++){
-            entries.add(new BarEntry(2010 + i, 30*i));
+        List<MonthRevenue> monthRevenueList = AppDatabase.getInstance(getActivity()).monthRevenueDao().getAllMonthRevenues();
+        for (MonthRevenue monthRevenue : monthRevenueList) {
+            int month = Integer.valueOf(monthRevenue.getCurrentDate().substring(0, 2));
+            entries.add(new BarEntry(month, (float) monthRevenue.getMonthRevenue()));
         }
 
         BarDataSet barDataSet = new BarDataSet(entries, "");
@@ -66,15 +91,9 @@ public class ChartMonthFragment extends Fragment {
 
         barDataSet.setDrawValues(true);
         barChart.setData(new BarData(barDataSet));
+
+        barChart.notifyDataSetChanged();
         barChart.invalidate();
-    }
-
-    private void setUpBarChart(){
-        barChart.setFitBars(true);
-        barChart.getDescription().setEnabled(false);
-        barChart.getLegend().setEnabled(true);
-        barChart.setDrawValueAboveBar(true);
-
     }
 
     private void onBarChartEvents(){
@@ -90,4 +109,15 @@ public class ChartMonthFragment extends Fragment {
             }
         });
     }
+
+//    private MonthRevenue getMonth(List<MonthRevenue> monthRevenueList, String currentDate) {
+//        MonthRevenue temp = new MonthRevenue("", 0, 0);
+//        for (MonthRevenue monthRevenue : monthRevenueList) {
+//            if (monthRevenue.getCurrentDate().equals(currentDate)) {
+//                temp = monthRevenue;
+//            }
+//        }
+//
+//        return temp;
+//    }
 }
