@@ -19,6 +19,9 @@
             android:name=".Activities.RevenueChartActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.OrderInfoHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.UpdateClientActivity"
             android:exported="false" />
         <activity

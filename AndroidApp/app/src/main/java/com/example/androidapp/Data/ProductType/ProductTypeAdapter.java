@@ -4,9 +4,14 @@ package com.example.androidapp.Data.ProductType;
 
 
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +28,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private static final int FOOTER_VIEW = 1;
     //    private OnItemClickDelListener listener;
     private OnItemClickAddListener addListener;
+    private OnItemChangeListener changeListener;
 
     public ProductTypeAdapter(List<ProductType> mListProductType) {
         this.mListProductType = mListProductType;
@@ -58,35 +64,22 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         try {
             if (holder instanceof ProductTypeViewHolder) {
-                ProductType productType = mListProductType.get(position);
+                ProductType productType = mListProductType.get(holder.getAdapterPosition());
                 if (productType == null) {
                     return;
                 }
                 ProductTypeViewHolder vh = (ProductTypeViewHolder) holder;
                 ((ProductTypeViewHolder) holder).typeName.setText(productType.getName());
+//
                 vh.bindView(position);
+//
             } else if (holder instanceof ProductTypeViewHolderFooter) {
                 ProductTypeViewHolderFooter vh = (ProductTypeViewHolderFooter) holder;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        holder.tvAttributeItemName.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                mListProductType.get(holder.getAdapterPosition()).setAttributeItemName(s.toString());
-//            }
-//        });
+
 
 //        holder.tvClientNumber.setText(client.getClientNumber());
 //        holder.tvClientAddress.setText(client.getClientAddress());
@@ -123,26 +116,28 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         //        private final TextView tvClientName;
 //        private final TextView tvClientNumber;
-        private TextView typeName;
+        private EditText typeName;
 //        private final LinearLayout item;
 
         public ProductTypeViewHolder(@NonNull View itemView) {
             super(itemView);
             typeName = itemView.findViewById(R.id.type_name);
-//
-//
-//            btnDel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //Get pos
-//
-//                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION){
-//                        mListProductType.remove(getAdapterPosition());
-//                        notifyItemRemoved(getAdapterPosition());
-//                        notifyItemRangeChanged(getAdapterPosition(), mListProductType.size());
-//                    }
-//                }
-//            });
+            typeName.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    // You can identify which key pressed buy checking keyCode value
+                    // with KeyEvent.KEYCODE_
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        String newName = typeName.getText().toString().trim();
+                        int position = getAdapterPosition();
+                        if (changeListener != null && position != RecyclerView.NO_POSITION) {
+                            changeListener.onItemChange(mListProductType.get(position), newName);
+                        }
+                    }
+                    return false;
+                }
+            });
+
         }
 
 
@@ -151,15 +146,16 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public ProductTypeViewHolderFooter(@NonNull View itemView) {
             super(itemView);
-          itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (addListener != null && position != RecyclerView.NO_POSITION) {
-                        addListener.onItemClickAdd(position);
+                        addListener.onItemClickAdd();
                     }
                 }
             });
+
         }
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -174,14 +170,23 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    //Interface to click on a dish item
+    //Interface to click on a type item
     public interface OnItemClickAddListener {
-        void onItemClickAdd(int position);
+        void onItemClickAdd();
     }
 
     //Method item click listener
     public void setOnItemClickAddListener(OnItemClickAddListener addListener) {
         this.addListener = addListener;
+    }
+    //Interface to click on a type item
+    public interface OnItemChangeListener {
+        void onItemChange(ProductType productType, String newName);
+    }
+
+    //Method item click listener
+    public void setOnItemChangeListener(OnItemChangeListener changeListener) {
+        this.changeListener = changeListener;
     }
 //    //Interface to click on a dish item
 //    public interface OnItemClickDelListener {

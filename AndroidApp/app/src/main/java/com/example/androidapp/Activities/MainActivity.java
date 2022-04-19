@@ -1,6 +1,11 @@
 package com.example.androidapp.Activities;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -16,18 +21,31 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.androidapp.Data.AppDatabase;
+import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.DayRevenueData.DayRevenue;
 import com.example.androidapp.Data.DayRevenueData.DayRevenueViewModel;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrder;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrderViewModel;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
+import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
+import com.example.androidapp.Data.OrderData.OrderTodayData.OrderViewModel;
+import com.example.androidapp.Data.OrderData.OrderUnpaidData.UnpaidOrder;
+import com.example.androidapp.Data.OrderData.OrderUnpaidData.UnpaidOrderViewModel;
+import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrder;
+import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderViewModel;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
 import com.example.androidapp.Fragments.ViewPagerAdapter;
+import com.example.androidapp.HelperClass.NotificationReceiver;
 import com.example.androidapp.PickTypeActivity;
 import com.example.androidapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.joda.time.DateTimeComparator;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,10 +62,49 @@ public class MainActivity extends AppCompatActivity {
     private DayRevenue dayRevenue;
     private MonthRevenue monthRevenue;
     private Date nowDate;
+    private OrderViewModel orderViewModel;
+    private UnpaidOrderViewModel unpaidOrderViewModel;
+    private UpcomingOrderViewModel upcomingOrderViewModel;
+    private HistoryOrderViewModel historyOrderViewModel;
+    private SimpleDateFormat simpleDateFormat;
+    private DateTimeComparator dateTimeComparator;
+    private String tomorrow;
+    private Calendar calendarTomorrow;
+    public static final String CHANNEL_ID = "CHANNEL 1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //setup for order update
+        //-------------------------------------------------
+        //Setup View Model
+        orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+        unpaidOrderViewModel = new ViewModelProvider(this).get(UnpaidOrderViewModel.class);
+        upcomingOrderViewModel = new ViewModelProvider(this).get(UpcomingOrderViewModel.class);
+        historyOrderViewModel = new ViewModelProvider(this).get(HistoryOrderViewModel.class);
+
+
+        //Date format
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        //Only compare the date
+        dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
+
+        //Get tomorrow's date
+        calendarTomorrow = Calendar.getInstance();
+        calendarTomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        //get string of tomorrow date
+        tomorrow = simpleDateFormat.format(calendarTomorrow.getTime());
+
+        //set notify
+        updateNumTomorrowOrderAndNotify();
+
+        //Update Upcoming Order to Order Today
+        updateUpcomingOrder();
+
+        //Update item from Today Order to Unpaid Order and History
+        updateUnpaidOrderAndHistory();
+
 
         //Prepopulate entries
         prepopulateMonthEntries();
@@ -185,5 +242,124 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkDate(){
         //implement later
+    }
+    private void updateUnpaidOrderAndHistory() {
+        orderViewModel.getAllOrder().observe(MainActivity.this, new Observer<List<Order>>() {
+            @Override
+            public void onChanged(List<Order> orders) {
+                Date today = Calendar.getInstance().getTime();
+                for (Order order : orders) {
+                    try {
+                        Date orderDate = simpleDateFormat.parse(order.getDate());
+                        int ret = dateTimeComparator.compare(orderDate, today);
+                        if (ret < 0) {
+                            Client client = new Client(order.getClient().getClientName(), order.getClient().getClientNumber(),
+                                    order.getClient().getClientAddress(), order.getClient().getClientEmail(), order.getClient().getClientBank(), order.getClient().getImageDir());
+                            //if shipped
+                            if (order.getShip()) {
+                                //move to unpaid order
+                                if (!order.getPaid()) {
+                                    UnpaidOrder unpaidOrder = new UnpaidOrder(client, order.getDate(), order.getTime(), order.getPrice(), false, order.getOrderListProduct());
+                                    unpaidOrderViewModel.insert(unpaidOrder);
+                                }
+                            } else {
+                                //Move to history all cancel order
+                                HistoryOrder historyOrder = new HistoryOrder(client, order.getDate(), order.getTime(), order.getPrice(), order.getShip(), order.getPaid(), order.getOrderListProduct());
+                                historyOrderViewModel.insert(historyOrder);
+                            }
+
+                            //Remove all old order
+                            orderViewModel.delete(order);
+                        }
+                    } catch (ParseException ex) {
+
+                    }
+                }
+            }
+        });
+    }
+    private void updateUpcomingOrder() {
+        Date today = Calendar.getInstance().getTime();
+        upcomingOrderViewModel.getAllUpcomingOrder().observe(MainActivity.this, new Observer<List<UpcomingOrder>>() {
+            @Override
+            public void onChanged(List<UpcomingOrder> upcomingOrders) {
+                for (UpcomingOrder upcomingOrder : upcomingOrders) {
+                    //Get the day of upcomingOrder
+                    try {
+                        Date upcomingOrderDate = simpleDateFormat.parse(upcomingOrder.getDate());
+                        //Check if the upcomingOrderDay is today
+                        int ret = dateTimeComparator.compare(upcomingOrderDate, today);
+                        if (ret == 0) {
+                            Client client = new Client(upcomingOrder.getClient().getClientName(), upcomingOrder.getClient().getClientNumber(),
+                                    upcomingOrder.getClient().getClientAddress(), upcomingOrder.getClient().getClientEmail(),
+                                    upcomingOrder.getClient().getClientBank(), upcomingOrder.getClient().getImageDir());
+                            Order order = new Order(client, upcomingOrder.getDate(), upcomingOrder.getTime(),
+                                    upcomingOrder.getPrice(), false, upcomingOrder.getPaid(), upcomingOrder.getOrderListProduct());
+                            //add upcomingOrder to today's Order
+                            orderViewModel.insert(order);
+                            //remove that upcomingOrder
+                            upcomingOrderViewModel.delete(upcomingOrder);
+                        }
+
+                    } catch (ParseException ex) {
+
+                    }
+                }
+            }
+        });
+    }
+    private void updateNumTomorrowOrderAndNotify() {
+        upcomingOrderViewModel.getAllUpcomingOrder().observe(MainActivity.this, new Observer<List<UpcomingOrder>>() {
+            @Override
+            public void onChanged(List<UpcomingOrder> upcomingOrders) {
+                //get the number of tomorrow order and notify
+                int numTomorrowOrder = getNumTomorrowOrder();
+                //Notify
+                if (numTomorrowOrder > 0) {
+                    setNotification(numTomorrowOrder);
+                }
+            }
+        });
+
+    }
+    private int getNumTomorrowOrder() {
+
+        List<UpcomingOrder> list = AppDatabase.getInstance(this).upcomingOrderDao().getNumOrderTomorrow(tomorrow);
+        return list.size();
+    }
+    private void setNotification(int numTomorrowOrder) {
+        //Notification
+        createNotificationChannel();
+
+        //set time daily for notification
+        Calendar calendarNotification = Calendar.getInstance();
+        calendarNotification.set(Calendar.HOUR_OF_DAY, 20);
+        calendarNotification.set(Calendar.MINUTE, 0);
+        calendarNotification.set(Calendar.SECOND, 0);
+
+        //set notify only 1 time in day
+        if (Calendar.getInstance().after(calendarNotification)) {
+            calendarNotification.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        intent.putExtra("numOrderTomorrow", numTomorrowOrder);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //set notify daily
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendarNotification.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "NotificationChannel";
+            String description = "Channel for notification";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 }

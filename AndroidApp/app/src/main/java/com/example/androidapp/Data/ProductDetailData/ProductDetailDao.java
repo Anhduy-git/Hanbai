@@ -24,7 +24,10 @@ public interface ProductDetailDao {
     void delete(ProductDetail productDetail);
 
     @Query("SELECT * FROM product_detail_table WHERE name =:name_s")
-   List<ProductDetail> getAllProductDetail(String name_s);
+    List<ProductDetail> getAllProductDetail(String name_s);
+
+    @Query("UPDATE product_detail_table SET quantity =quantity - :newQuantity WHERE ProductID =:id")
+    void updateQuantityProductDetail(int id, int newQuantity);
 
     @Query("DELETE FROM product_detail_table")
     void deleteAllProductDetail();
