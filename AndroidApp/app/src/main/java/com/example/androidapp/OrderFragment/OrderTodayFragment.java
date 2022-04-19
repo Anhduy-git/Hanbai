@@ -30,9 +30,12 @@ import android.widget.Toast;
 import com.example.androidapp.Activities.InfoClientActivity;
 import com.example.androidapp.Activities.NewOrderActivity;
 import com.example.androidapp.Activities.OrderInfoTodayActivity;
+import com.example.androidapp.Activities.SubProductActivity;
 import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.DayRevenueData.DayRevenue;
 import com.example.androidapp.Data.DayRevenueData.DayRevenueViewModel;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrder;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrderViewModel;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueDao;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueViewModel;
@@ -62,10 +65,7 @@ public class OrderTodayFragment extends Fragment {
     private OrderViewModel orderViewModel;
     private int numberOfOrders = 0;
 
-    //private MonthRevenue monthRevenue;
 
-    //sound
-    private MediaPlayer sound = null;
 
 
     @Nullable
@@ -141,10 +141,11 @@ public class OrderTodayFragment extends Fragment {
             String date = data.getStringExtra(NewOrderActivity.EXTRA_ORDER_DATE);
             Client client = data.getParcelableExtra(NewOrderActivity.EXTRA_ORDER_CLIENT);
             List<ProductDetail> mOrderListProduct = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_PRODUCT_LIST);
-            Order order = new Order(client, date, time, 0, false, false, mOrderListProduct);
+            int price = calculateOrderPrice(mOrderListProduct);
+            Order order = new Order(client, date, time, price, false, false, mOrderListProduct);
             orderViewModel.insert(order);
 
-//          int price = calculateOrderPrice(mOrderListDish);
+
 //
             //Only compare the date
 //            DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
@@ -186,19 +187,24 @@ public class OrderTodayFragment extends Fragment {
                 return;
             }
             List<ProductDetail> mOrderListProduct = data.getParcelableArrayListExtra(NewOrderActivity.EXTRA_ORDER_PRODUCT_LIST);
-//            int price = calculateOrderPrice(mOrderListDish);
+            int price = calculateOrderPrice(mOrderListProduct);
 
-            Order order = new Order(client, date, time, 0, ship, paid, mOrderListProduct);
+            Order order = new Order(client, date, time, price, ship, paid, mOrderListProduct);
             order.setId(id);
             orderViewModel.update(order);
 //            //if shipped, then move to history
-//            if(confirmShip) {
-//                HistoryOrderViewModel historyOrderViewModel;
-//                historyOrderViewModel = new ViewModelProvider(this).get(HistoryOrderViewModel.class);
-//                //Move to history all success order
-//                HistoryOrder historyOrder = new HistoryOrder(client, order.getDate(), order.getTime(), order.getPrice(), order.getShip(), order.getPaid(), order.getOrderListDish());
-//                historyOrderViewModel.insert(historyOrder);
-//            }
+            if(confirmShip) {
+                HistoryOrderViewModel historyOrderViewModel;
+                historyOrderViewModel = new ViewModelProvider(this).get(HistoryOrderViewModel.class);
+                //Move to history all success order
+                HistoryOrder historyOrder = new HistoryOrder(client, order.getDate(), order.getTime(), order.getPrice(), order.getShip(), order.getPaid(), order.getOrderListProduct());
+                historyOrderViewModel.insert(historyOrder);
+
+                for (ProductDetail productDetail : mOrderListProduct) {
+                    AppDatabase.getInstance(getActivity()).
+                            productDetailDao().updateQuantityProductDetail(productDetail.getProductID(), productDetail.getQuantity());
+                }
+            }
 
             //Update month number of orders
             //Get current date
@@ -272,13 +278,13 @@ public class OrderTodayFragment extends Fragment {
 
     }
 
-//    int calculateOrderPrice(List<Dish> listDish) {
-//        int price = 0;
-//        for (Dish dish : listDish) {
-//            price += dish.getPrice() * dish.getQuantity();
-//        }
-//        return price;
-//    }
+    int calculateOrderPrice(List<ProductDetail> productDetailList) {
+        int price = 0;
+        for (ProductDetail productDetail : productDetailList) {
+            price += productDetail.getPrice() * productDetail.getQuantity();
+        }
+        return price;
+    }
 
     private void confirmDelDialog(Order order) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);

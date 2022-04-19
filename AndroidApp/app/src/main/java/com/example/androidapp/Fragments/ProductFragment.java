@@ -72,8 +72,17 @@ public class ProductFragment extends Fragment {
 
         productTypeAdapter.setOnItemClickAddListener(new ProductTypeAdapter.OnItemClickAddListener() {
             @Override
-            public void onItemClickAdd(int position) {
-                productTypeViewModel.insert(new ProductType("test"));
+            public void onItemClickAdd() {
+                productTypeViewModel.insert(new ProductType("New type"));
+            }
+        });
+        productTypeAdapter.setOnItemChangeListener(new ProductTypeAdapter.OnItemChangeListener() {
+            @Override
+            public void onItemChange(ProductType productType, String newName) {
+                productType.setName(newName);
+                productTypeViewModel.update(productType);
+//                productAdapter.notifyDataSetChanged();
+//                Log.d("test", "change");
             }
         });
 //        //Create search bar listener for SEARCH METHOD

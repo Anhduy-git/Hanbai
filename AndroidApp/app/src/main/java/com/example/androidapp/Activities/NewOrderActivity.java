@@ -315,7 +315,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
         }
         else if (requestCode == CHOOSE_PRODUCT_REQUEST && resultCode == RESULT_OK) {
-            Log.d("test", "haha");
+
             assert data != null;
             ProductDetail productDetail = data.getParcelableExtra(SubProductActivity.EXTRA_PRODUCT);
             int productQuantity = data.getIntExtra(SubProductActivity.EXTRA_PRODUCT_QUANTITY, 0);

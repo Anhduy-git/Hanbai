@@ -14,10 +14,14 @@ import com.example.androidapp.Data.ClientData.Client;
 import com.example.androidapp.Data.ClientData.ClientDao;
 import com.example.androidapp.Data.DayRevenueData.DayRevenue;
 import com.example.androidapp.Data.DayRevenueData.DayRevenueDao;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrder;
+import com.example.androidapp.Data.HistoryOrder.HistoryOrderDao;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenue;
 import com.example.androidapp.Data.MonthRevenueData.MonthRevenueDao;
 import com.example.androidapp.Data.OrderData.OrderTodayData.DataConverter;
 import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
+import com.example.androidapp.Data.OrderData.OrderUnpaidData.UnpaidOrder;
+import com.example.androidapp.Data.OrderData.OrderUnpaidData.UnpaidOrderDao;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrder;
 import com.example.androidapp.Data.OrderData.OrderTodayData.OrderDao;
 import com.example.androidapp.Data.OrderData.OrderUpcomingData.UpcomingOrderDao;
@@ -40,7 +44,7 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {Client.class, Order.class, UpcomingOrder.class, ProductType.class,
         Product.class, ProductDetail.class, MonthRevenue.class, DayRevenue.class,
-        ProductTypeRevenue.class}, version = 2)
+        ProductTypeRevenue.class, HistoryOrder.class, UnpaidOrder.class}, version = 6)
 
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
@@ -57,6 +61,10 @@ public abstract class AppDatabase extends RoomDatabase{
     public abstract MonthRevenueDao monthRevenueDao();
     public abstract DayRevenueDao dayRevenueDao();
     public abstract ProductTypeRevenueDao productTypeRevenueDao();
+    public abstract HistoryOrderDao historyOrderDao();
+    public abstract UnpaidOrderDao unpaidOrderDao();
+
+
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -81,12 +89,13 @@ public abstract class AppDatabase extends RoomDatabase{
         private MonthRevenueDao monthRevenueDao;
         private DayRevenueDao dayRevenueDao;
         private ProductTypeRevenueDao productTypeRevenueDao;
-
+        private HistoryOrderDao historyOrderDao;
+        private UnpaidOrderDao unpaidOrderDao;
         private PopulateDbAsyncTask(AppDatabase db) {
             clientDao = db.clientDao();
 //            dishDao = db.dishDao();
             orderDao = db.orderDao();
-//            unpaidOrderDao = db.unpaidOrderDao();
+            unpaidOrderDao = db.unpaidOrderDao();
             upcomingOrderDao = db.upcomingOrderDao();
 //            historyOrderDao = db.historyOrderDao();
             productTypeDao = db.productTypeDao();
@@ -95,6 +104,7 @@ public abstract class AppDatabase extends RoomDatabase{
             monthRevenueDao = db.monthRevenueDao();
             dayRevenueDao = db.dayRevenueDao();
             productTypeRevenueDao = db.productTypeRevenueDao();
+            historyOrderDao = db.historyOrderDao();
         }
 
         @Override

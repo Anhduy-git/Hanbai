@@ -30,7 +30,7 @@ public class HistoryFragment extends Fragment {
         bottomNavigationView = v.findViewById(R.id.bottom_nav_history);
         viewPager = v.findViewById(R.id.history_viewpager);
 
-        OrderViewPagerAdapter adapter = new OrderViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        HistoryViewPagerAdapter adapter = new HistoryViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
