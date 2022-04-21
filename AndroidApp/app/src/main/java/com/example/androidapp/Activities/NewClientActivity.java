@@ -109,15 +109,16 @@ public class NewClientActivity extends AppCompatActivity {
             }
         });
 
+        //Temporarily disable
         //Choose image from camera
-        btnCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkRequestPermission()){
-                    takePictureFromCamera();
-                }
-            }
-        });
+//        btnCamera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (checkRequestPermission()){
+//                    takePictureFromCamera();
+//                }
+//            }
+//        });
 
         //Add client button
         btnAddClient.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +256,7 @@ public class NewClientActivity extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST) {
             //CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                imageView.setRotation(0);
+//                imageView.setRotation(0);
 
                 try {
                     changeImg = true;
@@ -269,14 +270,14 @@ public class NewClientActivity extends AppCompatActivity {
 
         if (requestCode == CAMERA_REQUEST){
             if (resultCode == RESULT_OK) {
-                imageView.setRotation(0);
+//                imageView.setRotation(0);
 
                 try {
                     //set changed Img
                     changeImg = true;
                     //Bundle bundle = data.getExtras();
                     Bitmap bitmapImage = BitmapFactory.decodeFile(currentPhotoPath);
-                    imageView.setRotation(90);
+//                    imageView.setRotation(90);
                     imageView.setImageBitmap(bitmapImage);
                 } catch (Exception e) {
                     e.printStackTrace();

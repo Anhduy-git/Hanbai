@@ -124,7 +124,7 @@ public class InfoClientActivity extends AppCompatActivity {
             //read path image from intent and display
             File f = new File(client.getImageDir());
             Bitmap image = BitmapFactory.decodeStream(new FileInputStream(f));
-            imageView.setRotation(90);
+//            imageView.setRotation(90);
             imageView.setImageBitmap(image);
         }
         catch (FileNotFoundException e) {

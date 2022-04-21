@@ -60,9 +60,6 @@ public class UnpaidOrderFragment extends Fragment {
     //View model
     private UnpaidOrderViewModel unpaidOrderViewModel;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -84,7 +84,7 @@ public class UnpaidOrderAdapter extends ListAdapter<UnpaidOrder,UnpaidOrderAdapt
 
         holder.tvOrderName.setText(unpaidOrder.getClient().getClientName());
         holder.tvOrderTime.setText(unpaidOrder.getTime());
-        holder.tvOrderPrice.setText(String.format("%,d", unpaidOrder.getPrice()) + " VND");
+        holder.tvOrderPrice.setText(String.valueOf(unpaidOrder.getPrice()));
         //Read image from file
         if (unpaidOrder.getClient().getImageDir() != null) {
             try {
@@ -97,8 +97,6 @@ public class UnpaidOrderAdapter extends ListAdapter<UnpaidOrder,UnpaidOrderAdapt
                 holder.imageView.setImageBitmap(bitmap);
             }
         }
-
-
     }
 
     public UnpaidOrder getOrderAt(int pos) {
@@ -106,7 +104,6 @@ public class UnpaidOrderAdapter extends ListAdapter<UnpaidOrder,UnpaidOrderAdapt
     }
 
     public class UnpaidOrderViewHolder extends RecyclerView.ViewHolder {
-
         private final TextView tvOrderName;
         private final TextView tvOrderTime;
         private final TextView tvOrderPrice;
@@ -140,8 +137,6 @@ public class UnpaidOrderAdapter extends ListAdapter<UnpaidOrder,UnpaidOrderAdapt
                     }
                 }
             });
-
-
         }
     }
 

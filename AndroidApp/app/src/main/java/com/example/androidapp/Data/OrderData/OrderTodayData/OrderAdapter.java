@@ -87,7 +87,7 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
 
         holder.tvOrderName.setText(order.getClient().getClientName());
         holder.tvOrderTime.setText(order.getTime());
-        holder.tvOrderPrice.setText(String.format("%,d", order.getPrice()) + " VND");
+        holder.tvOrderPrice.setText(String.valueOf(order.getPrice()));
         //Read image from file
         if (order.getClient().getImageDir() != null) {
             try {
@@ -121,7 +121,6 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
     }
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
-
         private final TextView tvOrderName;
         private final TextView tvOrderTime;
         private final TextView tvOrderPrice;
