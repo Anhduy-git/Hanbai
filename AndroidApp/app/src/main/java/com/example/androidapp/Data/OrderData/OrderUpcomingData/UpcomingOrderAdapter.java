@@ -27,12 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrderAdapter.UpcomingOrderViewHolder> {
-
     private List<UpcomingOrder> mListUpcomingOrder = new ArrayList<>();
     private OnItemClickListener listener;
     private OnItemClickDelListener delListener;
     private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
-
 
     public UpcomingOrderAdapter(){
         super(DIFF_CALLBACK);
@@ -87,7 +85,7 @@ public class UpcomingOrderAdapter extends ListAdapter<UpcomingOrder, UpcomingOrd
         holder.tvOrderName.setText(upcomingOrder.getClient().getClientName());
 //        holder.tvOrderDate.setText(upcomingOrder.getDate());
         holder.tvOrderTime.setText(upcomingOrder.getTime());
-        holder.tvOrderPrice.setText(String.format("%,d", upcomingOrder.getPrice()) + " VND");
+        holder.tvOrderPrice.setText(String.valueOf(upcomingOrder.getPrice()));
         //Read image from file
         if (upcomingOrder.getClient().getImageDir() != null) {
             try {

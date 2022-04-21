@@ -65,9 +65,6 @@ public class OrderTodayFragment extends Fragment {
     private OrderViewModel orderViewModel;
     private int numberOfOrders = 0;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
