@@ -34,23 +34,23 @@
             android:name=".Activities.UpdateProductActivity3"
             android:exported="false" />
         <activity
-            android:name=".AddQuantityPriceProductActivity"
+            android:name=".Activities.InfoClientActivity$AddQuantityPriceProductActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.InfoClientActivity"
             android:exported="false"
             android:theme="@style/NoStatusBar" />
         <activity
-            android:name=".PickTypeActivity"
+            android:name=".Activities.InfoClientActivity$PickTypeActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfirmProductActivity"
+            android:name=".Activities.InfoClientActivity$ConfirmProductActivity"
             android:exported="false" />
         <activity
-            android:name=".QuantityPriceActivity"
+            android:name=".Activities.InfoClientActivity$QuantityPriceActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductInfoActivity"
+            android:name=".Activities.InfoClientActivity$ProductInfoActivity"
             android:exported="false"
             android:theme="@style/NoStatusBar" />
         <activity

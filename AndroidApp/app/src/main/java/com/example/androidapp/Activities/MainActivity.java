@@ -7,15 +7,11 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -38,7 +34,6 @@ import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeViewModel;
 import com.example.androidapp.Fragments.ViewPagerAdapter;
 import com.example.androidapp.HelperClass.NotificationReceiver;
-import com.example.androidapp.PickTypeActivity;
 import com.example.androidapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -47,7 +42,6 @@ import org.joda.time.DateTimeComparator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -116,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         List<ProductType> typeLst = productTypeViewModel.getAllProductType();
 
         if (typeLst == null || typeLst.size() == 0) {
-            Intent intent = new Intent(MainActivity.this, PickTypeActivity.class);
+            Intent intent = new Intent(MainActivity.this, InfoClientActivity.PickTypeActivity.class);
             startActivity(intent);
         }
 

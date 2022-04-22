@@ -34,9 +34,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.androidapp.AddQuantityPriceProductActivity;
 import com.example.androidapp.Data.AppDatabase;
-import com.example.androidapp.HelperClass.ImageConverter;
 import com.example.androidapp.HelperClass.ProductAttributeAdapter;
 import com.example.androidapp.Data.ProductType.ProductType;
 import com.example.androidapp.Data.ProductType.ProductTypeCategoryAdapter;
@@ -163,18 +161,18 @@ public class NewProductActivity extends AppCompatActivity {
                 String strProductType = productTypeList.get(idx).getName();
                 String strProductName = productName.getText().toString().trim();
 
-                Intent intent = new Intent(NewProductActivity.this, AddQuantityPriceProductActivity.class);
+                Intent intent = new Intent(NewProductActivity.this, InfoClientActivity.AddQuantityPriceProductActivity.class);
                 //put data
-                intent.putExtra(AddQuantityPriceProductActivity.EXTRA_PRODUCT_NAME, strProductName);
-                intent.putExtra(AddQuantityPriceProductActivity.EXTRA_PRODUCT_TYPE, strProductType);
+                intent.putExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_PRODUCT_NAME, strProductName);
+                intent.putExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_PRODUCT_TYPE, strProductType);
                 if (attribute.size() == 1) {
-                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                    intent.putExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
+                    intent.putParcelableArrayListExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
                 } else if (attribute.size() == 2) {
-                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
-                    intent.putExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_2, attribute.get(1).getAttributeTitle());
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
-                    intent.putParcelableArrayListExtra(AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_2, (ArrayList<? extends Parcelable>) attribute.get(1).getProductAttributeItemList());
+                    intent.putExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_1, attribute.get(0).getAttributeTitle());
+                    intent.putExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_2, attribute.get(1).getAttributeTitle());
+                    intent.putParcelableArrayListExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_1, (ArrayList<? extends Parcelable>) attribute.get(0).getProductAttributeItemList());
+                    intent.putParcelableArrayListExtra(InfoClientActivity.AddQuantityPriceProductActivity.EXTRA_ATTRIBUTE_LIST_2, (ArrayList<? extends Parcelable>) attribute.get(1).getProductAttributeItemList());
                 }
                 startActivityForResult(intent, ADD_SUCCESS);
             }
