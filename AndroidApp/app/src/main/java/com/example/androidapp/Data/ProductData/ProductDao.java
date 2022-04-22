@@ -27,4 +27,10 @@ public interface ProductDao {
     @Query("DELETE FROM product_table")
     void deleteAllProduct();
 
+    @Query("UPDATE product_table SET imageDir=:imageDirs WHERE name =:productName")
+    void updateImageProduct(String productName, String imageDirs);
+
+    @Query("SELECT imageDir FROM product_table WHERE name =:name_s")
+    String getProductImg(String name_s);
+
 }

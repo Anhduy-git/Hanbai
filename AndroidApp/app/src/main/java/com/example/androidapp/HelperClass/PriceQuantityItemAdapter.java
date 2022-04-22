@@ -53,8 +53,17 @@ public class PriceQuantityItemAdapter extends RecyclerView.Adapter<PriceQuantity
         }
 
         holder.tvType.setText(priceQuantityItem.getName());
-        holder.tvQuantity.setText(String.valueOf(priceQuantityItem.getQuantity()));
-        holder.tvPrice.setText(String.valueOf(priceQuantityItem.getPrice()));
+        if (priceQuantityItem.getQuantity() < 0) {
+            holder.tvQuantity.setText("");
+        } else {
+            holder.tvQuantity.setText(String.valueOf(priceQuantityItem.getQuantity()));
+        }
+        if (priceQuantityItem.getPrice() < 0) {
+            holder.tvPrice.setText("");
+        } else {
+            holder.tvPrice.setText(String.valueOf(priceQuantityItem.getPrice()));
+        }
+
 //        holder.tvClientNumber.setText(client.getClientNumber());
 //        holder.tvClientress.setText(client.getClientAddress());
         holder.tvPrice.addTextChangedListener(new TextWatcher() {

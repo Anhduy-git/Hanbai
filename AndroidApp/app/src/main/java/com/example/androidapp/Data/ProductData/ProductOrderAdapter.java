@@ -1,5 +1,8 @@
 package com.example.androidapp.Data.ProductData;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +16,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapp.Data.AppDatabase;
 import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,17 +66,17 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
         holder.tvProductPrice.setText(String.format("%,d", productDetail.getPrice()));
 
         //read image from file
-
-//        try {
-//            File f=new File(product.getImageDir());
-//            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imageView.setImageBitmap(b);
-//        }
-//        catch (FileNotFoundException e) {
-//            Resources res = holder.imageView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rec_ava_dish_default);
-//            holder.imageView.setImageBitmap(bitmap);
-//        }
+        String imgDir = AppDatabase.getInstance(holder.productImg.getContext()).productDao().getProductImg(productDetail.getName());
+        try {
+            File f=new File(imgDir);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            holder.productImg.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e) {
+            Resources res = holder.productImg.getResources();
+            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.product_ava_default);
+            holder.productImg.setImageBitmap(bitmap);
+        }
 
     }
 

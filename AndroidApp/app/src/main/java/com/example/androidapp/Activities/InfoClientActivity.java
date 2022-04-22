@@ -120,17 +120,19 @@ public class InfoClientActivity extends AppCompatActivity {
         tvClientEmail.setText(client.getClientEmail());
         tvClientBank.setText(client.getClientBank());
 
-        try {
-            //read path image from intent and display
-            File f = new File(client.getImageDir());
-            Bitmap image = BitmapFactory.decodeStream(new FileInputStream(f));
+        if (client.getImageDir() != null) {
+            try {
+                //read path image from intent and display
+                File f = new File(client.getImageDir());
+                Bitmap image = BitmapFactory.decodeStream(new FileInputStream(f));
 //            imageView.setRotation(90);
-            imageView.setImageBitmap(image);
-        }
-        catch (FileNotFoundException e) {
-            //display default image for client
-            Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
-            imageView.setImageBitmap(image);
+                imageView.setImageBitmap(image);
+            }
+            catch (FileNotFoundException e) {
+                //display default image for client
+                Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ava_client_default);
+                imageView.setImageBitmap(image);
+            }
         }
     }
 
@@ -156,7 +158,6 @@ public class InfoClientActivity extends AppCompatActivity {
                                 //read path image from intent and display
                                 File f = new File(clientUpdate.getImageDir());
                                 Bitmap image = BitmapFactory.decodeStream(new FileInputStream(f));
-                                imageView.setRotation(90);
                                 imageView.setImageBitmap(image);
                             }
                             catch (FileNotFoundException e) {

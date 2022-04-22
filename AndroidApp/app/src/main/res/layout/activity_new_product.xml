@@ -31,6 +31,7 @@
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <ImageView
+                    android:id="@+id/product_img"
                     android:layout_width="match_parent"
                     android:layout_height="340dp"
                     android:scaleType="centerCrop"
@@ -129,12 +130,16 @@
             app:layout_anchorGravity="bottom|end"
             android:layout_marginEnd="10dp"
             android:translationY="-60dp">
+
             <Button
+                android:id="@+id/btn_camera"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@drawable/cam_btn"
-                android:layout_marginEnd="10dp"></Button>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cam_btn"></Button>
+
             <Button
+                android:id="@+id/btn_gallery"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:background="@drawable/lib_btn"></Button>

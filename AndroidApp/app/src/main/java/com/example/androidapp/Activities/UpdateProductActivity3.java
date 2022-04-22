@@ -116,7 +116,7 @@ public class UpdateProductActivity3 extends AppCompatActivity {
             for (int i = 0; i < lstAttribut1.size(); i++) {
                 PriceQuantity priceQuantity = new PriceQuantity(lstAttribut1.get(i).getAttributeItemName(), new ArrayList<>());
                 for (int j = 0; j < lstAttribut2.size(); j++) {
-                    priceQuantity.getAttribute2().add(new PriceQuantityItem(lstAttribut2.get(j).getAttributeItemName(), 0, 0));
+                    priceQuantity.getAttribute2().add(new PriceQuantityItem(lstAttribut2.get(j).getAttributeItemName(), -1, -1));
                 }
                 priceQuantityList.add(priceQuantity);
             }
@@ -126,7 +126,7 @@ public class UpdateProductActivity3 extends AppCompatActivity {
             for (int i = 0; i < lstAttribut1.size(); i++) {
                 PriceQuantity priceQuantity = new PriceQuantity(lstAttribut1.get(i).getAttributeItemName(), new ArrayList<>());
                 //for all attribute 2
-                priceQuantity.getAttribute2().add(new PriceQuantityItem("All", 0, 0));
+                priceQuantity.getAttribute2().add(new PriceQuantityItem("All", -1, -1));
                 priceQuantityList.add(priceQuantity);
             }
         }
@@ -135,7 +135,7 @@ public class UpdateProductActivity3 extends AppCompatActivity {
             //for all attribute 1
             PriceQuantity priceQuantity = new PriceQuantity("All", new ArrayList<>());
             //for all attribute 2
-            priceQuantity.getAttribute2().add(new PriceQuantityItem("All", 0, 0));
+            priceQuantity.getAttribute2().add(new PriceQuantityItem("All", -1, -1));
             priceQuantityList.add(priceQuantity);
         }
 

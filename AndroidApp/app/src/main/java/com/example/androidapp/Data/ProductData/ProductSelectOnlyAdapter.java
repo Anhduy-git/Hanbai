@@ -65,16 +65,18 @@ public class ProductSelectOnlyAdapter extends RecyclerView.Adapter<ProductSelect
 
         //read image from file
 
-//        try {
-//            File f=new File(product.getImageDir());
-//            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imageView.setImageBitmap(b);
-//        }
-//        catch (FileNotFoundException e) {
-//            Resources res = holder.imageView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rec_ava_dish_default);
-//            holder.imageView.setImageBitmap(bitmap);
-//        }
+        if (product.getImageDir() != null) {
+            try {
+                File f=new File(product.getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imageView.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e) {
+                Resources res = holder.imageView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.product_ava_default);
+                holder.imageView.setImageBitmap(bitmap);
+            }
+        }
 
     }
 
@@ -126,14 +128,14 @@ public class ProductSelectOnlyAdapter extends RecyclerView.Adapter<ProductSelect
     public class ProductSelectOnlyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvProductName;
-
+        private final ImageView imageView;
 
         public ProductSelectOnlyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvProductName = itemView.findViewById(R.id.product_name);
 //            tvProductPrice = itemView.findViewById(R.id.dish_price);
-//            imageView = itemView.findViewById(R.id.dish_pic_view);
+            imageView = itemView.findViewById(R.id.product_img);
 //            item = itemView.findViewById(R.id.menu_item);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

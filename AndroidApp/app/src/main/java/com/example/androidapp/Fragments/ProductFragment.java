@@ -113,6 +113,7 @@ public class ProductFragment extends Fragment {
                 intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_TYPE, product.getType());
                 intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_ATTRIBUTE_1, product.getAttribute1());
                 intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_ATTRIBUTE_2, product.getAttribute2());
+                intent.putExtra(UpdateProductActivity.EXTRA_PRODUCT_IMAGE, product.getImageDir());
 
                 startActivityForResult(intent, EDIT_DISH_REQUEST);
             }
