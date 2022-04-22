@@ -63,7 +63,7 @@ public class OrderTodayFragment extends Fragment {
     public static final int CONFIRM_ORDER_REQUEST = 2;
     //View model
     private OrderViewModel orderViewModel;
-    private int numberOfOrders = 0;
+
 
     @Nullable
     @Override
@@ -72,6 +72,7 @@ public class OrderTodayFragment extends Fragment {
                 container, false);
 
         RecyclerView rcvData = (RecyclerView) view.findViewById(R.id.order_recycler);
+        numOrderToday = view.findViewById(R.id.order_num);
         rcvData.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         final OrderAdapter orderAdapter = new OrderAdapter();
@@ -84,7 +85,7 @@ public class OrderTodayFragment extends Fragment {
                 //Update Recycle View
                 orderAdapter.submitList(orders);
 //                //Display number of order today
-//                numOrderToday.setText(String.format("%d", orders.size()));
+                numOrderToday.setText(String.format("%d", orders.size()));
             }
         });
 
@@ -199,7 +200,7 @@ public class OrderTodayFragment extends Fragment {
 
                 for (ProductDetail productDetail : mOrderListProduct) {
                     AppDatabase.getInstance(getActivity()).
-                            productDetailDao().updateQuantityProductDetail(productDetail.getProductID(), productDetail.getQuantity());
+                            productDetailDao().updateQuantityProductDetail(productDetail.getName(), productDetail.getAttribute1(), productDetail.getAttribute2(), productDetail.getQuantity());
                 }
             }
 

@@ -96,17 +96,17 @@ public class ProductAdapter extends ListAdapter<Product, ProductAdapter.ProductV
 //            holder.itemDel.setVisibility(View.GONE);
 //        }
         //read image from file
-
-//        try {
-//            File f=new File(Product.getImageDir());
-//            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-//            holder.imgView.setImageBitmap(b);
-//        }
-//        catch (FileNotFoundException e) {
-//            Resources res = holder.imgView.getResources();
-//            Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.rec_ava_Product_default);
-//            holder.imgView.setImageBitmap(bitmap);
-//        }
+        if (product.getImageDir() != null) {
+            try {
+                File f = new File(product.getImageDir());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.imgView.setImageBitmap(b);
+            } catch (FileNotFoundException e) {
+                Resources res = holder.imgView.getResources();
+                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.product_ava_default);
+                holder.imgView.setImageBitmap(bitmap);
+            }
+        }
     }
 
     @Override

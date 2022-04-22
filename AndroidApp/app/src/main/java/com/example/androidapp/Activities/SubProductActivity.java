@@ -196,7 +196,7 @@ public class SubProductActivity extends AppCompatActivity {
         final String[] attributeItemSelected2 = {productDetails.get(0).getAttribute2()};
         //init price, quantity
 //        productPrice.setText(Integer.toString(productDetails.get(0).getPrice()));
-        productQuantity.setText(Integer.toString(productDetails.get(0).getQuantity()));
+        productQuantity.setText("1");
 
         //2 attribute
         if (attribute1 != null && attribute2 != null) {
@@ -233,7 +233,7 @@ public class SubProductActivity extends AppCompatActivity {
                         if (productDetail.getAttribute1().equals(attributeItemSelected1[0]) &&
                                 productDetail.getAttribute2().equals(attributeItemSelected2[0])) {
 //                            productPrice.setText(Integer.toString(productDetail.getPrice()));
-                            productQuantity.setText(Integer.toString(productDetail.getQuantity()));
+                            productQuantity.setText("1");
                             curProductDetailSelected = productDetail;
                         }
                     }
@@ -260,7 +260,7 @@ public class SubProductActivity extends AppCompatActivity {
                     for (ProductDetail productDetail : productDetails) {
                         if (productDetail.getAttribute1().equals(attributeItemSelected1[0])) {
 //                            productPrice.setText(Integer.toString(productDetail.getPrice()));
-                            productQuantity.setText(Integer.toString(productDetail.getQuantity()));
+                            productQuantity.setText("1");
                             curProductDetailSelected = productDetail;
                         }
                     }
@@ -271,7 +271,7 @@ public class SubProductActivity extends AppCompatActivity {
         else {
 //            productPrice.setText(Integer.toString(productDetails.get(0).getPrice()));
             curProductDetailSelected = productDetails.get(0);
-            productQuantity.setText(Integer.toString(productDetails.get(0).getQuantity()));
+            productQuantity.setText("1");
         }
     }
 }

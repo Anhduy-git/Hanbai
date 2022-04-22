@@ -6,25 +6,19 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +31,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapp.Data.AppDatabase;
-import com.example.androidapp.Data.OrderData.OrderTodayData.Order;
-import com.example.androidapp.Data.OrderData.OrderTodayData.OrderAdapter;
 import com.example.androidapp.Data.ProductDetailData.ProductDetail;
 import com.example.androidapp.HelperClass.ProductAttribute;
-import com.example.androidapp.HelperClass.ProductAttributeAdapter;
 import com.example.androidapp.HelperClass.ProductAttributeItem;
 import com.example.androidapp.HelperClass.ProductInfoAttributeAdapter;
 import com.example.androidapp.R;
@@ -65,12 +56,14 @@ public class UpdateProductActivity extends AppCompatActivity {
             "com.example.androidapp.EXTRA_PRODUCT_ATTRIBUTE_2";
     public static final String EXTRA_PRODUCT_TYPE =
             "com.example.androidapp.EXTRA_PRODUCT_TYPE";
+    public static final String EXTRA_PRODUCT_IMAGE =
+            "com.example.androidapp.EXTRA_PRODUCT_IMAGE";
 
 
     private final int GALLERY_REQUEST = 1;
     private final int CAMERA_REQUEST = 2;
     private final int IMAGE_SIZE = 500;
-    public static final Integer CONFIRM_REQUEST = 3;
+    public static final Integer CONFIRM_REQUEST = 4;
     private TextView productName;
     private TextView productPrice;
     private TextView productType;
@@ -90,6 +83,7 @@ public class UpdateProductActivity extends AppCompatActivity {
     private List<ProductAttributeItem>attribute2ItemList = new ArrayList<>();
     private String attribute1, attribute2;
     private int productId;
+    private String imageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +119,23 @@ public class UpdateProductActivity extends AppCompatActivity {
             attribute1 = intent.getStringExtra(EXTRA_PRODUCT_ATTRIBUTE_1);
             attribute2 = intent.getStringExtra(EXTRA_PRODUCT_ATTRIBUTE_2);
             productId = intent.getIntExtra(EXTRA_PRODUCT_ID, -1);
+            imageDir = intent.getStringExtra(EXTRA_PRODUCT_IMAGE);
             productName.setText(name);
             productType.setText(type);
+            //set image
+            if (imageDir != null) {
+                try {
+                    File f=new File(imageDir);
+                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    //holder.imageView.setRotation(90);
+                    imageView.setImageBitmap(b);
+                }
+                catch (FileNotFoundException e) {
+                    Resources res = imageView.getResources();
+                    Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.product_ava_default);
+                    imageView.setImageBitmap(bitmap);
+                }
+            }
 
             //Query data
             productDetails  = AppDatabase.getInstance(UpdateProductActivity.this).
@@ -248,6 +257,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                 Intent intent = new Intent(UpdateProductActivity.this, UpdateProductActivity2.class);
                 intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_TYPE, type);
                 intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_NAME, name);
+                intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_IMAGE, imageDir);
                 if (attribute1 != null) {
                     intent.putExtra(UpdateProductActivity2.EXTRA_PRODUCT_ATTRIBUTE1, attribute1);
                 }
@@ -302,7 +312,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         productPrice = findViewById(R.id.product_price);
         productQuantity = findViewById(R.id.product_quantity);
         productType = findViewById(R.id.product_type);
-        imageView = findViewById(R.id.product_image);
+        imageView = findViewById(R.id.product_img);
         btnBack = findViewById(R.id.back_btn);
         attributeRecycler = findViewById(R.id.attribute_list);
         updateBtn = findViewById(R.id.update_btn);
@@ -396,7 +406,10 @@ public class UpdateProductActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == CONFIRM_REQUEST && resultCode == RESULT_OK) {
+            onBackPressed();
+        }
+        else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             try {
                 //update image
                 btnUpdate.setVisibility(View.VISIBLE);
@@ -477,29 +490,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 //        });
 //
 //    }
-    private String saveToInternalStorage(Bitmap bitmapImage, String fileName){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageProductDir
-        File directory = cw.getDir("imageProductDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File myPath = new File(directory,fileName);
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(myPath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath() + "/" + fileName;
-    }
 
 //    private boolean checkProductAvailableForUpdate(@NonNull Product dish) {
 //        List<Product> list  = AppDatabase.getInstance(UpdateProductActivity.this).dishDao().checkProductExist(dish.getName(), dish.getPrice());

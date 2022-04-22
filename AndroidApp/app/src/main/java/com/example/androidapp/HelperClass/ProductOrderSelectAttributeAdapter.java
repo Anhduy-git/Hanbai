@@ -1,6 +1,9 @@
 package com.example.androidapp.HelperClass;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapp.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class ProductOrderSelectAttributeAdapter extends RecyclerView.Adapter<ProductOrderSelectAttributeAdapter.ProductOrderSelectAttributeViewHolder> {
@@ -55,6 +61,8 @@ public class ProductOrderSelectAttributeAdapter extends RecyclerView.Adapter<Pro
         ProductInfoAttributeItemAdapter productInfoAttributeItemAdapter = new ProductInfoAttributeItemAdapter(mListProductOrderSelectAttribute.get(position).getProductAttributeItemList());
         holder.itemLst.setLayoutManager(new LinearLayoutManager(holder.itemLst.getContext(), RecyclerView.HORIZONTAL, false));
         holder.itemLst.setAdapter(productInfoAttributeItemAdapter);
+
+
         productInfoAttributeItemAdapter.setOnItemClickListener(new ProductInfoAttributeItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
