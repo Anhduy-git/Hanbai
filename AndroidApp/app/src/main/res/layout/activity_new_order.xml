@@ -90,13 +90,6 @@
                         android:src="@drawable/cam_new_ava">
 
                     </de.hdodenhof.circleimageview.CircleImageView>
-
-                    <Button
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/lib_btn_1"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"></Button>
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
