@@ -1,8 +1,14 @@
+## You are the  ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FAnhduygit%2FHanbai&countColor=%230096ff&style=flat) ! Thanks for your visit!
+
+
+
+# Hanbai (Product Order Management)
 
 ![Logo](https://user-images.githubusercontent.com/84486806/188899027-bf3eac0a-37cf-4101-a71c-2586e3e4fd86.png)
 
-# Hanbai (Product Order Management)
 Hanbai is an android application that helps online merchants manage orders, customers list and products list.
+
+
 
 ## Contributors
 Here is our team, you can connect us through our Linkedin:
